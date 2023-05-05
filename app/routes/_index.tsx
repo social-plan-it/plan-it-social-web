@@ -1,6 +1,6 @@
 
 import type { V2_MetaFunction } from "@remix-run/react";
-import TopNav from "~/components/topNav";
+
 
 export const meta: V2_MetaFunction = () => {
   return [{ title: "Plan It Social" }];
@@ -9,7 +9,7 @@ export const meta: V2_MetaFunction = () => {
 export default function Index() {
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <TopNav />
+      
       <h1>Welcome to Remix</h1>
       <ul>
         <li>

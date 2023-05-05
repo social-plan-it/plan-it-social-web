@@ -3,9 +3,10 @@ import {
   LiveReload,
   Meta,
   Outlet,
-  Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+
+import TopNav from "~/components/topNav";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <TopNav />
         <Outlet />
         <ScrollRestoration />
         <LiveReload />
