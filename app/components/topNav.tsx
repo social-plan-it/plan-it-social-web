@@ -15,7 +15,6 @@ export default function TopNav() {
             <span className="sr-only">Open main menu</span>
             {/* <!--
               Icon when menu is closed.
-
               Menu open: "hidden", Menu closed: "block"
             --> */}
             <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
