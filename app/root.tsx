@@ -1,8 +1,6 @@
-import type {LinksFunction} from "@remix-run/node"
-
+import type { LinksFunction } from "@remix-run/node";
 import stylesheet from "./styles/tailwind.css";
-
-
+import TopNav from "~/components/topNav";
 import {
   Links,
   LiveReload,
@@ -11,8 +9,6 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-
-import TopNav from "~/components/topNav";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -27,14 +23,12 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body  >
+      <body>
         <TopNav />
-        <h1 className="text-3xl font-bold underline">
-        Hello world Here!
-       </h1>
+        <h1 className="text-3xl font-bold underline">Hello world Here!</h1>
         <Outlet />
         <ScrollRestoration />
-        <Scripts /> 
+        <Scripts />
         <LiveReload />
       </body>
     </html>
