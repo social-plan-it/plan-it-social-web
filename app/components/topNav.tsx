@@ -204,31 +204,39 @@ export default function TopNav() {
         <div className="sm:hidden" id="mobile-menu">
           <div className="space-y-1 px-2 pb-3 pt-2">
             {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
-            <a
-              href="#"
+            <Link
+              to="/"
+              title="Home"
+              aria-label="Home"
               className="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
               aria-current="page"
             >
               Home
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/about-us"
+              title="About Us"
+              aria-label="About Us"
               className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
             >
               About
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/"
+              title="Log"
+              aria-label="Log"
               className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
             >
               Log
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/"
+              title="Calendar"
+              aria-label="Calendar"
               className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
             >
               Calendar
-            </a>
+            </Link>
           </div>
         </div>
       </div>
