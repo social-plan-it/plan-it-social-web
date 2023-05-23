@@ -1,0 +1,37 @@
+# Pull Request Guidelines
+
+## Please consider splitting up big PRs (more than 10-15 files) into several small ones for easier reviews
+
+---
+
+# Pull Request Template
+
+## Issue=#<Number>
+
+## Summary (1-2 sentences)
+
+## Details
+
+### Challenges (what problems did I face?)(optional)
+
+### Alternative implementations (what alternatives were considered and why were they disregarded?) (optional)
+
+### Solution (how did I fix the problems?) (optional)
+
+### Does it work on mobile? (Screenshot for different screen sizes)
+
+### Implementation details (how was this change implemented?) (optional)
+
+Please delete options that are not relevant.
+
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+
+## Checklist before requesting a review
+
+- [ ] I have performed a self-review of my code
+- [ ] I have commented my code, particularly in hard-to-understand areas
+- [ ] My code does not generate any new warnings or errors
+- [ ] New and existing unit tests pass locally with my changes (if relevant)
+- [ ] Screenshots and recordings for UI changes
