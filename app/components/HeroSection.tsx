@@ -5,9 +5,7 @@
 export default function HeroSection() {
   return (
     <>
-
-      <section className="mb-40">
-
+    <section className="mb-40">
     <div
       className="relative overflow-hidden bg-no-repeat bg-cover"
       style={{
