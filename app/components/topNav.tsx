@@ -4,8 +4,8 @@ import logo_sq from "../imgs/SocialPlan-it-logo-Square.png";
 export default function TopNav() {
   return (
     <>
-      <div className="mx-auto bg-gray-700">
-        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 bg-gray-700">
+      <div className="mx-auto bg-gray-800">
+        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 bg-gray-800">
           <div className="relative flex h-16 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
               {/* <!-- Mobile menu button--> */}
