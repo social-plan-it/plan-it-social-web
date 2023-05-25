@@ -1,7 +1,7 @@
 import type { LinksFunction } from "@remix-run/node";
 import stylesheet from "./styles/tailwind.css";
 import TopNav from "~/components/topNav";
-import PrimaryButton, {SecondaryButton, WarmButton} from "~/components/Buttons";
+
 import {
   Links,
   LiveReload,
@@ -26,9 +26,6 @@ export default function App() {
       </head>
       <body>
         <TopNav />
-        <PrimaryButton />
-        <SecondaryButton />
-        <WarmButton />
         <h1 className="text-3xl font-bold underline">Hello world Here!</h1>
         <Outlet />
         <ScrollRestoration />
