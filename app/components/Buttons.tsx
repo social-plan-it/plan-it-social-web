@@ -1,5 +1,3 @@
-
-
 export default function PrimaryButton() {
   return (
     <button className="bg-gray-800 rounded-3xl py-1 px-8 m-1 text-white hover:bg-emerald-50 hover:text-gray-800 uppercase font-semibold">Join</button>
