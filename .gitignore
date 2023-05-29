@@ -9,3 +9,8 @@ node_modules
 /public/build
 /api/index.js
 /api/index.js.map
+
+/node_modules/@remix-run/web-fetch/
+/node_modules/@ariakit/react/
+/node_modules/@radix-ui/react-label/
+/node_modules/tailwind-merge/
