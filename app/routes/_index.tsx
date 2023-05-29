@@ -1,6 +1,7 @@
 import type { V2_MetaFunction } from "@remix-run/react";
-import EventsSection from "../components/EventsSection";
-import { Button } from "../components/Button";
+import EventsSection from "../components/events-section";
+import { Button } from "../components/button-one";
+import { ReakitButton } from "../components/button-two";
 
 export const meta: V2_MetaFunction = () => {
   return [{ title: "Plan It Social" }];
@@ -38,6 +39,9 @@ export default function Index() {
         </ul>
       </div> */}
       <EventsSection />
+      <h2 className="font-bold text-2xl mb-5 mx-10">
+        Buttons created using only CVA
+      </h2>
       <div className="mx-10">
         {/* Small Buttons  */}
         <div className="flex mb-10 gap-3">
@@ -85,6 +89,15 @@ export default function Index() {
             Secondary Full-Width Button
           </Button>
         </div>
+      </div>
+      <h2 className="font-bold text-2xl mb-5 mx-10">
+        Buttons created using CVA and Reakit
+      </h2>
+      <div className="flex mx-10 mb-10 gap-3">
+        <ReakitButton>Primary</ReakitButton>
+        <ReakitButton intent="secondary">Secondary</ReakitButton>
+        <ReakitButton intent="danger">Danger</ReakitButton>
+        <ReakitButton intent="text">Text</ReakitButton>
       </div>
     </>
   );
