@@ -4,7 +4,6 @@ type ButtonProps = {
   to?: string;
   className?: string;
   children: React.ReactNode;
-  buttonType: string; 
 } & HTMLAttributes<HTMLButtonElement | HTMLAnchorElement>;
 
 const primaryButton: string =
