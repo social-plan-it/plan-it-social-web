@@ -1,6 +1,7 @@
 import type { LinksFunction } from "@remix-run/node";
 import stylesheet from "./styles/tailwind.css";
-import TopNav from "~/components/topNav";
+import {TopNav, Buttons} from "~/components/Components";
+
 
 import {
   Links,
@@ -26,6 +27,9 @@ export default function App() {
       </head>
       <body>
         <TopNav />
+        <Buttons className={'primary'}>attend</Buttons>
+        <Buttons className={'secondary'}>manage group</Buttons>
+        <Buttons className={'warm'}>create event</Buttons>
         <h1 className="text-3xl font-bold underline">Hello world Here!</h1>
         <Outlet />
         <ScrollRestoration />
