@@ -1,7 +1,8 @@
 import type { V2_MetaFunction } from "@remix-run/react";
-import EventsSection from "../components/events-section";
+// import EventsSection from "../components/events-section";
 import { Button } from "../components/button-one";
 import { ReakitButton } from "../components/button-two";
+import CardsSection from "~/components/cards-section";
 
 export const meta: V2_MetaFunction = () => {
   return [{ title: "Plan It Social" }];
@@ -38,7 +39,8 @@ export default function Index() {
           </li>
         </ul>
       </div> */}
-      <EventsSection />
+      {/* <EventsSection /> */}
+      <CardsSection />
       <h2 className="font-bold text-2xl mb-5 mx-10">
         Buttons created using only CVA
       </h2>
