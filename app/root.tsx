@@ -1,7 +1,5 @@
 import type {LinksFunction} from "@remix-run/node"
-
 import stylesheet from "~/tailwind.css";
-
 
 import {
   Links,
@@ -11,12 +9,6 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-
-import globalStyles from "./styles/global.css"
-
-
-
-import TopNav from "~/components/topNav"; 
 
 export const links: LinksFunction = () => [
   // { rel: "stylesheet", href: globalStyles },
@@ -33,7 +25,6 @@ export default function App() {
         <Links />
       </head>
       <body  >
-        <TopNav />
         <Outlet />
         <ScrollRestoration />
         <Scripts /> 
