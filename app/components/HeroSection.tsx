@@ -21,6 +21,7 @@ export default function HeroSection() {
             >
               Search groups or events:
             </label>
+
             <div className="relative">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
@@ -39,19 +40,21 @@ export default function HeroSection() {
                   ></path>
                 </svg>
               </div>
-              <input
-                type="text"
-                id="q"
-                className="block w-full py-4 pl-10 text-md text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Search groups or events..."
-                required
-              />
-              <button
-                type="submit"
-                className="text-white absolute right-2.5 bottom-2.5 bg-primary hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
-              >
-                Search
-              </button>
+              <div className="flex">
+                <input
+                  type="text"
+                  id="q"
+                  className="block w-full py-4 pl-10 text-md text-gray-900 md:text-center border border-gray-300 rounded-l-lg  bg-gray-50 focus:ring-2 focus:outline-none focus:ring-blue-500"
+                  placeholder='"Frisbee in San Fran"'
+                  required
+                />
+                <button
+                  type="submit"
+                  className="text-white  right-2.5 bottom-2.5 bg-primary hover:bg-gray-500 focus:ring-2 focus:outline-none focus:ring-blue-500 font-semibold rounded-r-lg text-md px-2 md:px-4 py-4 "
+                >
+                  Search
+                </button>
+              </div>
             </div>
           </form>
         </div>
