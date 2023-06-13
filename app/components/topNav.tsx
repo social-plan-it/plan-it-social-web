@@ -1,11 +1,11 @@
-import logo_hori from "../imgs/SocialPlan-it-logo-Horizontal.png";
-import logo_sq from "../imgs/SocialPlan-it-logo-Square.png";
+import logo_hori from '../imgs/SocialPlan-it-logo-Horizontal.png';
+import logo_sq from '../imgs/SocialPlan-it-logo-Square.png';
 
 export default function TopNav() {
   return (
     <>
-      <div className="mx-auto bg-gray-700">
-        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 bg-gray-700">
+      <div className="bg-gray-700">
+        <div className="mx-40 max-w-7xl px-2 sm:px-6 lg:px-8 bg-gray-700">
           <div className="relative flex h-16 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
               {/* <!-- Mobile menu button--> */}
@@ -28,11 +28,7 @@ export default function TopNav() {
                   stroke="currentColor"
                   aria-hidden="true"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
                 {/* <!--
               Icon when menu is open.
@@ -47,26 +43,14 @@ export default function TopNav() {
                   stroke="currentColor"
                   aria-hidden="true"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex flex-shrink-0 items-center">
-                <img
-                  className="block h-8 w-auto lg:hidden"
-                  src={logo_sq}
-                  alt="Plan It Social Logo!"
-                />
-                <img
-                  className="hidden h-8 w-auto lg:block"
-                  src={logo_hori}
-                  alt="Plan It Social Logo!"
-                />
+                <img className="block h-8 w-auto lg:hidden" src={logo_sq} alt="Plan It Social Logo!" />
+                <img className="hidden h-8 w-auto lg:block" src={logo_hori} alt="Plan It Social Logo!" />
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
@@ -221,5 +205,3 @@ export default function TopNav() {
     </>
   );
 }
-
-
