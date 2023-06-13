@@ -1,27 +1,9 @@
-import type {LinksFunction} from "@remix-run/node"
+import type { LinksFunction } from '@remix-run/node';
+import stylesheet from './styles/tailwind.css';
+import TopNav from '~/components/topNav';
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
 
-import stylesheet from "~/tailwind.css";
-
-
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "@remix-run/react";
-
-import globalStyles from "./styles/global.css"
-
-
-
-import TopNav from "~/components/topNav"; 
-
-export const links: LinksFunction = () => [
-  // { rel: "stylesheet", href: globalStyles },
-  { rel: "stylesheet", href: stylesheet },
-];
+export const links: LinksFunction = () => [{ rel: 'stylesheet', href: stylesheet }];
 
 export default function App() {
   return (
@@ -32,11 +14,11 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body  >
+      <body>
         <TopNav />
         <Outlet />
         <ScrollRestoration />
-        <Scripts /> 
+        <Scripts />
         <LiveReload />
       </body>
     </html>
