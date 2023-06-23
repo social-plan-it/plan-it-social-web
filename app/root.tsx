@@ -1,7 +1,6 @@
 import type { LinksFunction } from "@remix-run/node";
 import stylesheet from "./styles/tailwind.css";
-import {TopNav} from "~/components/Components";
-
+import TopNav from "~/components/topNav";
 
 import {
   Links,
