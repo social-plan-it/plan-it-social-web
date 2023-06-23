@@ -1,4 +1,5 @@
 import React, { HTMLAttributes } from "react";
+import { Link } from "@remix-run/react"
 
 type ButtonProps = {
   to?: string;
@@ -30,9 +31,9 @@ const Button: React.FC<ButtonProps> = ({
 
   if (to) {
     return (
-      <a href={to} className={buttonClassName} {...props}>
+      <Link to={to} className={buttonClassName} {...props}>
         {children}
-      </a>
+      </Link>
     );
   }
 
