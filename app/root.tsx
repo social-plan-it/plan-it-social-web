@@ -2,6 +2,7 @@ import type { LinksFunction } from '@remix-run/node';
 import stylesheet from './styles/tailwind.css';
 import TopNav from '~/components/topNav';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
+import Footer from './components/footer';
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: stylesheet }];
 
@@ -20,6 +21,7 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+        <Footer />
       </body>
     </html>
   );
