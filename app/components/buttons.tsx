@@ -13,7 +13,7 @@ const secondaryButton: string =
 const warmButton: string =
   "bg-rose-600 rounded-3xl py-1 px-8 m-1 text-white hover:bg-gray-800 hover:text-emerald-50 uppercase font-semibold";
 
-const Buttons: React.FC<ButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
   to,
   className,
   children,
@@ -43,4 +43,4 @@ const Buttons: React.FC<ButtonProps> = ({
   );
 };
 
-export default Buttons;
+export default Button;
