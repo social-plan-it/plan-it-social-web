@@ -8,6 +8,7 @@ export default {
         primary: '#1F2937',
         secondary: '#E4EFF0',
         warm: '#E11D48',
+        grayBackground: 'rgba(217, 217, 217, 0.25);',
       },
     },
   },
