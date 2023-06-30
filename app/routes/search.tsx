@@ -1,9 +1,44 @@
+import { LoaderFunction } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
+import { getEvents } from '~/models/events.server';
+
+export const loader: LoaderFunction = async ({ request }) => {
+  // Get the query string from the URL
+
+  const url = new URL(request.url);
+  const query = url.searchParams.get('q') as string;
+  console.log(query);
+
+  // Get all events from the database
+
+  const events = await getEvents();
+  const filteredEvents = events.filter((e) => e.description.toLowerCase().includes(query.toLowerCase()));
+
+  // Return the filtered events
+
+  console.log(filteredEvents);
+  return filteredEvents;
+};
+
 export default function SearchPage() {
+  const events = useLoaderData();
   return (
     <section className="bg-secondary pt-10 pb-40">
       <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-50 lg:py-20">
         <h1 className="text-4xl font-bold mb-3">Welcome, John Smith</h1>
         <p className="text-2xl font-bold">Events recommended for you</p>
+        <div className="pt-5">
+          {events.length === 0 ? (
+            <p>No events found. Please, try another keywords. </p>
+          ) : (
+            <>
+              <p>
+                {events.length} event{events.length > 1 ? 's' : ''} found:
+              </p>
+              <p>{events.map((e: any) => e.title)}</p>
+            </>
+          )}
+        </div>
         <div className="grid gap-5 mt-20 lg:grid-cols-4 sm:max-w-sm sm:mx-auto lg:max-w-full">
           <div className="overflow-hidden rounded-2xl shadow-sm bg-primary flex flex-col">
             <div className="p-5 border-t-0 text-white flex-grow">
@@ -27,8 +62,8 @@ export default function SearchPage() {
                 </a>
               </p>
               <p className="mb-2 text-xs">
-                Break a sweat and achieve your fitness goals with our
-                high-intensity workout session suitable for all fitness levels.
+                Break a sweat and achieve your fitness goals with our high-intensity workout session suitable for all
+                fitness levels.
               </p>
             </div>
             <div className="h-1/2">
@@ -61,8 +96,8 @@ export default function SearchPage() {
                 </a>
               </p>
               <p className="mb-2 text-xs">
-                Break a sweat and achieve your fitness goals with our
-                high-intensity workout session suitable for all fitness levels.
+                Break a sweat and achieve your fitness goals with our high-intensity workout session suitable for all
+                fitness levels.
               </p>
             </div>
             <div className="h-1/2">
@@ -95,8 +130,8 @@ export default function SearchPage() {
                 </a>
               </p>
               <p className="mb-2 text-xs">
-                Break a sweat and achieve your fitness goals with our
-                high-intensity workout session suitable for all fitness levels.
+                Break a sweat and achieve your fitness goals with our high-intensity workout session suitable for all
+                fitness levels.
               </p>
             </div>
             <div className="h-1/2">
@@ -129,8 +164,8 @@ export default function SearchPage() {
                 </a>
               </p>
               <p className="mb-2 text-xs">
-                Break a sweat and achieve your fitness goals with our
-                high-intensity workout session suitable for all fitness levels.
+                Break a sweat and achieve your fitness goals with our high-intensity workout session suitable for all
+                fitness levels.
               </p>
             </div>
             <div className="h-1/2">
