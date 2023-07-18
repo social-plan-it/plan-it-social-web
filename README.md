@@ -32,3 +32,6 @@ npm run dev
 Open up [http://localhost:3000](http://localhost:3000) and you should be ready to go!
 
 If you're used to using the `vercel dev` command provided by [Vercel CLI](https://vercel.com/cli) instead, you can also use that, but it's not needed.
+
+
+<img align="center" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSagMR3FC2rPHvoqZFjHunC5DkmFLdeNzok9d7P8OHW&s" width="50%" alt="Vercel" >

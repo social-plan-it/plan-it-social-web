@@ -1,24 +1,10 @@
-import type { LinksFunction } from "@remix-run/node";
+import type { LinksFunction } from '@remix-run/node';
+import stylesheet from './styles/tailwind.css';
+import TopNav from '~/components/topNav';
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
+import Footer from './components/footer';
 
-import stylesheet from "~/tailwind.css";
-
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "@remix-run/react";
-
-import globalStyles from "./styles/global.css";
-
-import { TopNav } from "~/components/top-nav";
-
-export const links: LinksFunction = () => [
-  // { rel: "stylesheet", href: globalStyles },
-  { rel: "stylesheet", href: stylesheet },
-];
+export const links: LinksFunction = () => [{ rel: 'stylesheet', href: stylesheet }];
 
 export default function App() {
   return (
@@ -31,11 +17,11 @@ export default function App() {
       </head>
       <body>
         <TopNav />
-        <h1 className="text-3xl font-bold underline">Hello world Here!</h1>
         <Outlet />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+        <Footer />
       </body>
     </html>
   );
