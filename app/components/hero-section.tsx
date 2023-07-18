@@ -1,4 +1,4 @@
-import { Image } from './image';
+import { Image } from './images';
 
 export default function HeroSection() {
   return (

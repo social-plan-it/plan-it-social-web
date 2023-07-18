@@ -16,10 +16,4 @@ module.exports = {
     v2_routeConvention: true,
     unstable_tailwind: true,
   },
-  images: {
-    sizes: [256, 384, 600, 1000],
-    domains: [],
-    minimumCacheTTL: 60,
-    formats: ['image/webp', 'image/avif'],
-  },
 };
