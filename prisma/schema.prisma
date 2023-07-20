@@ -24,3 +24,23 @@ model Password {
   user   User   @relation(fields: [userId], references: [id])
   hash   String
 }
+
+// Originally thought it was going to be a many-to-many relationship
+// Thought about it again and decided it was one-to-many
+// Andre - looking forward to your feedback!
+model Group {
+  id          String @id @default(uuid())
+  name        String
+  description String
+  events      Event[]
+}
+
+model Event {
+  id          String @id @default(uuid())
+  name        String
+  date        DateTime
+  description String
+  group       Group @relation(fields: [groupId], references: [id])
+  groupId     String @unique
+}
+
