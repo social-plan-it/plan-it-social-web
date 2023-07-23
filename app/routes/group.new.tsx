@@ -1,8 +1,8 @@
 export default function GroupNew() {
   return (
-    <div className="mb-20">
+    <div className="border-2 ml-3 pl-4 pt-4 pb-4">
       <div>
-        <div className="flex flex-col w-full items-center justify-center mt-5 lg:mt-40">
+        <div className="flex flex-col w-full items-center justify-center">
           <div>
             <h1>Create New Group</h1>
           </div>
@@ -11,15 +11,15 @@ export default function GroupNew() {
           </div>
         </div>
       </div>
-      <div className="flex">
+      <div className="flex pt-4">
         <div className="flex-col">
-          <div className="w-1/2">
+          <div className="w-1/2 pb-4">
             <label>
               Group Name:
               <input className="bg-grayBackground" name="groupName" type="text" required />
             </label>
           </div>
-          <div className="w-1/2">
+          <div className="w-1/2 pb-4">
             <label>
               Location:
               <input className="bg-grayBackground" name="location" type="text" required />
@@ -27,7 +27,7 @@ export default function GroupNew() {
           </div>
         </div>
         <div className="flex-col">
-          <div className="w-1/2">
+          <div className="w-1/2 pb-4">
             <label>
               Group Topics:
               <select name="groupTopics" id="groupTopics">
@@ -38,7 +38,7 @@ export default function GroupNew() {
               </select>
             </label>
           </div>
-          <div className="w-1/2">
+          <div className="w-1/2 pb-4">
             <label>
               Discord Channel:
               <input className="bg-grayBackground" name="discordChannel" type="text" />
@@ -46,11 +46,21 @@ export default function GroupNew() {
           </div>
         </div>
       </div>
-      <div className="flex-col">
+      <div className="flex-col pb-4">
         <label>
           Description:
-          <input className="bg-grayBackground" name="description" type="text" required />
+          <textarea name="description" rows="5" cols="33" required></textarea>
         </label>
+      </div>
+      <div className="flex-row justify-end">
+        <div>
+          <label>Attach Image</label>
+        </div>
+        <div>
+          <button className="border-2 w-24 bg-red-700 text-white rounded-lg " type="submit">
+            Create
+          </button>
+        </div>
       </div>
     </div>
   );
