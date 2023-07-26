@@ -11,11 +11,19 @@ datasource db {
   relationMode = "prisma"
 }
 
+enum Role {
+  ADMIN
+  USER
+  APPLICANT
+}
+
 model User {
   id       String    @id @default(uuid())
   email    String    @unique
   name     String
   password Password?
+  groups   Group[]
+  events   Event[]
 }
 
 model Password {
@@ -25,22 +33,30 @@ model Password {
   hash   String
 }
 
-// Originally thought it was going to be a many-to-many relationship
-// Thought about it again and decided it was one-to-many
-// Andre - looking forward to your feedback!
 model Group {
-  id          String @id @default(uuid())
+  id          String  @id @default(uuid())
   name        String
   description String
   events      Event[]
+  users       User[]
+}
+
+model User_Group {
+  userId  String
+  groupId String
+  role    Role
+
+  @@id([userId, groupId])
 }
 
 model Event {
-  id          String @id @default(uuid())
+  id          String   @id @default(uuid())
   name        String
   date        DateTime
   description String
-  group       Group @relation(fields: [groupId], references: [id])
-  groupId     String @unique
-}
+  group       Group    @relation(fields: [groupId], references: [id])
+  groupId     String
+  users       User[]
 
+  @@index([groupId], name: "groupId")
+}
