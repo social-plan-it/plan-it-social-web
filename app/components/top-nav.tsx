@@ -142,7 +142,7 @@ export default function TopNav() {
                 >
                   {/* <!-- Active: "bg-gray-100", Not Active: "" --> */}
                   <a
-                    href="#"
+                    href="/"
                     className="block px-4 py-2 text-sm text-gray-700"
                     role="menuitem"
                     tabIndex="-1"
@@ -151,7 +151,7 @@ export default function TopNav() {
                     Your Profile
                   </a>
                   <a
-                    href="#"
+                    href="/"
                     className="block px-4 py-2 text-sm text-gray-700"
                     role="menuitem"
                     tabIndex="-1"
@@ -160,7 +160,7 @@ export default function TopNav() {
                     Settings
                   </a>
                   <a
-                    href="#"
+                    href="/"
                     className="block px-4 py-2 text-sm text-gray-700"
                     role="menuitem"
                     tabIndex="-1"
@@ -180,26 +180,26 @@ export default function TopNav() {
           <div className="space-y-1 px-2 pb-3 pt-2">
             {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
             <a
-              href="#"
+              href="/"
               className="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
               aria-current="page"
             >
               Home
             </a>
             <a
-              href="#"
+              href="/about-us"
               className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
             >
               About
             </a>
             <a
-              href="#"
+              href="/login"
               className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
             >
-              Log
+              Log In
             </a>
             <a
-              href="#"
+              href="/"
               className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
             >
               Calendar
