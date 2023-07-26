@@ -1,6 +1,3 @@
-import logo_hori from '../imgs/SocialPlan-it-logo-Horizontal.png';
-import logo_sq from '../imgs/SocialPlan-it-logo-Square.png';
-
 export default function TopNav() {
   return (
     <>
@@ -49,8 +46,16 @@ export default function TopNav() {
             </div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex flex-shrink-0 items-center">
-                <img className="block h-8 w-auto lg:hidden" src={logo_sq} alt="Plan It Social Logo!" />
-                <img className="hidden h-8 w-auto lg:block" src={logo_hori} alt="Plan It Social Logo!" />
+                <img
+                  className="block h-8 w-auto lg:hidden"
+                  src="/imgs/SocialPlan-it-logo-Square.png"
+                  alt="Plan It Social Logo!"
+                />
+                <img
+                  className="hidden h-8 w-auto lg:block"
+                  src="/imgs/SocialPlan-it-logo-Horizontal.png"
+                  alt="Plan It Social Logo!"
+                />
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
