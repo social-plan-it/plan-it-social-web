@@ -1,5 +1,10 @@
 import { createCookieSessionStorage, redirect } from '@remix-run/node';
 
+const sessionSecret = process.env.SESSION_SECRET;
+if (!sessionSecret) {
+  throw new Error('SESSION_SECRET must be set');
+}
+
 const { commitSession, destroySession, getSession } = createCookieSessionStorage({
   cookie: {
     name: 'session',
@@ -7,7 +12,7 @@ const { commitSession, destroySession, getSession } = createCookieSessionStorage
     // but that doesn't work on localhost for Safari
     // https://web.dev/when-to-use-local-https/
     secure: true,
-    secrets: ['3453453453453453'],
+    secrets: [sessionSecret],
     sameSite: 'lax',
     path: '/',
     maxAge: 60 * 60 * 24 * 30,
