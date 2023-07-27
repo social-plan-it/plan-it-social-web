@@ -1,4 +1,11 @@
+import { useMatches } from '@remix-run/react';
+
+import type { UserSession } from '~/modules/session/session.server';
+
 export default function TopNav() {
+  const matches = useMatches();
+  const session: UserSession | null = matches[0].data.session;
+
   return (
     <>
       <div className="bg-gray-700">
@@ -73,12 +80,23 @@ export default function TopNav() {
                   >
                     About
                   </a>
-                  <a
-                    href="/login"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    Login
-                  </a>
+                  {session ? (
+                    <form action="/logout" method="post">
+                      <button
+                        type="submit"
+                        className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium whitespace-nowrap"
+                      >
+                        Log out
+                      </button>
+                    </form>
+                  ) : (
+                    <a
+                      href="/login"
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    >
+                      Login
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -192,12 +210,23 @@ export default function TopNav() {
             >
               About
             </a>
-            <a
-              href="/login"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-            >
-              Log In
-            </a>
+            {session ? (
+              <form action="/logout" method="post">
+                <button
+                  type="submit"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                >
+                  Log out
+                </button>
+              </form>
+            ) : (
+              <a
+                href="/login"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+              >
+                Log In
+              </a>
+            )}
             <a
               href="/"
               className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
