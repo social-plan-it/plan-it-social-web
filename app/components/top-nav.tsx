@@ -1,10 +1,7 @@
-import { useMatches } from '@remix-run/react';
-
-import type { UserSession } from '~/modules/session/session.server';
+import { useCurrentUser } from '~/hooks/useCurrentUser';
 
 export default function TopNav() {
-  const matches = useMatches();
-  const session: UserSession | null = matches[0].data.session;
+  const currentUser = useCurrentUser();
 
   return (
     <>
@@ -80,7 +77,7 @@ export default function TopNav() {
                   >
                     About
                   </a>
-                  {session ? (
+                  {currentUser ? (
                     <form action="/logout" method="post">
                       <button
                         type="submit"
@@ -210,7 +207,7 @@ export default function TopNav() {
             >
               About
             </a>
-            {session ? (
+            {currentUser ? (
               <form action="/logout" method="post">
                 <button
                   type="submit"
