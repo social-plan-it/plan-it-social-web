@@ -1,5 +1,7 @@
 import { createCookieSessionStorage, redirect } from '@remix-run/node';
 
+import { db } from '~/modules/database/db.server';
+
 const sessionSecret = process.env.SESSION_SECRET;
 if (!sessionSecret) {
   throw new Error('SESSION_SECRET must be set');
@@ -41,6 +43,20 @@ export async function getUserSession(request: Request): Promise<UserSession | nu
   if (cookie && cookie.get('userId')) {
     return { userId: cookie.get('userId') };
   }
+  return null;
+}
+
+export async function getCurrentUser(request: Request) {
+  const session = await getUserSession(request);
+
+  if (session) {
+    const currentUser = await db.user.findUnique({ where: { id: session.userId } });
+
+    if (currentUser) {
+      return currentUser;
+    }
+  }
+
   return null;
 }
 
