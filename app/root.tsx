@@ -4,14 +4,14 @@ import stylesheet from './styles/tailwind.css';
 import TopNav from '~/components/top-nav';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
 import Footer from './components/footer';
-import { getUserSession } from '~/modules/session/session.server';
+import { getCurrentUser } from '~/modules/session/session.server';
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: stylesheet }];
 
 export async function loader({ request }: LoaderArgs) {
-  const session = await getUserSession(request);
+  const currentUser = await getCurrentUser(request);
 
-  return json({ session });
+  return json({ currentUser });
 }
 
 export default function App() {
