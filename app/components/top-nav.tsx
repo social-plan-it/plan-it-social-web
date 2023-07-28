@@ -1,3 +1,5 @@
+import { Form } from '@remix-run/react';
+
 import { useCurrentUser } from '~/hooks/useCurrentUser';
 
 export default function TopNav() {
@@ -78,14 +80,14 @@ export default function TopNav() {
                     About
                   </a>
                   {currentUser ? (
-                    <form action="/logout" method="post">
+                    <Form action="/logout" method="post">
                       <button
                         type="submit"
                         className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium whitespace-nowrap"
                       >
                         Log out
                       </button>
-                    </form>
+                    </Form>
                   ) : (
                     <a
                       href="/login"
@@ -208,14 +210,14 @@ export default function TopNav() {
               About
             </a>
             {currentUser ? (
-              <form action="/logout" method="post">
+              <Form action="/logout" method="post">
                 <button
                   type="submit"
                   className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
                 >
                   Log out
                 </button>
-              </form>
+              </Form>
             ) : (
               <a
                 href="/login"
