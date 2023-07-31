@@ -6,27 +6,6 @@ export const meta: V2_MetaFunction = () => {
   return [{ title: 'Plan It Social' }];
 };
 
-type Event = {
-  id: number;
-  imgUrl: string;
-  imgAlt: string;
-  groupName: string;
-  eventTitle: string;
-  eventDescription: string;
-  date: string;
-  time: string;
-  location: string;
-  category: string;
-};
-
-export type EventsSectionProps = {
-  events: Event[];
-};
-
-export type EventPreviewProps = {
-  events: Event[];
-};
-
 export const events = [
   {
     id: 0,
@@ -77,26 +56,3 @@ export default function Index() {
     </>
   );
 }
-
-// {
-//   id: 3,
-//   title: 'Remix Workshop: Building Interactive Web Applications',
-//   slug: 'remix-workshop-interactive-web-applications',
-//   description:
-//     'Learn how to leverage Remix, a powerful web framework, to build modern and interactive web applications with ease.',
-//   date: '2023-05-28',
-//   time: '2:00 PM',
-//   location: '321 Pine St, City',
-//   category: 'Technology',
-// },
-// {
-//   id: 4,
-//   title: 'Art Exhibition: Discover the Beauty of Colors',
-//   slug: 'art-exhibition-beauty-colors',
-//   description:
-//     'Immerse yourself in a stunning art exhibition featuring captivating artworks from renowned local artists.',
-//   date: '2023-05-30',
-//   time: '7:00 PM',
-//   location: '987 Cedar St, City',
-//   category: 'Art',
-// },
