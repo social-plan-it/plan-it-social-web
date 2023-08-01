@@ -1,6 +1,6 @@
 export default function EventsSection() {
   return (
-    <section className="max-w-screen-xl bg-secondary">
+    <section className="bg-secondary">
       <div className="sm:ml-24 pt-10 pb-20 space-y-3 ">
         <h2 className="text-center sm:text-left sm:text-5xl text-4xl font-bold italic text-primary">Upcoming Events</h2>
         <div className="flex flex-wrap gap-6 justify-center sm:justify-start">

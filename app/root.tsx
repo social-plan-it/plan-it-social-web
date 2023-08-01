@@ -1,9 +1,9 @@
 import type { LinksFunction, LoaderArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import stylesheet from './styles/tailwind.css';
-import TopNav from '~/components/top-nav';
+import TopNav from '~/components/layout/top-nav';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
-import Footer from './components/footer';
+import Footer from './components/layout/footer';
 import { getCurrentUser } from '~/modules/session/session.server';
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: stylesheet }];
@@ -23,7 +23,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="min-h-screen w-full flex flex-col">
         <TopNav />
         <Outlet />
         <ScrollRestoration />
