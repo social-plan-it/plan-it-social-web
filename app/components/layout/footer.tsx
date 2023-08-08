@@ -1,8 +1,8 @@
-import VercelBanner from '../imgs/VercelBanner.svg';
+import VercelBanner from '~/imgs/VercelBanner.svg';
 
 export default function Footer() {
   return (
-    <div className="bg-black text-white ">
+    <div className="bg-black text-white">
       <div className="max-w-7xl m-auto">
         {/*Top Line*/}
         <div className=" hidden sm:mx-8 sm:pt-8 sm:flex sm:border-b sm:pb-2">
