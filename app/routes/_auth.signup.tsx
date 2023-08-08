@@ -1,6 +1,6 @@
 import type { LoaderArgs, ActionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
-import { Form, useActionData } from '@remix-run/react';
+import { Form, Link, useActionData, useNavigation } from '@remix-run/react';
 import { Card } from '~/components/ui/containers';
 import { Input } from '~/components/ui/forms';
 import { getHash } from '~/modules/database/crypto.server';
@@ -58,6 +58,8 @@ export async function loader({ request }: LoaderArgs) {
 
 export default function Component() {
   const actionData = useActionData();
+  const navigation = useNavigation();
+  const isPending = navigation.state === 'submitting' || navigation.state === 'loading';
   return (
     <div className="flex w-full items-center justify-center">
       <div className="max-w-[400px] w-full">
@@ -74,8 +76,13 @@ export default function Component() {
               label="Confirm Password"
               required
             />
-            <button type="submit">Sign Up</button>
+            <button type="submit" disabled={isPending}>
+              {isPending ? 'Signing up...' : 'Sign Up'}
+            </button>
             {actionData && actionData.message && <p className="text-red-500">{actionData.message}</p>}
+            <p>
+              Have an account already? <Link to="/login">Login</Link>
+            </p>
           </Form>
         </Card>
       </div>
