@@ -1,7 +1,10 @@
-import logo_hori from '../imgs/SocialPlan-it-logo-Horizontal.png';
-import logo_sq from '../imgs/SocialPlan-it-logo-Square.png';
+import { Form } from '@remix-run/react';
+
+import { useCurrentUser } from '~/hooks/useCurrentUser';
 
 export default function TopNav() {
+  const currentUser = useCurrentUser();
+
   return (
     <>
       <div className="bg-gray-700">
@@ -49,31 +52,50 @@ export default function TopNav() {
             </div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex flex-shrink-0 items-center">
-                <img className="block h-8 w-auto lg:hidden" src={logo_sq} alt="Plan It Social Logo!" />
-                <img className="hidden h-8 w-auto lg:block" src={logo_hori} alt="Plan It Social Logo!" />
+                <img
+                  className="block h-8 w-auto lg:hidden"
+                  src="/imgs/SocialPlan-it-logo-Square.png"
+                  alt="Plan It Social Logo!"
+                />
+                <img
+                  className="hidden h-8 w-auto lg:block"
+                  src="/imgs/SocialPlan-it-logo-Horizontal.png"
+                  alt="Plan It Social Logo!"
+                />
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
                   <a
-                    href="#"
+                    href="/"
                     className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
                     aria-current="page"
                   >
                     Home
                   </a>
                   <a
-                    href="#"
+                    href="/about-us"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                   >
                     About
                   </a>
-                  <a
-                    href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    Login
-                  </a>
+                  {currentUser ? (
+                    <Form action="/logout" method="post">
+                      <button
+                        type="submit"
+                        className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium whitespace-nowrap"
+                      >
+                        Log out
+                      </button>
+                    </Form>
+                  ) : (
+                    <a
+                      href="/login"
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    >
+                      Login
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -137,7 +159,7 @@ export default function TopNav() {
                 >
                   {/* <!-- Active: "bg-gray-100", Not Active: "" --> */}
                   <a
-                    href="#"
+                    href="/"
                     className="block px-4 py-2 text-sm text-gray-700"
                     role="menuitem"
                     tabIndex="-1"
@@ -146,7 +168,7 @@ export default function TopNav() {
                     Your Profile
                   </a>
                   <a
-                    href="#"
+                    href="/"
                     className="block px-4 py-2 text-sm text-gray-700"
                     role="menuitem"
                     tabIndex="-1"
@@ -155,7 +177,7 @@ export default function TopNav() {
                     Settings
                   </a>
                   <a
-                    href="#"
+                    href="/"
                     className="block px-4 py-2 text-sm text-gray-700"
                     role="menuitem"
                     tabIndex="-1"
@@ -175,26 +197,37 @@ export default function TopNav() {
           <div className="space-y-1 px-2 pb-3 pt-2">
             {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
             <a
-              href="#"
+              href="/"
               className="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
               aria-current="page"
             >
               Home
             </a>
             <a
-              href="#"
+              href="/about-us"
               className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
             >
               About
             </a>
+            {currentUser ? (
+              <Form action="/logout" method="post">
+                <button
+                  type="submit"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                >
+                  Log out
+                </button>
+              </Form>
+            ) : (
+              <a
+                href="/login"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+              >
+                Log In
+              </a>
+            )}
             <a
-              href="#"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-            >
-              Log
-            </a>
-            <a
-              href="#"
+              href="/"
               className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
             >
               Calendar
