@@ -5,11 +5,11 @@ import benefitImg3 from "../imgs/Feature-Image-3.png"
 export default function BenefitsSection(){
     return(
         <>
-            <section className="bg-gray-800 pt-10 pb-40 text-white font-sans flex justify-center content-center">
-                <div className="max-w-screen-xl flex flex-wrap content-between justify-center gap-y-4 gap-x-4 grid-cols-3" >
+            <section className="bg-gray-800 pt-5 pb-5 text-white font-sans flex justify-center content-center">
+                <div className="max-w-screen-xl flex flex-wrap content-between justify-center gap-y-8 gap-x-16 grid-cols-3" >
                     <a href="">
-                        <div className="flex flex-col p-5 text-center max-w-xs">
-                            <div className="w-full">
+                        <div className="flex flex-col p-5 text-start max-w-xs">
+                            <div className="w-full pb-5">
                                 <img className="w-full" src={benefitImg1} alt="group of people" />
                             </div>
                             <h1 className="text-4xl font-bold mb-2">Join a group</h1>
@@ -17,8 +17,8 @@ export default function BenefitsSection(){
                         </div>
                     </a>
                     <a href="">
-                        <div className="flex flex-col p-5 text-center max-w-xs">
-                            <div className="w-full">
+                        <div className="flex flex-col p-5 text-start max-w-xs">
+                            <div className="w-full pb-5">
                                 <img className="w-full" src={benefitImg2} alt="group of people" />
                             </div>
                             <h1 className="text-4xl font-bold mb-2">Find an event</h1>
@@ -26,8 +26,8 @@ export default function BenefitsSection(){
                         </div>
                     </a>
                     <a href="">
-                        <div className="flex flex-col p-5 text-center max-w-xs">
-                            <div className="w-full">
+                        <div className="flex flex-col p-5 text-start max-w-xs">
+                            <div className="w-full pb-5">
                                 <img className="w-full" src={benefitImg3} alt="group of people" />
                             </div>
                             <h1 className="text-4xl font-bold mb-2">Start a group</h1>
