@@ -1,12 +1,13 @@
-import { Card, DashboardHeader } from '~/components/ui/containers';
+import { Card } from '~/components/ui/containers';
+import { H1, H2 } from '~/components/ui/headers';
 
 export default function GroupNew() {
   return (
     <div className="grow py-20 lg:py-40 bg-secondary w-full flex flex-col items-center justify-center">
       <div className="flex w-full items-center justify-center flex-col">
         <div className="max-w-[900px] w-full flex flex-col gap-3">
-          <DashboardHeader>Create New Group</DashboardHeader>
-          <h2 className="text-black font-bold text-2xl">Your Community Starts Here</h2>
+          <H1>Create New Group</H1>
+          <H2>Your Community Starts Here</H2>
           <Card>
             <div className="flex pt-4">
               <div className="flex-col">
