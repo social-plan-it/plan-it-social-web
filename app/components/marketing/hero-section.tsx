@@ -1,4 +1,4 @@
-import { Image } from './images';
+import { Image } from '../ui/images';
 
 export default function HeroSection() {
   return (

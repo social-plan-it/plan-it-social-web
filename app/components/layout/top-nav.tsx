@@ -1,4 +1,10 @@
+import { Form } from '@remix-run/react';
+
+import { useCurrentUser } from '~/hooks/useCurrentUser';
+
 export default function TopNav() {
+  const currentUser = useCurrentUser();
+
   return (
     <>
       <div className="bg-gray-700">
@@ -73,12 +79,23 @@ export default function TopNav() {
                   >
                     About
                   </a>
-                  <a
-                    href="/login"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    Login
-                  </a>
+                  {currentUser ? (
+                    <Form action="/logout" method="post">
+                      <button
+                        type="submit"
+                        className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium whitespace-nowrap"
+                      >
+                        Log out
+                      </button>
+                    </Form>
+                  ) : (
+                    <a
+                      href="/login"
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    >
+                      Login
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -192,12 +209,23 @@ export default function TopNav() {
             >
               About
             </a>
-            <a
-              href="/login"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-            >
-              Log In
-            </a>
+            {currentUser ? (
+              <Form action="/logout" method="post">
+                <button
+                  type="submit"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                >
+                  Log out
+                </button>
+              </Form>
+            ) : (
+              <a
+                href="/login"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+              >
+                Log In
+              </a>
+            )}
             <a
               href="/"
               className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"

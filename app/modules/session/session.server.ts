@@ -1,4 +1,11 @@
-import { createCookieSessionStorage } from '@remix-run/node';
+import { createCookieSessionStorage, redirect } from '@remix-run/node';
+
+import { db } from '~/modules/database/db.server';
+
+const sessionSecret = process.env.SESSION_SECRET;
+if (!sessionSecret) {
+  throw new Error('SESSION_SECRET must be set');
+}
 
 const { commitSession, destroySession, getSession } = createCookieSessionStorage({
   cookie: {
@@ -7,7 +14,7 @@ const { commitSession, destroySession, getSession } = createCookieSessionStorage
     // but that doesn't work on localhost for Safari
     // https://web.dev/when-to-use-local-https/
     secure: true,
-    secrets: ['3453453453453453'],
+    secrets: [sessionSecret],
     sameSite: 'lax',
     path: '/',
     maxAge: 60 * 60 * 24 * 30,
@@ -37,4 +44,28 @@ export async function getUserSession(request: Request): Promise<UserSession | nu
     return { userId: cookie.get('userId') };
   }
   return null;
+}
+
+export async function getCurrentUser(request: Request) {
+  const session = await getUserSession(request);
+
+  if (session) {
+    const currentUser = await db.user.findUnique({ where: { id: session.userId } });
+
+    if (currentUser) {
+      return currentUser;
+    }
+  }
+
+  return null;
+}
+
+export async function logout(request: Request) {
+  const cookie = await getSession(request.headers.get('Cookie'));
+
+  return redirect('/login', {
+    headers: {
+      'Set-Cookie': await destroySession(cookie),
+    },
+  });
 }
