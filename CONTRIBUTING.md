@@ -2,6 +2,8 @@
 
 Welcome to `social-plan-it`! These are some quick notes on how to start contributing to our open source project. A good place to start is to join our [Discord server](https://discord.gg/tTD7PvwpuX).
 
+The group meets most Mondays 6pm PST ([meetup](https://www.meetup.com/all-things-web-react-html-css-javascript-tutoring/))
+
 Check out our [Figma wire-frame](https://www.figma.com/file/6e3cBuEHOIpWvqT31Zd29p/Social-Plan-it?type=design&node-id=0-1&mode=design&t=DpLSfRITCDDG1pj0-0).
 
 ## Setup instructions
