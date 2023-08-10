@@ -54,6 +54,9 @@ model Event {
   name        String
   date        DateTime
   description String
+  imgUrl      String?
+  imgAlt      String?
+  location    String?
   group       Group    @relation(fields: [groupId], references: [id])
   groupId     String
   users       User[]
