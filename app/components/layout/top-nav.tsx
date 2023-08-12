@@ -21,7 +21,7 @@ const TopNav: React.FC = () => {
           </ul>
           <ul className='flex'>
             <a href="/signin"><li className='text-2xl py-1 hover:py-0'>Sign in</li></a>
-            <a href="/signup"><li className='ml-4 bg-secondary text-primary rounded-full px-2 py-1 text-2xl hover:bg-primary hover:text-secondary hover:border-white hover:border-solid hover:py-0' >Sign up</li></a>
+            <a href="/signup"><li className='ml-4 bg-white text-primary rounded-full px-2 py-1 text-2xl hover:bg-primary hover:text-secondary hover:border-white hover:border-solid hover:py-0' >Sign up</li></a>
             
           </ul>
           </div>
@@ -58,7 +58,6 @@ const TopNav: React.FC = () => {
       </div>
       {isMenuOpen && (
         <div className="mt-4">
-          {/* Add your menu items here */}
           <a
             className="block text-white py-2 px-4 hover:bg-gray-700"
             href="/"
