@@ -16,6 +16,20 @@ export function EventsSection({ events }: { events: Event[] }) {
 }
 
 export function EventCard({ event, index }: { event: Event; index: number }) {
+  const options = {
+    weekday: 'short' as const,
+    month: 'short' as const,
+    day: 'numeric' as const,
+    hour: 'numeric' as const,
+    minute: 'numeric' as const,
+    hour12: true,
+    timeZone: 'America/Los_Angeles',
+    timeZoneName: 'short' as const,
+  };
+  const date = new Date(event.date).toLocaleString('en-US', options);
+  const parts = date.split(', ');
+  const formattedTime = `${parts[0]}, ${parts[1]} - ${parts[2]}`;
+
   return (
     <div className="flex flex-col space-y-3 w-[350px] mx-6 sm:mx-0 max-w-md p-6 rounded-2xl bg-primary">
       <img
@@ -28,7 +42,7 @@ export function EventCard({ event, index }: { event: Event; index: number }) {
         <div className="text-lg sm:text-2xl font-bold text-white">Placeholder Group Name</div>
         <h3 className="text-3xl sm:text-4xl font-bold text-white">{event.name}</h3>
         <p className="text-lg sm:text-2xl text-white">{event.description}</p>
-        <div className="text-lg sm:text-2xl font-bold text-white">{event.date.toLocaleString()}</div>
+        <div className="text-lg sm:text-2xl font-bold text-white">{formattedTime}</div>
       </div>
     </div>
   );
