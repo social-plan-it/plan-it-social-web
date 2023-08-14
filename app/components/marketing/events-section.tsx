@@ -1,6 +1,10 @@
-import type { Event } from '@prisma/client';
+import type { Event, Group } from '@prisma/client';
 
-export function EventsSection({ events }: { events: Event[] }) {
+interface ExtendedEvent extends Event {
+  group: Group;
+}
+
+export function EventsSection({ events }: { events: ExtendedEvent[] }) {
   return (
     <section className="bg-secondary">
       <div className="sm:ml-24 pt-10 pb-20 space-y-3 ">
@@ -15,18 +19,17 @@ export function EventsSection({ events }: { events: Event[] }) {
   );
 }
 
-export function EventCard({ event, index }: { event: Event; index: number }) {
-  const options = {
-    weekday: 'short' as const,
-    month: 'short' as const,
-    day: 'numeric' as const,
-    hour: 'numeric' as const,
-    minute: 'numeric' as const,
+export function EventCard({ event, index }: { event: ExtendedEvent; index: number }) {
+  const date = event.date.toLocaleString('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
     hour12: true,
     timeZone: 'America/Los_Angeles',
-    timeZoneName: 'short' as const,
-  };
-  const date = new Date(event.date).toLocaleString('en-US', options);
+    timeZoneName: 'short',
+  });
   const parts = date.split(', ');
   const formattedTime = `${parts[0]}, ${parts[1]} - ${parts[2]}`;
 
@@ -39,7 +42,7 @@ export function EventCard({ event, index }: { event: Event; index: number }) {
       />
 
       <div>
-        <div className="text-lg sm:text-2xl font-bold text-white">Placeholder Group Name</div>
+        <div className="text-lg sm:text-2xl font-bold text-white">{event.group.name}</div>
         <h3 className="text-3xl sm:text-4xl font-bold text-white">{event.name}</h3>
         <p className="text-lg sm:text-2xl text-white">{event.description}</p>
         <div className="text-lg sm:text-2xl font-bold text-white">{formattedTime}</div>
