@@ -86,8 +86,8 @@ export function TopNav() {
             <LogoutButton className="w-full text-left text-white py-2 px-4 hover:bg-gray-700" />
           ) : (
             <>
-              <Link className="block text-white py-2 px-4 hover:bg-gray-700" to="/signin">
-                Sign in
+              <Link className="block text-white py-2 px-4 hover:bg-gray-700" to="/login">
+                Log in
               </Link>
               <Link className="block text-white py-2 px-4 hover:bg-gray-700" to="/signup">
                 Sign up
