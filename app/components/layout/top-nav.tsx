@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import {Link} from "@remix-run/react"
 
-const TopNav: React.FC = () => {
+export default function TopNav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -14,14 +15,14 @@ const TopNav: React.FC = () => {
           <a href="/"><img  className="w-1/3" src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1683267003/SocialPlanIt/SocialPlan-it-logo-Horizontal_xwm3xt.png" alt="Social Plan It horizontal logo" /></a>
           <div className="hidden md:flex justify-between w-3/4 py-4" >
           <ul className='flex'>
-            <a href="/"><li className='text-2xl py-1 hover:py-0'>Home</li></a>
-            <a href="/about"><li className='ml-4 text-2xl py-1 hover:py-0'>About</li></a>
-            <a href="/events"><li className='ml-4 text-2xl py-1 hover:py-0'>Events</li></a>
-            <a href="/groups"><li className='ml-4 text-2xl py-1 hover:py-0'>Groups</li></a>
+            <Link to="/"><li className='text-2xl py-1 hover:py-0'>Home</li></Link>
+            <Link to="/about"><li className='ml-4 text-2xl py-1 hover:py-0'>About</li></Link>
+            <Link to="/events"><li className='ml-4 text-2xl py-1 hover:py-0'>Events</li></Link>
+            <Link to="/groups"><li className='ml-4 text-2xl py-1 hover:py-0'>Groups</li></Link>
           </ul>
           <ul className='flex'>
-            <a href="/signin"><li className='text-2xl py-1 hover:py-0'>Sign in</li></a>
-            <a href="/signup"><li className='ml-4 bg-white text-primary rounded-full px-2 py-1 text-2xl hover:bg-primary hover:text-secondary hover:border-white hover:border-solid hover:py-0' >Sign up</li></a>
+            <Link to="/login"><li className='text-2xl py-1 hover:py-0'>Log in</li></Link>
+            <Link to="/signup"><li className='ml-4 bg-white text-primary rounded-full px-2 py-1 text-2xl hover:bg-primary hover:text-secondary hover:border-white hover:border-solid hover:py-0' >Sign up</li></Link>
             
           </ul>
           </div>
@@ -58,47 +59,44 @@ const TopNav: React.FC = () => {
       </div>
       {isMenuOpen && (
         <div className="mt-4">
-          <a
+          <Link
             className="block text-white py-2 px-4 hover:bg-gray-700"
-            href="/"
+            to="/"
           >
             Home
-          </a>
-          <a
+          </Link>
+          <Link
             className="block text-white py-2 px-4 hover:bg-gray-700"
-            href="/about"
+            to="/about-us"
           >
             About
-          </a>
-          <a
+          </Link>
+          <Link
             className="block text-white py-2 px-4 hover:bg-gray-700"
-            href="/events"
+            to="/events"
           >
             Events
-          </a>
-          <a
+          </Link>
+          <Link
             className="block text-white py-2 px-4 hover:bg-gray-700"
-            href="/groups"
+            to="/groups"
           >
             Groups
-          </a>
-          <a
+          </Link>
+          <Link
             className="block text-white py-2 px-4 hover:bg-gray-700"
-            href="/signin"
+            to="/signin"
           >
             Sign in
-          </a>
-          <a
+          </Link>
+          <Link
             className="block text-white py-2 px-4 hover:bg-gray-700"
-            href="/signup"
+            to="/signup"
           >
             Sign up
-          </a>
+          </Link>
         </div>
       )}
     </nav>
   );
 };
-
-
-export default TopNav;
