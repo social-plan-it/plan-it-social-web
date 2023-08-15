@@ -9,7 +9,6 @@ const events = [
     imgUrl: 'imgs/upc-events1.png',
     imgAlt: 'group of people in a meeting-1',
     location: '123 Main St, San Francisco',
-    groupId: '345',
   },
   {
     name: 'Fitness Bootcamp: Get Fit and Stay Active',
@@ -19,7 +18,6 @@ const events = [
     imgUrl: 'imgs/upc-events2.png',
     imgAlt: 'group of people in a meeting-2',
     location: '456 Elm St, Munich',
-    groupId: '346',
   },
   {
     name: 'Tennis Tournament: Fun and Competitive Matches',
@@ -29,25 +27,21 @@ const events = [
     imgUrl: 'imgs/upc-events3.png',
     imgAlt: 'group of people in a meeting-3',
     location: '789 Oak St, Istanbul',
-    groupId: '347',
   },
 ];
 
 const groups = [
   {
-    id: '345',
     name: 'WebDev Enthusiasts',
     description:
       'Join our community of web development enthusiasts and stay up-to-date with the latest trends, technologies, and innovations in the ever-evolving world of web development.',
   },
   {
-    id: '346',
     name: 'FitFam Community',
     description:
       "Welcome to the FitFam Community! We're dedicated to helping you achieve your fitness goals and live a healthier, more active lifestyle. Join us for high-energy bootcamp sessions that are suitable for all fitness levels.",
   },
   {
-    id: '347',
     name: 'Competitive Tennis Club',
     description:
       'Calling all tennis enthusiasts! Our Competitive Tennis Club is your gateway to exciting and friendly matches with players who share your passion for the game. Join us for fun and challenging competitive tennis tournaments.',
@@ -56,27 +50,16 @@ const groups = [
 
 async function seed() {
   try {
-    // Transform the events array into the format expected by createMany
-    const eventRecords = events.map((event) => ({
-      name: event.name,
-      date: event.date,
-      description: event.description,
-      imgUrl: event.imgUrl,
-      imgAlt: event.imgAlt,
-      location: event.location,
-      groupId: event.groupId,
+    await db.group.createMany({ data: groups });
+
+    const groupRecords = await db.group.findMany();
+
+    const eventRecords = events.map((event, index) => ({
+      ...event,
+      groupId: groupRecords[index].id,
     }));
 
-    // Transform the groups array into the format expected by createMany
-    const groupRecords = groups.map((group) => ({
-      id: group.id,
-      name: group.name,
-      description: group.description,
-    }));
-
-    // Use createMany to insert records
     await db.event.createMany({ data: eventRecords });
-    await db.group.createMany({ data: groupRecords });
 
     console.log('Seed data inserted successfully.');
   } catch (error) {

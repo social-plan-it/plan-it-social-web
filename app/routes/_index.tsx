@@ -8,13 +8,13 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export async function loader() {
-  const data = await db.event.findMany({ take: 3, include: { group: true } });
-  return data;
+  const events = await db.event.findMany({ take: 3, include: { group: true } });
+  return { events };
 }
 
 export default function Index() {
-  const data = useLoaderData<typeof loader>();
-  const events = data.map((event) => ({
+  const { events } = useLoaderData<typeof loader>();
+  const serializedEvents = events.map((event) => ({
     ...event,
     date: new Date(event.date),
   }));
@@ -22,7 +22,7 @@ export default function Index() {
   return (
     <>
       <HeroSection />
-      <EventsSection events={events} />
+      <EventsSection events={serializedEvents} />
     </>
   );
 }

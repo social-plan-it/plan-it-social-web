@@ -35,11 +35,13 @@ export function EventCard({ event, index }: { event: ExtendedEvent; index: numbe
 
   return (
     <div className="flex flex-col space-y-3 w-[350px] mx-6 sm:mx-0 max-w-md p-6 rounded-2xl bg-primary">
-      <img
-        className={`${index === 1 && 'sm:order-2'} pt-8 w-full object-contain box-border`}
-        src={event.imgUrl ?? ''}
-        alt={event.imgAlt ?? ''}
-      />
+      {event.imgUrl && event.imgAlt && (
+        <img
+          className={`${index === 1 && 'sm:order-2'} pt-8 w-full object-contain box-border`}
+          src={event.imgUrl}
+          alt={event.imgAlt}
+        />
+      )}
 
       <div>
         <div className="text-lg sm:text-2xl font-bold text-white">{event.group.name}</div>
