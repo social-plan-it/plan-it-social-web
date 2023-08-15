@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { Link } from '@remix-run/react';
+import { Form, Link, useNavigation } from '@remix-run/react';
+import { useCurrentUser } from '~/hooks/useCurrentUser';
 
 export function TopNav() {
+  const currentUser = useCurrentUser();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -34,16 +36,20 @@ export function TopNav() {
                 <li className="ml-4 text-2xl py-1 hover:py-0">Groups</li>
               </Link>
             </ul>
-            <ul className="flex">
-              <Link to="/login">
-                <li className="text-2xl py-1 hover:py-0">Log in</li>
-              </Link>
-              <Link to="/signup">
-                <li className="ml-4 bg-white text-primary rounded-full px-2 py-1 text-2xl hover:bg-primary hover:text-secondary hover:border-white hover:border-solid hover:py-0">
-                  Sign up
-                </li>
-              </Link>
-            </ul>
+            {currentUser ? (
+              <LogoutButton className="text-2xl py-1 hover:py-0" />
+            ) : (
+              <ul className="flex">
+                <Link to="/login">
+                  <li className="text-2xl py-1 hover:py-0">Log in</li>
+                </Link>
+                <Link to="/signup">
+                  <li className="ml-4 bg-white text-primary rounded-full px-2 py-1 text-2xl hover:bg-primary hover:text-secondary hover:border-white hover:border-solid hover:py-0">
+                    Sign up
+                  </li>
+                </Link>
+              </ul>
+            )}
           </div>
         </div>
         <button className="text-white block md:hidden" onClick={toggleMenu}>
@@ -76,12 +82,18 @@ export function TopNav() {
           <Link className="block text-white py-2 px-4 hover:bg-gray-700" to="/groups">
             Groups
           </Link>
-          <Link className="block text-white py-2 px-4 hover:bg-gray-700" to="/signin">
-            Sign in
-          </Link>
-          <Link className="block text-white py-2 px-4 hover:bg-gray-700" to="/signup">
-            Sign up
-          </Link>
+          {currentUser ? (
+            <LogoutButton className="w-full text-left text-white py-2 px-4 hover:bg-gray-700" />
+          ) : (
+            <>
+              <Link className="block text-white py-2 px-4 hover:bg-gray-700" to="/signin">
+                Sign in
+              </Link>
+              <Link className="block text-white py-2 px-4 hover:bg-gray-700" to="/signup">
+                Sign up
+              </Link>
+            </>
+          )}
         </div>
       )}
     </nav>
