@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Link} from "@remix-run/react"
 
-export default function TopNav() {
+export function TopNav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -12,11 +12,11 @@ export default function TopNav() {
     <nav className="bg-gray-800 p-4">
       <div className="flex justify-start items-center max-w-screen-2xl mx-auto">
         <div className="text-white text-xl font-semibold flex justify-between items-center py-4 w-full">
-          <a href="/"><img  className="w-1/3" src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1683267003/SocialPlanIt/SocialPlan-it-logo-Horizontal_xwm3xt.png" alt="Social Plan It horizontal logo" /></a>
+          <Link to="/"><img  className="w-1/3" src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1683267003/SocialPlanIt/SocialPlan-it-logo-Horizontal_xwm3xt.png" alt="Social Plan It horizontal logo" /></Link>
           <div className="hidden md:flex justify-between w-3/4 py-4" >
           <ul className='flex'>
             <Link to="/"><li className='text-2xl py-1 hover:py-0'>Home</li></Link>
-            <Link to="/about"><li className='ml-4 text-2xl py-1 hover:py-0'>About</li></Link>
+            <Link to="/about-us"><li className='ml-4 text-2xl py-1 hover:py-0'>About</li></Link>
             <Link to="/events"><li className='ml-4 text-2xl py-1 hover:py-0'>Events</li></Link>
             <Link to="/groups"><li className='ml-4 text-2xl py-1 hover:py-0'>Groups</li></Link>
           </ul>
