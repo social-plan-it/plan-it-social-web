@@ -23,7 +23,7 @@ const benefits = [
     },
 ];
 
-export default function BenefitsSection() {
+export function BenefitsSection() {
     return (
         <section className="bg-gray-800 pt-5 pb-5 text-white font-sans flex justify-center content-center">
             <div className="max-w-screen-xl flex flex-wrap content-between justify-center gap-y-8 gap-x-16 grid-cols-3">

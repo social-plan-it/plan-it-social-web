@@ -2,7 +2,7 @@ import type { V2_MetaFunction } from '@remix-run/react';
 import type { Event, Group } from '@prisma/client';
 import HeroSection from '~/components/marketing/hero-section';
 import { EventsSection } from '../components/marketing/events-section';
-import BenefitsSection from '~/components/marketing/benefits-section';
+import {BenefitsSection} from '~/components/marketing/benefits-section';
 
 export const meta: V2_MetaFunction = () => {
   return [{ title: 'Plan It Social' }];
