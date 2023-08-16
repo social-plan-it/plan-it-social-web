@@ -3,14 +3,14 @@ const benefits = [
         title: "Join a group",
         message: "Do what you love, meet others who love it, find your community. The rest is history!",
         imgUrl: "https://res.cloudinary.com/dxctpvd8v/image/upload/v1687225039/SocialPlan-it/Feature-Image-1_clboti.png", 
-        imgAlt: "image description",
+        imgAlt: "Group of women collaborating on a computer",
         link: "/groups",
     },
     {
         title: "Find an event",
         message: "Events are happening on just about any topic you can think of, from online gaming and photography to yoga and hiking.",
         imgUrl: "https://res.cloudinary.com/dxctpvd8v/image/upload/v1687225039/SocialPlan-it/Feature-Image-2_c5mgcb.png", 
-        imgAlt: "image description",
+        imgAlt: "Five members sitting on a ledge bench",
         link: "/events", 
 
     },
@@ -18,7 +18,7 @@ const benefits = [
         title: "Start a group",
         message: "You don’t have to be an expert to gather people together and explore shared interests.",
         imgUrl: "https://res.cloudinary.com/dxctpvd8v/image/upload/v1687225039/SocialPlan-it/Feature-Image-3_vpibsv.png", 
-        imgAlt: "image description",
+        imgAlt: "Multiple people conversing on the steps",
         link: "/groups",
     },
 ];
