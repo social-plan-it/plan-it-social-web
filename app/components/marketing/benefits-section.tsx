@@ -1,3 +1,5 @@
+import { Link } from "@remix-run/react";
+
 const benefits = [
     {
         title: "Join a group",
@@ -28,7 +30,7 @@ export function BenefitsSection() {
         <section className="bg-gray-800 pt-5 pb-5 text-white font-sans flex justify-center content-center">
             <div className="max-w-screen-xl flex flex-wrap content-between justify-center gap-y-8 gap-x-16 grid-cols-3">
                 {benefits.map((benefit, index) => (
-                    <a key={index} href={benefit.link}>
+                    <Link key={index} to={benefit.link}>
                         <div className="flex flex-col p-5 text-start max-w-xs">
                             <div className="w-full pb-5">
                                 <img className="w-full" src={benefit.imgUrl} alt={benefit.imgAlt} />
@@ -36,7 +38,7 @@ export function BenefitsSection() {
                             <h1 className="text-4xl font-bold mb-2">{benefit.title}</h1>
                             <p className="text-lg">{benefit.message}</p>
                         </div>
-                    </a>
+                    </Link>
                 ))}
             </div>
         </section>
