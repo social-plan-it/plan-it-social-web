@@ -19,7 +19,7 @@ const benefits = [
         message: "You don’t have to be an expert to gather people together and explore shared interests.",
         imgUrl: "https://res.cloudinary.com/dxctpvd8v/image/upload/v1687225039/SocialPlan-it/Feature-Image-3_vpibsv.png", 
         imgAlt: "Multiple people conversing on the steps",
-        link: "/groups",
+        link: "/groups/new",
     },
 ];
 
