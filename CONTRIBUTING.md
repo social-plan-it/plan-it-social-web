@@ -6,7 +6,7 @@ The group meets most Mondays 6pm PST ([meetup](https://www.meetup.com/all-things
 
 Check out our [Figma wire-frame](https://www.figma.com/file/6e3cBuEHOIpWvqT31Zd29p/Social-Plan-it?type=design&node-id=0-1&mode=design&t=DpLSfRITCDDG1pj0-0).
 
-## Setup instructions
+## Initial Setup Instructions
 
 1. Fork the repo
 2. Clone your fork
@@ -20,3 +20,11 @@ Check out our [Figma wire-frame](https://www.figma.com/file/6e3cBuEHOIpWvqT31Zd2
 10. Create a pull request
 11. Iterate on the solution
 12. Get merged
+
+## Formatting and Linting
+
+Please utilize our formatting and linting command `npm run lint`. Also included in our documentation, are great instructions on how to [setup this functionality to automatically run on save in VS code](./docs/formatting-and-linting.md).
+
+## Database Seed and Refresh
+
+_I think this is something not currently working for me...researching how to update and will include instructions here._
