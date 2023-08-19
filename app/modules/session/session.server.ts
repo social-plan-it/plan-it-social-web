@@ -60,6 +60,17 @@ export async function getCurrentUser(request: Request) {
   return null;
 }
 
+export async function getGroups(groupIds: string[]) {
+  const groups = await db.group.findMany({
+    where: { id: { in: groupIds } },
+  });
+
+  if (groups) {
+    return groups;
+  }
+  return null;
+}
+
 export async function logout(request: Request) {
   const cookie = await getSession(request.headers.get('Cookie'));
 
