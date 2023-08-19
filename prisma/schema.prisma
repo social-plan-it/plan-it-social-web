@@ -36,7 +36,7 @@ model Password {
 model Group {
   id          String  @id @default(uuid())
   name        String
-  description String
+  description String  @db.Text
   events      Event[]
   users       User[]
 }
@@ -53,7 +53,7 @@ model Event {
   id          String   @id @default(uuid())
   name        String
   date        DateTime
-  description String
+  description String   @db.Text
   imgUrl      String?
   imgAlt      String?
   location    String?
