@@ -102,10 +102,12 @@ export function TopNav() {
 
 function LogoutButton({ className }: { className?: string }) {
   const navigation = useNavigation();
-  const isPending = navigation.state === 'submitting' || navigation.state === 'loading';
+  const formAction = '/logout';
+  const isPending =
+    navigation.formAction === formAction && (navigation.state === 'submitting' || navigation.state === 'loading');
 
   return (
-    <Form method="post" action="/logout">
+    <Form method="post" action={formAction}>
       <button disabled={isPending} className={className}>
         {isPending ? 'Logging out...' : 'Log Out'}
       </button>
