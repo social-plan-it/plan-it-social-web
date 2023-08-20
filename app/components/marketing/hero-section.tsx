@@ -1,8 +1,8 @@
-import heroImg from '../imgs/Hero-Image.png';
+import { Image } from '../ui/images';
 
 export default function HeroSection() {
   return (
-    <section className="bg-[#E4EFF0] pt-10 pb-40">
+    <section className="bg-secondary pt-10 pb-40">
       <div className="mx-auto w-screen max-w-screen-xl flex flex-wrap-reverse space-x-10 justify-center">
         <div className="w-4/5 max-w-[45%] min-w-[270px]">
           <h1 className="text-gray-800 font-bold text-4xl pb-8 w-full">Social made easy, memories made forever</h1>
@@ -56,7 +56,7 @@ export default function HeroSection() {
           </form>
         </div>
         <div className="w-4/5 mb-3 max-w-[600px] flex self-start">
-          <img className="w-full" src={heroImg} alt="group of people" />
+          <Image className="w-full" src="/imgs/Hero-Image.png" alt="group of people" />
         </div>
       </div>
     </section>

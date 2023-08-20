@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+enum Role {
+  ADMIN
+  USER
+  APPLICANT
+}
+
+model User {
+  id       String    @id @default(uuid())
+  email    String    @unique
+  name     String
+  password Password?
+  groups   Group[]
+  events   Event[]
+}
+
+model Password {
+  id     String @id @default(uuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
+  hash   String
+}
+
+model Group {
+  id          String  @id @default(uuid())
+  name        String
+  description String  @db.Text
+  events      Event[]
+  users       User[]
+}
+
+model User_Group {
+  userId  String
+  groupId String
+  role    Role
+
+  @@id([userId, groupId])
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  name        String
+  date        DateTime
+  description String   @db.Text
+  imgUrl      String?
+  imgAlt      String?
+  location    String?
+  group       Group    @relation(fields: [groupId], references: [id])
+  groupId     String
+  users       User[]
+
+  @@index([groupId], name: "groupId")
+}
