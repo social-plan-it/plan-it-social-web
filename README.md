@@ -13,12 +13,14 @@ The group meets most Mondays 6pm PST ([meetup](https://www.meetup.com/all-things
 
 ## What we're using
 
+- [Figma](https://www.figma.com/)
 - [MySQL](https://www.mysql.com/)
+- [PlanetScale] (https://planetscale.com/)
 - [Prisma](https://www.prisma.io/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Typescript](https://www.typescriptlang.org/)
 - [React 18](https://react.dev)
 - [Remix](https://remix.run/docs)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
 - [Vercel](https://vercel.com/)
 
 ## Development
