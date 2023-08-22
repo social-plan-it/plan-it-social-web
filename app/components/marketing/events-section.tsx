@@ -10,12 +10,20 @@ export function EventsSection({ events }: { events: ExtendedEvent[] }) {
       <div className="sm:ml-24 pt-10 pb-20 space-y-3 ">
         <h2 className="text-center sm:text-left sm:text-5xl text-4xl font-bold italic text-primary">Upcoming Events</h2>
         <div className="flex flex-wrap gap-6 justify-center sm:justify-start">
-          {events.map((event, index) => {
-            return <EventCard key={event.id} event={event} index={index} />;
-          })}
+          <EventsCards events={events} />
         </div>
       </div>
     </section>
+  );
+}
+
+export function EventsCards({ events }: { events: ExtendedEvent[] }) {
+  return (
+    <>
+      {events.map((event, index) => {
+        return <EventCard key={event.id} event={event} index={index} />;
+      })}
+    </>
   );
 }
 
@@ -37,7 +45,7 @@ export function EventCard({ event, index }: { event: ExtendedEvent; index: numbe
     <div className="flex flex-col space-y-3 w-[350px] mx-6 sm:mx-0 max-w-md p-6 rounded-2xl bg-primary">
       {event.imgUrl && event.imgAlt && (
         <img
-          className={`${index === 1 && 'sm:order-2'} pt-8 w-full object-contain box-border`}
+          className={`${index === 1 && 'sm:order-2 pt-8'}  w-full object-contain box-border`}
           src={event.imgUrl}
           alt={event.imgAlt}
         />

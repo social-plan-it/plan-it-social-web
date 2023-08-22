@@ -1,3 +1,4 @@
+import { Form } from '@remix-run/react';
 import { Image } from '../ui/images';
 
 export default function HeroSection() {
@@ -11,7 +12,7 @@ export default function HeroSection() {
             people who share it on Social Plan-it. Events are happening every day—log in to join the fun.
           </p>
           {/* <button className="bg-gray-800 rounded-3xl py-1 px-8 m-1 text-white hover:bg-emerald-50 hover:text-gray-800 hover:border-2 border-gray-800 uppercase font-semibold">Join</button> */}
-          <form method="GET" action="/search">
+          <Form method="GET" action="/search">
             <label htmlFor="q" className="mb-2 text-sm font-medium text-gray-900 sr-only">
               Search groups or events:
             </label>
@@ -38,19 +39,22 @@ export default function HeroSection() {
                 <input
                   type="text"
                   id="q"
-                  className="block w-full py-4 pl-10 text-md text-gray-900 md:text-center border border-gray-300 rounded-l-lg  bg-gray-50 focus:ring-2 focus:outline-none focus:ring-blue-500"
-                  placeholder='"Frisbee in San Fran"'
+                  name="q"
+                  className="block w-full py-4 pl-10 text-xs sm:text-base text-gray-900 md:text-center lg:text-2xl border border-gray-300 rounded-l-lg italic bg-gray-50 focus:ring-2 focus:outline-none focus:ring-blue-500"
+                  placeholder='"Frisbee in San Francisco"'
                   required
+                  minLength={2}
+                  maxLength={50}
                 />
                 <button
                   type="submit"
-                  className="text-white  right-2.5 bottom-2.5 bg-primary hover:bg-gray-500 focus:ring-2 focus:outline-none focus:ring-blue-500 font-semibold rounded-r-lg text-md px-2 md:px-4 py-4 "
+                  className="text-white  right-2.5 bottom-2.5 bg-primary hover:bg-gray-500 focus:ring-2 focus:outline-none focus:ring-blue-500 font-semibold rounded-r-lg italic text-md px-2 md:px-4 py-4 lg:text-2xl"
                 >
                   Search
                 </button>
               </div>
             </div>
-          </form>
+          </Form>
         </div>
         <div className="w-4/5 mb-3 max-w-[600px] flex self-start">
           <Image className="w-full" src="/imgs/Hero-Image.png" alt="group of people" />
