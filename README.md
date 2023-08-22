@@ -64,6 +64,25 @@ If you're used to using the `vercel dev` command provided by [Vercel CLI](https:
 
 Please utilize our formatting and linting command `npm run lint`. Also included in our documentation, are great instructions on how to [setup this functionality to automatically run on save in VS code](./docs/formatting-and-linting.md).
 
+### VS Code Setup
+
+Use the following settings to format your files on save:
+
+```json
+{
+  // These are all my auto-save configs
+  "editor.formatOnSave": true,
+  // turn it off for JS and JSX, we will do this via eslint
+  "[javascript][javascriptreact][typescript][typescriptreact]": {
+    "editor.formatOnSave": false
+  },
+  // tell the ESLint plugin to run on save
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
+```
+
 ## Prisma
 
 We've created some handy scripts to help with database management with Prisma. Occasionally you might need to use these to update the database on your local machine.

@@ -3,6 +3,7 @@
   "sideEffects": false,
   "scripts": {
     "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "format": "run-s format:*",
     "format:prisma": "npx prisma format",
     "dev": "remix dev",
