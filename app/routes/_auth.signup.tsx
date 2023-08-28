@@ -42,17 +42,11 @@ export async function action({ request }: ActionArgs) {
 
   const signUpForm = await SignUpForm.safeParseAsync({ name, email, password, confirmPassword });
 
-  const actionData = {
-    success: false,
-    fields: { email, name },
-    fieldErrors: null,
-    formError: null,
-  };
-
   if (!signUpForm.success) {
     return badRequest({
-      ...actionData,
-      fieldErrors: signUpForm.error.format(),
+      success: false,
+      fields: { name, email },
+      ...signUpForm.error.flatten(),
     });
   }
 
@@ -84,7 +78,7 @@ export async function loader({ request }: LoaderArgs) {
 }
 
 export default function Component() {
-  const actionData = useActionData();
+  const actionData = useActionData<typeof action>();
   const navigation = useNavigation();
   const isPending = navigation.state === 'submitting' || navigation.state === 'loading';
   return (
@@ -95,7 +89,7 @@ export default function Component() {
             <h1 className="text-4xl">Sign Up</h1>
 
             <Input
-              defaultValue={actionData?.fields?.name}
+              defaultValue={typeof actionData?.fields?.name === 'string' ? actionData?.fields?.name : undefined}
               name="name"
               autoComplete="name"
               type="text"
@@ -107,12 +101,12 @@ export default function Component() {
             />
             {actionData?.fieldErrors?.name && (
               <p className="text-sm text-red-600" id="name-error" role="alert">
-                {actionData.fieldErrors.name._errors[0]}
+                {actionData.fieldErrors.name[0]}
               </p>
             )}
 
             <Input
-              defaultValue={actionData?.fields?.email}
+              defaultValue={typeof actionData?.fields?.email === 'string' ? actionData?.fields?.email : undefined}
               name="email"
               type="email"
               autoComplete="email"
@@ -124,7 +118,7 @@ export default function Component() {
             />
             {actionData?.fieldErrors?.email && (
               <p className="text-sm text-red-600" id="email-error" role="alert">
-                {actionData.fieldErrors.email._errors[0]}
+                {actionData.fieldErrors.email[0]}
               </p>
             )}
 
@@ -139,7 +133,7 @@ export default function Component() {
             />
             {actionData?.fieldErrors?.password && (
               <p className="text-sm text-red-600" id="password-error" role="alert">
-                {actionData.fieldErrors.password._errors[0]}
+                {actionData.fieldErrors.password[0]}
               </p>
             )}
 
@@ -154,7 +148,7 @@ export default function Component() {
             />
             {actionData?.fieldErrors?.confirmPassword && (
               <p className="text-sm text-red-600" id="confirmPassword-error" role="alert">
-                {actionData.fieldErrors.confirmPassword._errors[0]}
+                {actionData.fieldErrors.confirmPassword[0]}
               </p>
             )}
 
