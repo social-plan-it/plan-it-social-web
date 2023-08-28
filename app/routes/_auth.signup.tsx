@@ -11,11 +11,7 @@ import { badRequest } from '~/modules/response/response.server';
 import { createUserSession, getUserSession } from '~/modules/session/session.server';
 
 export async function action({ request }: ActionArgs) {
-  const form = await request.formData();
-  const name = form.get('name');
-  const email = form.get('email');
-  const password = form.get('password');
-  const confirmPassword = form.get('confirmPassword');
+  const signUpFormData = Object.fromEntries(await request.formData());
 
   const SignUpForm = z.object({
     name: z
@@ -37,15 +33,17 @@ export async function action({ request }: ActionArgs) {
       .string()
       .min(8, 'Password must be 8 or more characters.')
       .max(191, 'Password cannot exceed 191 max length.'),
-    confirmPassword: z.string().refine((confirmPassword) => confirmPassword === password, 'Password must match.'),
+    confirmPassword: z
+      .string()
+      .refine((confirmPassword) => confirmPassword === signUpFormData.password, 'Password must match.'),
   });
 
-  const signUpForm = await SignUpForm.safeParseAsync({ name, email, password, confirmPassword });
+  const signUpForm = await SignUpForm.safeParseAsync(signUpFormData);
 
   if (!signUpForm.success) {
     return badRequest({
       success: false,
-      fields: { name, email },
+      fields: { name: signUpFormData.name, email: signUpFormData.email },
       ...signUpForm.error.flatten(),
     });
   }
