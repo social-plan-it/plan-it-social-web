@@ -1,16 +1,47 @@
 import type { LoaderArgs, ActionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { Form, Link, useActionData, useNavigation } from '@remix-run/react';
+import { SignInWithGoogleButton } from '~/components/ui/buttons';
 import { Card } from '~/components/ui/containers';
 import { Input } from '~/components/ui/forms';
 import { matchesHash } from '~/modules/database/crypto.server';
 import { db } from '~/modules/database/db.server';
+import { badRequest } from '~/modules/response/response.server';
+import { verifyGoogleToken } from '~/modules/session/google-auth.server';
 import { createUserSession, getUserSession } from '~/modules/session/session.server';
 
 export async function action({ request }: ActionArgs) {
   const form = await request.formData();
   const email = form.get('email');
   const password = form.get('password');
+  const credential = form.get('credential');
+
+  if (typeof credential === 'string') {
+    try {
+      const payload = await verifyGoogleToken(credential);
+      if (!payload) {
+        throw new Error('Invalid payload.');
+      }
+
+      const { name, email } = payload;
+      if (!name || !email) {
+        throw new Error('Name or email does not exist in payload.');
+      }
+
+      const user = await db.user.findUnique({ where: { email } });
+
+      if (!user) {
+        const newUser = await db.user.create({ data: { name, email } });
+        const headers = await createUserSession(newUser.id);
+        return redirect('/', { headers });
+      }
+
+      const headers = await createUserSession(user.id);
+      return redirect('/', { headers });
+    } catch (error) {
+      return badRequest({ message: 'Google authentication failed.' });
+    }
+  }
 
   if (!email || !password) {
     return { status: 400, message: 'Missing required fields' };
@@ -61,6 +92,9 @@ export default function Component() {
               {isPending ? 'Logging in...' : 'Log In'}
             </button>
             {actionData && actionData.message && <p className="text-red-500">{actionData.message}</p>}
+
+            <SignInWithGoogleButton />
+
             <p>
               New here? <Link to="/signup">Sign up</Link>
             </p>
