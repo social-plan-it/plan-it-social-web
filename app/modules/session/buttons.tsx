@@ -1,11 +1,9 @@
-import type { SerializeFrom } from '@remix-run/node';
-import { useRouteLoaderData } from '@remix-run/react';
 import { useEffect } from 'react';
 
-import type { loader } from '~/root';
+import { useEnv } from '~/hooks/useEnv';
 
 export function SignInWithGoogleButton() {
-  const data = useRouteLoaderData('root') as SerializeFrom<typeof loader> | undefined;
+  const env = useEnv();
 
   useEffect(() => {
     const head = document.querySelector('head');
@@ -23,7 +21,7 @@ export function SignInWithGoogleButton() {
     <>
       <div
         id="g_id_onload"
-        data-client_id={data?.ENV.PUBLIC_GOOGLE_CLIENT_ID}
+        data-client_id={env.PUBLIC_GOOGLE_CLIENT_ID}
         data-context="signin"
         data-ux_mode="popup"
         data-login_uri="/login"
