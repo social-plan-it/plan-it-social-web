@@ -1,12 +1,12 @@
 import type { LoaderArgs, ActionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { Form, Link, useActionData, useNavigation } from '@remix-run/react';
-import { SignInWithGoogleButton } from '~/components/ui/buttons';
 import { Card } from '~/components/ui/containers';
 import { Input } from '~/components/ui/forms';
 import { matchesHash } from '~/modules/database/crypto.server';
 import { db } from '~/modules/database/db.server';
 import { badRequest } from '~/modules/response/response.server';
+import { SignInWithGoogleButton } from '~/modules/session/buttons';
 import { verifyGoogleToken } from '~/modules/session/google-auth.server';
 import { createUserSession, getUserSession } from '~/modules/session/session.server';
 
