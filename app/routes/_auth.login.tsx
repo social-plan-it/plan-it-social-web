@@ -31,9 +31,7 @@ export async function action({ request }: ActionArgs) {
       const user = await db.user.findUnique({ where: { email } });
 
       if (!user) {
-        const newUser = await db.user.create({ data: { name, email } });
-        const headers = await createUserSession(newUser.id);
-        return redirect('/', { headers });
+        return badRequest({ message: 'No user exists with this Google account. Please sign up instead.' });
       }
 
       const headers = await createUserSession(user.id);
