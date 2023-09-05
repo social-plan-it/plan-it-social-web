@@ -28,7 +28,7 @@ export async function action({ request }: ActionArgs) {
         throw new Error('Name or email does not exist in payload.');
       }
 
-      const user = await db.user.findUnique({ where: { email } });
+      const user = await db.user.findUnique({ where: { email: email.trim().toLowerCase() } });
 
       if (!user) {
         return badRequest({ message: 'No user exists with this Google account. Please sign up instead.' });
