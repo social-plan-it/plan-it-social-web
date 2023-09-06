@@ -9,9 +9,12 @@ import { getCurrentUser } from '~/modules/session/session.server';
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: stylesheet }];
 
 export async function loader({ request }: LoaderArgs) {
-  const currentUser = await getCurrentUser(request);
-
-  return json({ currentUser });
+  return json({
+    ENV: {
+      PUBLIC_GOOGLE_CLIENT_ID: process.env.PUBLIC_GOOGLE_CLIENT_ID,
+    },
+    currentUser: await getCurrentUser(request),
+  });
 }
 
 export default function App() {
