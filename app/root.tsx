@@ -10,8 +10,9 @@ import { db } from './modules/database/db.server';
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: stylesheet }];
 
 export async function loader({ request }: LoaderArgs) {
-  const events = await db.event.findMany({ include: { group: true }, take: 24 });
-  const groups = await db.group.findMany({ take: 24 });
+  const eventsPromise = db.event.findMany({ include: { group: true }, take: 24 });
+  const groupsPromise = db.group.findMany({ take: 24 });
+  const [events, groups] = await Promise.all([eventsPromise, groupsPromise]);
 
   return json({
     ENV: {
