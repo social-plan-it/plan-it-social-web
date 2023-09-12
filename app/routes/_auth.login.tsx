@@ -84,8 +84,25 @@ export default function Component() {
         <Card>
           <Form method="post" className="w-full flex flex-col items-center justify-center gap-5">
             <h1 className="text-4xl">Log In</h1>
-            <Input name="email" type="email" autoComplete="email" placeholder="Email" label="Email" required />
-            <Input name="password" type="password" placeholder="Password" label="Password" required />
+            <Input
+              name="email"
+              type="email"
+              autoComplete="email"
+              placeholder="Email"
+              label="Email"
+              required
+              showLabel={false}
+              centerText
+            />
+            <Input
+              name="password"
+              type="password"
+              placeholder="Password"
+              label="Password"
+              required
+              showLabel={false}
+              centerText
+            />
             <button type="submit" disabled={isPending}>
               {isPending ? 'Logging in...' : 'Log In'}
             </button>

@@ -96,6 +96,8 @@ export default function Component() {
               required
               aria-invalid={Boolean(actionData?.fieldErrors?.name)}
               aria-errormessage={actionData?.fieldErrors?.name ? 'name-error' : undefined}
+              showLabel={false}
+              centerText
             />
             {actionData?.fieldErrors?.name && (
               <p className="text-sm text-red-600" id="name-error" role="alert">
@@ -113,6 +115,8 @@ export default function Component() {
               required
               aria-invalid={Boolean(actionData?.fieldErrors?.email)}
               aria-errormessage={actionData?.fieldErrors?.email ? 'email-error' : undefined}
+              showLabel={false}
+              centerText
             />
             {actionData?.fieldErrors?.email && (
               <p className="text-sm text-red-600" id="email-error" role="alert">
@@ -128,6 +132,8 @@ export default function Component() {
               required
               aria-invalid={Boolean(actionData?.fieldErrors?.password)}
               aria-errormessage={actionData?.fieldErrors?.password ? 'password-error' : undefined}
+              showLabel={false}
+              centerText
             />
             {actionData?.fieldErrors?.password && (
               <p className="text-sm text-red-600" id="password-error" role="alert">
@@ -143,6 +149,8 @@ export default function Component() {
               required
               aria-invalid={Boolean(actionData?.fieldErrors?.confirmPassword)}
               aria-errormessage={actionData?.fieldErrors?.confirmPassword ? 'content-error' : undefined}
+              showLabel={false}
+              centerText
             />
             {actionData?.fieldErrors?.confirmPassword && (
               <p className="text-sm text-red-600" id="confirmPassword-error" role="alert">
