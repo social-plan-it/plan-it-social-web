@@ -22,6 +22,7 @@
     "@remix-run/vercel": "^1.19.0",
     "@vercel/node": "^2.10.3",
     "bcryptjs": "^2.4.3",
+    "clsx": "^2.0.0",
     "google-auth-library": "^9.0.0",
     "isbot": "^3.6.8",
     "react": "^18.2.0",
