@@ -1,4 +1,5 @@
 import { Card } from '~/components/ui/containers';
+import { Button, Input, TextArea } from '~/components/ui/forms';
 import { H1, H2 } from '~/components/ui/headers';
 
 export default function GroupNew() {
@@ -9,22 +10,16 @@ export default function GroupNew() {
           <H1>Create New Group</H1>
           <H2>Your Community Starts Here</H2>
           <Card>
-            <div className="flex pt-4">
-              <div className="flex-col">
+            <div className="flex pt-4 w-full">
+              <div className="w-1/2">
                 <div className="w-1/2 pb-4">
-                  <label>
-                    Group Name:
-                    <input className="bg-grayBackground" name="groupName" type="text" required />
-                  </label>
+                  <Input label="Group Name:" name="groupName" required />
                 </div>
                 <div className="w-1/2 pb-4">
-                  <label>
-                    Location:
-                    <input className="bg-grayBackground" name="location" type="text" required />
-                  </label>
+                  <Input label="Location:" name="location" required />
                 </div>
               </div>
-              <div className="flex-col">
+              <div className="w-full">
                 <div className="w-1/2 pb-4">
                   <label>
                     Group Topics:
@@ -37,28 +32,18 @@ export default function GroupNew() {
                   </label>
                 </div>
                 <div className="w-1/2 pb-4">
-                  <label>
-                    Discord Channel:
-                    <input className="bg-grayBackground" name="discordChannel" type="text" />
-                  </label>
+                  <Input label="Discord Channel:" name="discordChannel" />
                 </div>
               </div>
             </div>
             <div className="flex-col pb-4">
-              <label>
-                Description:
-                <textarea name="description" rows={5} cols={33} required></textarea>
-              </label>
+              <TextArea label="Description:" name="description" rows={5} required />
             </div>
             <div className="flex-row justify-end">
               <div>
                 <label>Attach Image</label>
               </div>
-              <div>
-                <button className="border-2 w-24 bg-red-700 text-white rounded-lg " type="submit">
-                  Create
-                </button>
-              </div>
+              <Button>Create</Button>
             </div>
           </Card>
         </div>
