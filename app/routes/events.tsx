@@ -1,13 +1,13 @@
 import { Card } from '~/components/ui/containers';
-import { useGroups } from '~/hooks/useGroups';
+import { useEvents } from '~/hooks/useEvents';
 
-export default function Group() {
-  const groups = useGroups();
+export default function EventsPage() {
+  const events = useEvents();
   return (
     <Card>
       <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-        {groups?.map((group) => {
-          return <li key={group.id}>{group.name}</li>;
+        {events?.map((event) => {
+          return <li key={event.id}>{event.name}</li>;
         })}
       </ul>
     </Card>
