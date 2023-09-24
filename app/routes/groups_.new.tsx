@@ -1,11 +1,13 @@
 import type { ActionFunction } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
+import { Form } from '@remix-run/react';
 
 import { db } from '~/modules/database/db.server';
 
 import { Card } from '~/components/ui/containers';
 import { Button, Input, TextArea } from '~/components/ui/forms';
 import { H1, H2 } from '~/components/ui/headers';
+
 
 export let action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
@@ -29,7 +31,7 @@ export default function GroupNew() {
           <H1>Create New Group</H1>
           <H2>Your Community Starts Here</H2>
           <Card>
-            <form method="post">
+            <Form method="post">
               <div className="flex pt-4 w-full">
                 <div className="w-1/2">
                   <div className="w-1/2 pb-4">
@@ -65,7 +67,7 @@ export default function GroupNew() {
                 </div>
                 <Button>Create</Button>
               </div>
-            </form>
+            </Form>
           </Card>
         </div>
       </div>
