@@ -2,13 +2,26 @@ import type { LoaderFunction } from '@remix-run/node';
 import { useParams, useLoaderData, Link } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
 import { json } from '@remix-run/node';
-import { eventDataPatcher } from '~/modules/db_utils/event';
+import { eventDataPatcher } from '~/modules/events/event';
 
 export const loader: LoaderFunction = async ({ params }) => {
-  const event = await db.event.findFirstOrThrow({
+  const event = await db.event.findFirst({
     where: { id: params.eventId },
-    include: { group: true, users: true },
+    include: {
+      group: true,
+      users: {
+        select: {
+          name: true,
+        },
+      },
+    },
   });
+  if (!event) {
+    throw new Response(null, {
+      status: 404,
+      statusText: 'Event ID Not Found',
+    });
+  }
   return json({ event });
 };
 
