@@ -1,6 +1,25 @@
+import type { ActionFunction } from '@remix-run/node';
+import { redirect } from '@remix-run/node';
+
+import { db } from '~/modules/database/db.server';
+
 import { Card } from '~/components/ui/containers';
 import { Button, Input, TextArea } from '~/components/ui/forms';
 import { H1, H2 } from '~/components/ui/headers';
+
+export let action: ActionFunction = async ({ request }) => {
+  const form = await request.formData();
+  const name = form.get('groupName');
+  const description = form.get('description');
+
+  if (typeof name !== 'string' || typeof description !== 'string') {
+    return { formError: `Form not submitted correctly.` };
+  }
+
+  await db.group.create({ data: { name, description } });
+
+  return redirect(`/groups/`);
+};
 
 export default function GroupNew() {
   return (
@@ -10,41 +29,43 @@ export default function GroupNew() {
           <H1>Create New Group</H1>
           <H2>Your Community Starts Here</H2>
           <Card>
-            <div className="flex pt-4 w-full">
-              <div className="w-1/2">
-                <div className="w-1/2 pb-4">
-                  <Input label="Group Name:" name="groupName" required />
+            <form method="post">
+              <div className="flex pt-4 w-full">
+                <div className="w-1/2">
+                  <div className="w-1/2 pb-4">
+                    <Input label="Group Name:" name="groupName" required />
+                  </div>
+                  <div className="w-1/2 pb-4">
+                    <Input label="Location:" name="location" required />
+                  </div>
                 </div>
-                <div className="w-1/2 pb-4">
-                  <Input label="Location:" name="location" required />
+                <div className="w-full">
+                  <div className="w-1/2 pb-4">
+                    <label>
+                      Group Topics:
+                      <select name="groupTopics" id="groupTopics">
+                        <option value="Tennis">Tennis</option>
+                        <option value="Golf">Golf</option>
+                        <option value="Pickleball">Pickleball</option>
+                        <option value="D&D">D&D</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div className="w-1/2 pb-4">
+                    <Input label="Discord Channel:" name="discordChannel" />
+                  </div>
                 </div>
               </div>
-              <div className="w-full">
-                <div className="w-1/2 pb-4">
-                  <label>
-                    Group Topics:
-                    <select name="groupTopics" id="groupTopics">
-                      <option value="Tennis">Tennis</option>
-                      <option value="Golf">Golf</option>
-                      <option value="Pickleball">Pickleball</option>
-                      <option value="D&D">D&D</option>
-                    </select>
-                  </label>
-                </div>
-                <div className="w-1/2 pb-4">
-                  <Input label="Discord Channel:" name="discordChannel" />
-                </div>
+              <div className="flex-col pb-4">
+                <TextArea label="Description:" name="description" rows={5} required />
               </div>
-            </div>
-            <div className="flex-col pb-4">
-              <TextArea label="Description:" name="description" rows={5} required />
-            </div>
-            <div className="flex-row justify-end">
-              <div>
-                <label>Attach Image</label>
+              <div className="flex-row justify-end">
+                <div>
+                  <label>Attach Image</label>
+                </div>
+                <Button>Create</Button>
               </div>
-              <Button>Create</Button>
-            </div>
+            </form>
           </Card>
         </div>
       </div>
