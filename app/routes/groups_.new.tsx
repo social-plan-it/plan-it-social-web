@@ -8,7 +8,6 @@ import { Card } from '~/components/ui/containers';
 import { Button, Input, TextArea } from '~/components/ui/forms';
 import { H1, H2 } from '~/components/ui/headers';
 
-
 export let action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   const name = form.get('groupName');
