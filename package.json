@@ -17,10 +17,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.15",
     "@prisma/client": "^5.1.1",
-    "@remix-run/node": "^1.19.0",
-    "@remix-run/react": "^1.19.0",
-    "@remix-run/vercel": "^1.19.0",
-    "@vercel/node": "^2.10.3",
+    "@remix-run/node": "^2.0.0",
+    "@remix-run/react": "^2.0.0",
     "bcryptjs": "^2.4.3",
     "clsx": "^2.0.0",
     "google-auth-library": "^9.0.0",
@@ -30,24 +28,24 @@
     "zod": "^3.22.2"
   },
   "devDependencies": {
-    "@remix-run/dev": "^1.19.0",
-    "@remix-run/eslint-config": "^1.19.0",
-    "@remix-run/serve": "^1.19.0",
+    "@remix-run/dev": "^2.0.0",
+    "@remix-run/eslint-config": "^2.0.0",
+    "@remix-run/serve": "^2.0.0",
     "@tailwindcss/forms": "^0.5.6",
     "@types/bcryptjs": "^2.4.2",
     "@types/react": "^18.0.35",
     "@types/react-dom": "^18.0.11",
     "eslint": "^8.40.0",
-    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-html": "^7.1.0",
     "eslint-plugin-jsx-a11y": "^6.7.1",
-    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.32.2",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.8.8",
+    "prettier": "^3.0.3",
     "prisma": "^5.1.1",
     "tailwindcss": "^3.3.2",
-    "typescript": "^4.9.5"
+    "typescript": "^5.2.2"
   },
   "engines": {
     "node": ">=14"
