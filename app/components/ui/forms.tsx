@@ -54,7 +54,7 @@ type LinkButtonProps = {
 export function LinkButton({ to, children, ...props }: LinkButtonProps) {
   return (
     <Link {...props} to={to} className="border-2 bg-red-700 text-white rounded-lg p-3 w-full text-center" type="submit">
-      Create {children}
+      {children}
     </Link>
   );
 }

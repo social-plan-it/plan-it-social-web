@@ -19,7 +19,7 @@ export default function Group() {
         </ul>
       </Card>
       <div className="px-6 py-6 sm:px-16 max-w-sm">
-        <LinkButton to="/groups/new">New Group</LinkButton>
+        <LinkButton to="/groups/new">Create New Group</LinkButton>
       </div>
     </>
   );
