@@ -41,7 +41,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 export function Button({ children, ...props }: ButtonProps) {
   return (
     <button {...props} className="border-2 bg-red-700 text-white rounded-lg" type="submit">
-      Create {children}
+      {children}
     </button>
   );
 }
