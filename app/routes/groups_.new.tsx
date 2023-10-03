@@ -64,7 +64,7 @@ export default function GroupNew() {
                 <div>
                   <label>Attach Image</label>
                 </div>
-                <Button>Create</Button>
+                <Button>Create New Group</Button>
               </div>
             </Form>
           </Card>
