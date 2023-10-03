@@ -25,12 +25,12 @@ export default function Footer() {
           <ul className="mb-8">
             <li className="text-lg">Your Account</li>
             <li className="pb-1">
-              <a className="text-gray-400   font-thin" href="/">
+              <a className="text-gray-400   font-thin" href="/signup">
                 Sign Up
               </a>
             </li>
             <li className="pb-1">
-              <a className="text-gray-400  font-thin" href="/">
+              <a className="text-gray-400  font-thin" href="/login">
                 Log In
               </a>
             </li>
@@ -48,7 +48,7 @@ export default function Footer() {
           <ul className="mb-8">
             <li className="text-lg">Discover</li>
             <li className="pb-1">
-              <a className="text-gray-400  font-thin" href="/">
+              <a className="text-gray-400  font-thin" href="/groups">
                 Groups
               </a>
             </li>

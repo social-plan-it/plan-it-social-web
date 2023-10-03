@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode, TextareaHTMLAttributes } from 'react';
+import { Link } from '@remix-run/react';
 
 import clsx from 'clsx';
 
@@ -37,10 +38,23 @@ export function TextArea({ label, ...props }: TextAreaProps) {
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function Button({ ...props }: ButtonProps) {
+export function Button({ children, ...props }: ButtonProps) {
   return (
-    <button {...props} className="border-2 w-24 bg-red-700 text-white rounded-lg" type="submit">
-      Create
+    <button {...props} className="border-2 bg-red-700 text-white rounded-lg" type="submit">
+      {children}
     </button>
+  );
+}
+
+type LinkButtonProps = {
+  children: ReactNode;
+  to: string;
+};
+
+export function LinkButton({ to, children, ...props }: LinkButtonProps) {
+  return (
+    <Link {...props} to={to} className="border-2 bg-red-700 text-white rounded-lg p-3 w-full text-center" type="submit">
+      {children}
+    </Link>
   );
 }
