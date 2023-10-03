@@ -1,3 +1,4 @@
+import image404 from '~/imgs/404-not-found.png';
 import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import stylesheet from './styles/tailwind.css';
@@ -50,6 +51,7 @@ export function ErrorBoundary() {
       return (
         <Shell title="An Error Occurred">
           <Error>
+            <img src={image404} alt="page not found"></img>
             <h1>the page you are looking for does not exist</h1>
           </Error>
         </Shell>
