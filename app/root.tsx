@@ -1,7 +1,3 @@
-import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
-import { json } from '@remix-run/node';
-import stylesheet from './styles/tailwind.css';
-import { TopNav } from '~/components/layout/top-nav';
 import {
   Links,
   LiveReload,
@@ -12,8 +8,12 @@ import {
   isRouteErrorResponse,
   useRouteError,
 } from '@remix-run/react';
+import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
+import { json } from '@remix-run/node';
+import stylesheet from './styles/tailwind.css';
+import { TopNav } from '~/components/layout/top-nav';
 import Footer from './components/layout/footer';
-import { Error } from '~/components/ui/error';
+import { ErrorMessage } from '~/components/ui/error-message';
 import { getCurrentUser } from '~/modules/session/session.server';
 import { db } from './modules/database/db.server';
 
@@ -42,56 +42,6 @@ export default function App() {
   );
 }
 
-export function ErrorBoundary() {
-  const error = useRouteError();
-
-  if (isRouteErrorResponse(error)) {
-    if (error.status == 404) {
-      return (
-        <Shell title="An Error Occurred">
-          <Error>
-            <div className="flex">
-              <img
-                className="h-0 w-0 collapse sm:visible sm:h-60 sm:w-60"
-                src="/imgs/404-not-found.png"
-                alt="page not found"
-              ></img>
-              <h1>the page you are looking for does not exist</h1>
-            </div>
-          </Error>
-        </Shell>
-      );
-    }
-    return (
-      <Shell title="An Error Occurred">
-        <Error>
-          <h1>
-            {error.status} {error.statusText}
-          </h1>
-          <p>{error.data}</p>
-        </Error>
-      </Shell>
-    );
-  } else if (error instanceof Error) {
-    return (
-      <Shell title="Something went wrong">
-        <Error>
-          <h1>Error</h1>
-          <p>{error?.message}</p>
-        </Error>
-      </Shell>
-    );
-  } else {
-    return (
-      <Shell title="An unknown error occurred">
-        <Error>
-          <h1>Unknown Error</h1>
-        </Error>
-      </Shell>
-    );
-  }
-}
-
 function Shell({ title, children }: { title?: string; children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -112,4 +62,54 @@ function Shell({ title, children }: { title?: string; children: React.ReactNode 
       </body>
     </html>
   );
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  if (isRouteErrorResponse(error)) {
+    if (error.status == 404) {
+      return (
+        <Shell title="An Error Occurred">
+          <ErrorMessage>
+            <div className="flex">
+              <img
+                className="h-0 w-0 collapse sm:visible sm:h-60 sm:w-60"
+                src="/imgs/404-not-found.png"
+                alt="Page not found"
+              />
+              <h1>The page you are looking for does not exist.</h1>
+            </div>
+          </ErrorMessage>
+        </Shell>
+      );
+    }
+    return (
+      <Shell title="An Error Occurred">
+        <ErrorMessage>
+          <h1>
+            {error.status} {error.statusText}
+          </h1>
+          <p>{error.data}</p>
+        </ErrorMessage>
+      </Shell>
+    );
+  } else if (error instanceof Error) {
+    return (
+      <Shell title="Something went wrong">
+        <ErrorMessage>
+          <h1>Error</h1>
+          <p>{error.message}</p>
+        </ErrorMessage>
+      </Shell>
+    );
+  } else {
+    return (
+      <Shell title="An unknown error occurred">
+        <ErrorMessage>
+          <h1>Unknown Error</h1>
+        </ErrorMessage>
+      </Shell>
+    );
+  }
 }
