@@ -1,11 +1,11 @@
 import { useLoaderData } from '@remix-run/react';
-import { type V2_MetaFunction } from '@remix-run/react';
+import { type MetaFunction } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
 import HeroSection from '~/components/marketing/hero-section';
 import { EventsSection } from '../components/marketing/events-section';
 import { BenefitsSection } from '~/components/marketing/benefits-section';
 
-export const meta: V2_MetaFunction = () => {
+export const meta: MetaFunction = () => {
   return [{ title: 'Plan It Social' }];
 };
 

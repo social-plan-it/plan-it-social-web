@@ -1,4 +1,4 @@
-import type { LinksFunction, LoaderArgs } from '@remix-run/node';
+import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import stylesheet from './styles/tailwind.css';
 import { TopNav } from '~/components/layout/top-nav';
@@ -9,7 +9,7 @@ import { db } from './modules/database/db.server';
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: stylesheet }];
 
-export async function loader({ request }: LoaderArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   const eventsPromise = db.event.findMany({ include: { group: true }, take: 24 });
   const groupsPromise = db.group.findMany({ take: 24 });
   const [events, groups] = await Promise.all([eventsPromise, groupsPromise]);
