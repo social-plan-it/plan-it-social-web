@@ -1,4 +1,4 @@
-import type { LoaderArgs, ActionArgs } from '@remix-run/node';
+import type { LoaderFunctionArgs, ActionFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { Form, Link, useActionData, useNavigation } from '@remix-run/react';
 import { Card } from '~/components/ui/containers';
@@ -10,7 +10,7 @@ import { SignInWithGoogleButton } from '~/modules/session/buttons';
 import { verifyGoogleToken } from '~/modules/session/google-auth.server';
 import { createUserSession, getUserSession } from '~/modules/session/session.server';
 
-export async function action({ request }: ActionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
   const email = form.get('email');
   const password = form.get('password');
@@ -66,7 +66,7 @@ export async function action({ request }: ActionArgs) {
   return redirect('/', { headers });
 }
 
-export async function loader({ request }: LoaderArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getUserSession(request);
   if (session) {
     return redirect('/');
