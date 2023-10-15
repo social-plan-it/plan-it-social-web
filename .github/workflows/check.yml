@@ -10,4 +10,4 @@ jobs:
       - name: Run ESLint
         run: npm run lint
       - name: Run Typecheck
-        run: npm run typescheck
+        run: npm run typecheck
