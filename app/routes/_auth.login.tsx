@@ -75,7 +75,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export default function Component() {
-  const actionData = useActionData();
+  const actionData = useActionData<typeof action>();
   const navigation = useNavigation();
   const isPending = navigation.state === 'submitting' || navigation.state === 'loading';
   return (
