@@ -9,3 +9,5 @@ jobs:
         run: npm i
       - name: Run ESLint
         run: npm run lint
+      - name: Run Typecheck
+        run: npm run typecheck
