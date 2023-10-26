@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 export default {
   content: ['./app/**/*.{js,jsx,ts,tsx}'],
@@ -9,6 +10,9 @@ export default {
         secondary: '#E4EFF0',
         warm: '#E11D48',
         grayBackground: 'rgba(217, 217, 217, 0.25);',
+      },
+      fontFamily: {
+        'sans': ['"Montserrat"', ...defaultTheme.fontFamily.sans],
       },
     },
   },
