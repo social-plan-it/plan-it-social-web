@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-const defaultTheme = require('tailwindcss/defaultTheme');
+import defaultTheme from 'tailwindcss/defaultTheme.js'
 
 export default {
   content: ['./app/**/*.{js,jsx,ts,tsx}'],
@@ -13,7 +13,7 @@ export default {
       },
       fontFamily: {
         'sans': ['"Montserrat"', ...defaultTheme.fontFamily.sans],
-      },
+      }
     },
   },
   plugins: [require('@tailwindcss/forms')],
