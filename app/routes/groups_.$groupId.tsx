@@ -1,8 +1,8 @@
 import type { Event } from '@prisma/client';
-import type { LoaderFunction, LoaderFunctionArgs } from '@remix-run/node';
+import type { LoaderFunction, LoaderFunctionArgs, SerializeFrom } from '@remix-run/node';
 import { useParams, useLoaderData, Link } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
-import { EventCard } from '~/components/ui/eventCard';
+import { EventCard } from '~/modules/events/card';
 import { json } from '@remix-run/node';
 
 export const loader: LoaderFunction = async ({ params }: LoaderFunctionArgs) => {
@@ -10,8 +10,24 @@ export const loader: LoaderFunction = async ({ params }: LoaderFunctionArgs) => 
   return json({ group });
 };
 
+export function useDeserializeGroup() {
+  const data = useLoaderData() as SerializeFrom<typeof loader> | undefined;
+  const events = data?.group?.events;
+  if (!events) {
+    return data;
+  }
+  const deserializedEvents = events?.map((event: { date: string }) => ({
+    ...event,
+    date: new Date(event.date),
+  }));
+  data.group.events = deserializedEvents;
+
+  console.log(events);
+  return data;
+}
+
 export default function GroupRoute() {
-  const data = useLoaderData<typeof loader>();
+  const data = useDeserializeGroup();
 
   return (
     <>
@@ -22,7 +38,7 @@ export default function GroupRoute() {
           <div className="p-10">
             <img
               className="rounded-full sm:h-32 sm:w-32"
-              src={`https://ui-avatars.com/api/?name=${data?.group.name}`}
+              src={`https://ui-avatars.com/api/?name=${data?.group?.name}`}
               alt="group icon"
             ></img>
           </div>

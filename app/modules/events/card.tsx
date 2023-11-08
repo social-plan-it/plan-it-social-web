@@ -8,7 +8,7 @@ export function EventCard({ name, date, description, imgUrl, imgAlt, location }:
       </div>
       <div className="col-span-2">
         <h1 className="font-bold text-3xl">{name}</h1>
-        <h3 className="text-lg">{date}</h3>
+        <h3 className="text-lg">{date.toDateString()}</h3>
         <p>{location}</p>
         <p>{description}</p>
       </div>
