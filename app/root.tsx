@@ -35,7 +35,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const eventsPromise = db.event.findMany({ include: { group: true }, take: 24 });
   const groupsPromise = db.group.findMany({ take: 24 });
   const [events, groups] = await Promise.all([eventsPromise, groupsPromise]);
-
   return json({
     ENV: {
       PUBLIC_GOOGLE_CLIENT_ID: process.env.PUBLIC_GOOGLE_CLIENT_ID,
@@ -109,7 +108,7 @@ export function ErrorBoundary() {
     return (
       <Shell>
         <ErrorMessage>
-          <h1>Error</h1>
+          <h1 className="text-2xl sm:text-6xl p-4 sm:p-16">Error</h1>
           <p>{error.message}</p>
         </ErrorMessage>
       </Shell>
