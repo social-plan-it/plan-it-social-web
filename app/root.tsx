@@ -8,7 +8,7 @@ import {
   isRouteErrorResponse,
   useRouteError,
 } from '@remix-run/react';
-import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
+import type { LinksFunction, LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import stylesheet from './styles/tailwind.css';
 import { TopNav } from '~/components/layout/top-nav';
@@ -16,6 +16,10 @@ import Footer from './components/layout/footer';
 import { ErrorMessage } from '~/components/ui/error-message';
 import { getCurrentUser } from '~/modules/session/session.server';
 import { db } from './modules/database/db.server';
+
+export const meta: MetaFunction = ({ error }: any) => {
+  return [{ title: error ? 'Oops! An Error Occurred' : 'Plan It Social' }];
+};
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: stylesheet }];
 
@@ -42,13 +46,12 @@ export default function App() {
   );
 }
 
-function Shell({ title, children }: { title?: string; children: React.ReactNode }) {
+function Shell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        {title && <title>{title}</title>}
         <Meta />
         <Links />
       </head>
@@ -70,7 +73,7 @@ export function ErrorBoundary() {
   if (isRouteErrorResponse(error)) {
     if (error.status === 404) {
       return (
-        <Shell title="An Error Occurred">
+        <Shell>
           <ErrorMessage>
             <div className="flex">
               <img
@@ -85,7 +88,7 @@ export function ErrorBoundary() {
       );
     }
     return (
-      <Shell title="An Error Occurred">
+      <Shell>
         <ErrorMessage>
           <h1>
             {error.status} {error.statusText}
@@ -96,7 +99,7 @@ export function ErrorBoundary() {
     );
   } else if (error instanceof Error) {
     return (
-      <Shell title="Something went wrong">
+      <Shell>
         <ErrorMessage>
           <h1>Error</h1>
           <p>{error.message}</p>
@@ -105,7 +108,7 @@ export function ErrorBoundary() {
     );
   } else {
     return (
-      <Shell title="An unknown error occurred">
+      <Shell>
         <ErrorMessage>
           <h1>Unknown Error</h1>
         </ErrorMessage>
