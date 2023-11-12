@@ -18,7 +18,15 @@ import { getCurrentUser } from '~/modules/session/session.server';
 import { db } from './modules/database/db.server';
 
 export const meta: MetaFunction = ({ error }: any) => {
-  return [{ title: error ? 'Oops! An Error Occurred' : 'Plan It Social' }];
+  const title = !error
+    ? 'Plan It Social'
+    : isRouteErrorResponse(error)
+    ? 'An error occured'
+    : error instanceof Error
+    ? 'Something went wrong'
+    : 'Unknown error';
+
+  return [{ title: title }];
 };
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: stylesheet }];
