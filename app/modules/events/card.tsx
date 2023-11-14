@@ -4,7 +4,7 @@ export function EventCard({ name, date, description, imgUrl, imgAlt, location }:
   return (
     <div className="grid grid-cols-3 gap-8 p-4 bg-primary text-white rounded-xl">
       <div className="">
-        <img src={imgUrl ?? ''} alt={imgAlt ?? 'group image'}></img>
+        {{imgUrl && imageAlt && <img src={imgUrl} alt={imgAlt}></img>}}
       </div>
       <div className="col-span-2">
         <h1 className="font-bold text-3xl">{name}</h1>
