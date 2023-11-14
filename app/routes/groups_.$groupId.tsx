@@ -18,8 +18,6 @@ export function useDeserializeGroup() {
     date: new Date(event.date),
   }));
   data.group.events = deserializedEvents;
-
-  console.log(events);
   return data;
 }
 
@@ -50,7 +48,7 @@ export default function GroupRoute() {
           <p>{data.group.description}</p>
         </div>
         <div className="m-10">
-          <h1 className="text-xl font-bold">Upcoming Events</h1>
+          <h2 className="text-xl font-bold">Upcoming Events</h2>
           {data?.group?.events &&
             data?.group?.events.map((event: Event) => {
               return (
