@@ -13,9 +13,6 @@ export const loader: LoaderFunction = async ({ params }: LoaderFunctionArgs) => 
 export function useDeserializeGroup() {
   const data = useLoaderData() as SerializeFrom<typeof loader> | undefined;
   const events = data?.group?.events;
-  if (!events) {
-    return data;
-  }
   const deserializedEvents = events?.map((event: { date: string }) => ({
     ...event,
     date: new Date(event.date),
