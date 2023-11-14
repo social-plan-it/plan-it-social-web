@@ -1,28 +1,19 @@
 import type { Event } from '@prisma/client';
-import type { LoaderFunction, LoaderFunctionArgs, SerializeFrom } from '@remix-run/node';
+import type { LoaderFunction, LoaderFunctionArgs } from '@remix-run/node';
 import { useParams, useLoaderData, Link } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
 import { EventCard } from '~/modules/events/card';
 import { json } from '@remix-run/node';
+import { groupDataPatcher } from '~/modules/events/utils';
 
 export const loader: LoaderFunction = async ({ params }: LoaderFunctionArgs) => {
   const group = await db.group.findFirstOrThrow({ where: { id: params.groupId }, include: { events: true } });
   return json({ group });
 };
 
-export function useDeserializeGroup() {
-  const data = useLoaderData() as SerializeFrom<typeof loader> | undefined;
-  const events = data?.group?.events;
-  const deserializedEvents = events?.map((event: { date: string }) => ({
-    ...event,
-    date: new Date(event.date),
-  }));
-  data.group.events = deserializedEvents;
-  return data;
-}
-
 export default function GroupRoute() {
-  const data = useDeserializeGroup();
+  const rawData = useLoaderData();
+  const data = groupDataPatcher(rawData);
 
   return (
     <>
