@@ -1,15 +1,19 @@
-import { Card } from '~/components/ui/containers';
 import { useEvents } from '~/hooks/useEvents';
+import { EventCard } from '~/components/marketing/events-section';
 
 export default function EventsPage() {
   const events = useEvents();
+
   return (
-    <Card>
-      <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-        {events?.map((event) => {
-          return <li key={event.id}>{event.name}</li>;
+    <div className="sm:p-16">
+      <h1 className="text-center sm:text-left sm:text-5xl text-4xl font-bold italic text-primary sm:p-8">
+        Upcoming Events
+      </h1>
+      <div className="grid grid-cols-auto-fill-events gap-y-8">
+        {events?.map((event, index) => {
+          return <EventCard key={event.id} event={event} index={index} />;
         })}
-      </ul>
-    </Card>
+      </div>
+    </div>
   );
 }
