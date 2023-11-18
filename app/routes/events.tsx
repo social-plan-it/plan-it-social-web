@@ -9,7 +9,7 @@ export default function EventsPage() {
       <h1 className="text-center sm:text-left sm:text-5xl text-4xl font-bold italic text-primary sm:p-8">
         Upcoming Events
       </h1>
-      <div className="grid grid-cols-auto-fill-events gap-y-8">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(22rem,1fr))] gap-y-8">
         {events?.map((event, index) => {
           return <EventCard key={event.id} event={event} index={index} />;
         })}
