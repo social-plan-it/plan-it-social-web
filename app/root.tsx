@@ -8,6 +8,7 @@ import { getCurrentUser } from '~/modules/session/session.server';
 import { db } from './modules/database/db.server';
 
 export const links: LinksFunction = () => [
+  { rel: 'icon', type: 'image/svg-xml', href: faviconAssetUrl },
   { rel: 'stylesheet', href: stylesheet },
   { rel: 'preconnect', href: 'https://fonts.googleapis.com'},
   { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
