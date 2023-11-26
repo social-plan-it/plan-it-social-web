@@ -64,6 +64,14 @@ If you're used to using the `vercel dev` command provided by [Vercel CLI](https:
 
 Please utilize our formatting and linting command `npm run lint`. Also included in our documentation, are great instructions on how to [setup this functionality to automatically run on save in VS code](./docs/formatting-and-linting.md).
 
+## Type Checking
+
+This project uses TypeScript to enforce static typing, enhancing code quality and catching potential issues early in the development process. Before submitting a pull request, ensure that your changes pass TypeScript type checking. Run the following command locally:
+
+```bash
+npm run typecheck
+```
+
 ### VS Code Setup
 
 Use the following settings to format your files on save:

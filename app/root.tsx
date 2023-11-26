@@ -11,6 +11,7 @@ import {
 import type { LinksFunction, LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import stylesheet from './styles/tailwind.css';
+import faviconAssetUrl from './imgs/favicon.svg';
 import { TopNav } from '~/components/layout/top-nav';
 import Footer from './components/layout/footer';
 import { ErrorMessage } from '~/components/ui/error-message';
@@ -29,7 +30,12 @@ export const meta: MetaFunction = ({ error }: any) => {
   return [{ title: title }];
 };
 
-export const links: LinksFunction = () => [{ rel: 'stylesheet', href: stylesheet }];
+export const links: LinksFunction = () => {
+  return [
+    { rel: 'icon', type: 'image/svg-xml', href: faviconAssetUrl },
+    { rel: 'stylesheet', href: stylesheet },
+  ];
+};
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const eventsPromise = db.event.findMany({ include: { group: true }, take: 24 });
@@ -100,11 +106,12 @@ export function ErrorBoundary() {
           <h1>
             {error.status} {error.statusText}
           </h1>
-          <p>{error.data}</p>
+          {!!error.data && <p>{error.data}</p>}
         </ErrorMessage>
       </Shell>
     );
-  } else if (error instanceof Error) {
+  }
+  if (error instanceof Error) {
     return (
       <Shell>
         <ErrorMessage>
