@@ -6,7 +6,7 @@ import { EventsSection } from '../components/marketing/events-section';
 import { BenefitsSection } from '~/components/marketing/benefits-section';
 
 export const meta: MetaFunction = () => {
-  return [{ title: 'Plan It Social' }];
+  return [{ title: 'Home' }];
 };
 
 export async function loader() {
