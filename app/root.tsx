@@ -1,11 +1,13 @@
 import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import stylesheet from './styles/tailwind.css';
+import faviconAssetUrl from './imgs/favicon.svg';
 import { TopNav } from '~/components/layout/top-nav';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
 import Footer from './components/layout/footer';
 import { getCurrentUser } from '~/modules/session/session.server';
 import { db } from './modules/database/db.server';
+
 
 export const links: LinksFunction = () => [
   { rel: 'icon', type: 'image/svg-xml', href: faviconAssetUrl },
@@ -14,6 +16,8 @@ export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
   { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap' }, 
 ];
+
+
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const eventsPromise = db.event.findMany({ include: { group: true }, take: 24 });
