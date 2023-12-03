@@ -84,22 +84,6 @@ export function ErrorBoundary() {
   const error = useRouteError();
 
   if (isRouteErrorResponse(error)) {
-    if (error.status === 404) {
-      return (
-        <Shell>
-          <ErrorMessage>
-            <div className="flex">
-              <img
-                className="h-0 w-0 collapse sm:visible sm:h-60 sm:w-60"
-                src="/imgs/404-not-found.png"
-                alt="Resource not found"
-              />
-              <h1>The resource you are looking for does not exist.</h1>
-            </div>
-          </ErrorMessage>
-        </Shell>
-      );
-    }
     return (
       <Shell>
         <ErrorMessage>
