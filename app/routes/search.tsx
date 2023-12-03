@@ -47,7 +47,7 @@ export default function SearchPage() {
 
   return (
     <>
-      <Form method="GET" action="/search" className="w-full bg-gray-800 ">
+      <Form method="GET" action="/search" className="w-full bg-gray-800">
         <div className="flex p-2 sm:p-8 w-full mx-auto max-w-screen-2xl">
           <input
             type="search"
