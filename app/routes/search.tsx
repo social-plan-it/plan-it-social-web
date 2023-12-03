@@ -35,7 +35,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     take: 24,
   });
 
-  return { events: events, query };
+  return { events, query };
 };
 
 export default function SearchPage() {
