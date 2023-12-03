@@ -1,13 +1,34 @@
-import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
+import {
+  Links,
+  LiveReload,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  isRouteErrorResponse,
+  useRouteError,
+} from '@remix-run/react';
+import type { LinksFunction, LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import stylesheet from './styles/tailwind.css';
 import faviconAssetUrl from './imgs/favicon.svg';
 import { TopNav } from '~/components/layout/top-nav';
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
 import Footer from './components/layout/footer';
+import { ErrorMessage } from '~/components/ui/error-message';
 import { getCurrentUser } from '~/modules/session/session.server';
 import { db } from './modules/database/db.server';
 
+export const meta: MetaFunction = ({ error }: any) => {
+  const title = !error
+    ? 'Plan It Social'
+    : isRouteErrorResponse(error)
+    ? 'An error occured'
+    : error instanceof Error
+    ? 'Something went wrong'
+    : 'Unknown error';
+
+  return [{ title: title }];
+};
 
 export const links: LinksFunction = () => [
   { rel: 'icon', type: 'image/svg-xml', href: faviconAssetUrl },
@@ -17,13 +38,10 @@ export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap' }, 
 ];
 
-
-
 export async function loader({ request }: LoaderFunctionArgs) {
   const eventsPromise = db.event.findMany({ include: { group: true }, take: 24 });
   const groupsPromise = db.group.findMany({ take: 24 });
   const [events, groups] = await Promise.all([eventsPromise, groupsPromise]);
-
   return json({
     ENV: {
       PUBLIC_GOOGLE_CLIENT_ID: process.env.PUBLIC_GOOGLE_CLIENT_ID,
@@ -36,6 +54,14 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function App() {
   return (
+    <Shell>
+      <Outlet />
+    </Shell>
+  );
+}
+
+function Shell({ children }: { children: React.ReactNode }) {
+  return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
@@ -45,7 +71,7 @@ export default function App() {
       </head>
       <body className="min-h-screen w-full flex flex-col">
         <TopNav />
-        <Outlet />
+        {children}
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
@@ -53,4 +79,55 @@ export default function App() {
       </body>
     </html>
   );
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  if (isRouteErrorResponse(error)) {
+    if (error.status === 404) {
+      return (
+        <Shell>
+          <ErrorMessage>
+            <div className="flex">
+              <img
+                className="h-0 w-0 collapse sm:visible sm:h-60 sm:w-60"
+                src="/imgs/404-not-found.png"
+                alt="Resource not found"
+              />
+              <h1>The resource you are looking for does not exist.</h1>
+            </div>
+          </ErrorMessage>
+        </Shell>
+      );
+    }
+    return (
+      <Shell>
+        <ErrorMessage>
+          <h1>
+            {error.status} {error.statusText}
+          </h1>
+          {!!error.data && <p>{error.data}</p>}
+        </ErrorMessage>
+      </Shell>
+    );
+  }
+  if (error instanceof Error) {
+    return (
+      <Shell>
+        <ErrorMessage>
+          <h1 className="text-2xl sm:text-6xl p-4 sm:p-16">Error</h1>
+          <p>{error.message}</p>
+        </ErrorMessage>
+      </Shell>
+    );
+  } else {
+    return (
+      <Shell>
+        <ErrorMessage>
+          <h1>Unknown Error</h1>
+        </ErrorMessage>
+      </Shell>
+    );
+  }
 }
