@@ -13,9 +13,8 @@ export default {
       },
       fontFamily: {
         sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
-      }
+      },
     },
   },
   plugins: [require('@tailwindcss/forms')],
 } satisfies Config;
-
