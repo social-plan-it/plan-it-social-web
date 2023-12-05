@@ -51,6 +51,7 @@ export default function SearchPage() {
         <div className="flex p-2 sm:p-8 w-full mx-auto max-w-screen-2xl">
           <input
             type="search"
+            aria-label="Search For Events"
             id="q"
             name="q"
             className="block w-full py-4 pl-10 text-xs sm:text-base text-gray-900 md:text-center lg:text-2xl border-none rounded-l-lg italic bg-gray-50 focus:ring-2 focus:outline-none focus:ring-blue-500 text-center"
@@ -61,6 +62,7 @@ export default function SearchPage() {
           />
           <button
             type="submit"
+            aria-label="submit"
             className="text-black bg-gray-50 right-2.5 bottom-2.5 hover:bg-gray-500 focus:ring-2 focus:outline-none focus:ring-blue-500 font-semibold rounded-r-lg italic text-md px-2 md:px-4 py-4 lg:text-2xl"
           >
             <svg
@@ -81,20 +83,18 @@ export default function SearchPage() {
         </div>
       </Form>
       <div className="bg-secondary py-5 pb-20">
-        <div className="">
-          {events.length === 0 ? (
-            <p>No events found. Please, try another keywords. </p>
-          ) : (
-            <>
-              <p className="mb-3 text-2xl text-center">
-                Showing events for: <span className="italic">{query}</span>
-              </p>
-              <div className="flex flex-wrap gap-6 justify-center self-center">
-                <EventsCards events={deserializedEvents} />
-              </div>
-            </>
-          )}
-        </div>
+        {events.length === 0 ? (
+          <p>No events found. Please, try another keywords. </p>
+        ) : (
+          <>
+            <p className="mb-3 text-2xl text-center">
+              Showing events for: <span className="italic">{query}</span>
+            </p>
+            <div className="flex flex-wrap gap-6 justify-center self-center">
+              <EventsCards events={deserializedEvents} />
+            </div>
+          </>
+        )}
       </div>
     </>
   );
