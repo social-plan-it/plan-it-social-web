@@ -1,4 +1,4 @@
-import { Event, Group, User } from '@prisma/client';
+import type { Event, Group, User } from '@prisma/client';
 
 interface FullEvent extends Event {
   group?: Group;
