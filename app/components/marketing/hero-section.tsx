@@ -37,7 +37,7 @@ export default function HeroSection() {
               </div>
               <div className="flex">
                 <input
-                  type="text"
+                  type="search"
                   id="q"
                   name="q"
                   className="block w-full py-4 pl-10 text-xs sm:text-base text-gray-900 md:text-center lg:text-2xl border border-gray-300 rounded-l-lg italic bg-gray-50 focus:ring-2 focus:outline-none focus:ring-blue-500"
