@@ -2,7 +2,7 @@ import type { LoaderFunction } from '@remix-run/node';
 import { useParams, useLoaderData, Link } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
 import { json } from '@remix-run/node';
-import { eventDataPatcher } from '~/modules/dataPatcher/event';
+import { eventDataPatcher } from '~/modules/db_utils/event';
 
 export const loader: LoaderFunction = async ({ params }) => {
   const event = await db.event.findFirstOrThrow({
