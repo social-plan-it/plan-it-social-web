@@ -1,4 +1,4 @@
-name: CI
+name: Linting and Typechecking
 on:
   push:
     branches: [main]
