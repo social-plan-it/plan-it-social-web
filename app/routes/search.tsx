@@ -1,8 +1,20 @@
 import { Form, useLoaderData } from '@remix-run/react';
-import type { LoaderFunction } from '@remix-run/node';
+import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { db } from '~/modules/database/db.server';
 import { EventsCards } from '~/components/marketing/events-section';
 import type { Event } from '@prisma/client';
+
+export const meta: MetaFunction = () => {
+  return [
+    {
+      title: 'Search',
+    },
+    {
+      name: 'description',
+      content: 'Search for events and groups',
+    },
+  ];
+};
 
 export const loader: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url);
@@ -84,7 +96,7 @@ export default function SearchPage() {
       </Form>
       <div className="bg-secondary py-5 pb-20">
         {events.length === 0 ? (
-          <p>No events found. Please, try another keywords. </p>
+          <p data-testid="no-results-text">No events found. Please, try another keywords.</p>
         ) : (
           <>
             <p className="mb-3 text-2xl text-center">
