@@ -38,6 +38,7 @@ export default function HeroSection() {
               <div className="flex">
                 <input
                   type="search"
+                  data-testid="hero-section-search-input"
                   id="q"
                   name="q"
                   className="block w-full py-4 pl-10 text-xs sm:text-base text-gray-900 md:text-center lg:text-2xl border border-gray-300 rounded-l-lg italic bg-gray-50 focus:ring-2 focus:outline-none focus:ring-blue-500"
@@ -48,6 +49,7 @@ export default function HeroSection() {
                 />
                 <button
                   type="submit"
+                  data-testid="hero-section-submit-button"
                   className="text-white  right-2.5 bottom-2.5 bg-primary hover:bg-gray-500 focus:ring-2 focus:outline-none focus:ring-blue-500 font-semibold rounded-r-lg italic text-md px-2 md:px-4 py-4 lg:text-2xl"
                 >
                   Search
