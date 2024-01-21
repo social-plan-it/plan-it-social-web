@@ -15,3 +15,7 @@ node_modules
 /api/metafile.server.json
 
 .DS_Store
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
