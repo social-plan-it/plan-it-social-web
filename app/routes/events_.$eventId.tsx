@@ -1,16 +1,17 @@
-import type { LoaderFunction } from '@remix-run/node';
+import type { LoaderFunction, LoaderFunctionArgs } from '@remix-run/node';
 import { useParams, useLoaderData, Link } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
 import { json } from '@remix-run/node';
 import { eventDataPatcher } from '~/modules/events/event';
 
-export const loader: LoaderFunction = async ({ params }) => {
+export async function loader({ params }: LoaderFunctionArgs) {
   const event = await db.event.findFirst({
     where: { id: params.eventId },
     include: {
       group: true,
       users: {
         select: {
+          id: true,
           name: true,
         },
       },
@@ -23,7 +24,7 @@ export const loader: LoaderFunction = async ({ params }) => {
     });
   }
   return json({ event });
-};
+}
 
 export default function EventRoute() {
   const rawData = useLoaderData<typeof loader>();
@@ -61,9 +62,9 @@ export default function EventRoute() {
           <p className="text-lg sm:text-2xl">Hosted at: {event.location}</p>
           <p className="text-lg sm:text-2xl">
             Hosted by:{' '}
-            <Link to={`/groups/${event.groupId}`} className="onhover:underline-offset-2">
-              {event?.group?.name}{' '}
-            </Link>{' '}
+            <Link to={`/groups/${event.groupId}`} className="hover:underline-offset-2">
+              {event?.group?.name}
+            </Link>
           </p>
         </div>
         <p className="text-lg sm:text-2xl">Current participants ({event.users?.length}): </p>
