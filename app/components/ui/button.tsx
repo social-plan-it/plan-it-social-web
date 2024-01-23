@@ -1,16 +1,16 @@
 import type { ButtonHTMLAttributes } from 'react';
 
-type ButtonProps = {
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant: 'primary' | 'secondary' | 'warm' | 'outlined';
   buttonStyle: 'rounded' | 'fullyRounded';
   size: 'small' | 'medium' | 'large';
   children: React.ReactNode;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
+};
 
 export function Button({ variant, buttonStyle, size, children, ...props }: ButtonProps) {
   const baseClasses = 'w-full sm:w-fit me-2 mb-2 text-center font-medium focus:outline-none focus:ring-4';
   let variantClasses = '';
-  const styleClasses = buttonStyle === 'rounded' ? 'rounded-lg' : 'rounded-full';
+  let styleClasses = '';
   let sizeClasses = '';
 
   switch (variant) {
@@ -23,8 +23,22 @@ export function Button({ variant, buttonStyle, size, children, ...props }: Butto
     case 'warm':
       variantClasses = 'bg-warm text-white focus:ring-red-300 hover:bg-red-700';
       break;
-    default:
+    case 'outlined':
       variantClasses = 'bg-white text-primary border border-gray-200 focus:ring-gray-300 hover:bg-gray-100';
+      break;
+    default:
+      variantClasses = 'bg-primary text-white focus:ring-gray-300 hover:bg-gray-900';
+  }
+
+  switch (buttonStyle) {
+    case 'rounded':
+      styleClasses = 'rounded-lg';
+      break;
+    case 'fullyRounded':
+      styleClasses = 'rounded-full';
+      break;
+    default:
+      styleClasses = 'rounded-lg';
   }
 
   switch (size) {
@@ -34,8 +48,11 @@ export function Button({ variant, buttonStyle, size, children, ...props }: Butto
     case 'medium':
       sizeClasses = 'px-5 py-2.5 text-sm';
       break;
-    default:
+    case 'large':
       sizeClasses = 'px-5 py-3 text-base';
+      break;
+    default:
+      sizeClasses = 'px-5 py-2.5 text-sm';
   }
 
   return (
