@@ -6,7 +6,7 @@ import { db } from '~/modules/database/db.server';
 
 import { Card } from '~/components/ui/containers';
 import { Button, Input, TextArea } from '~/components/ui/forms';
-import { H1, H2 } from '~/components/ui/headers';
+import { H1 } from '~/components/ui/headers';
 
 export let action: ActionFunction = async ({ request, params }) => {
   const form = await request.formData();
