@@ -7,35 +7,40 @@ type ButtonProps = {
   children: React.ReactNode;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function Button({ variant, buttonStyle, size }: ButtonProps) {
-  let baseClasses = 'w-full sm:w-fit me-2 mb-2 text-center font-medium focus:outline-none focus:ring-4';
+export function Button({ variant, buttonStyle, size, children, ...props }: ButtonProps) {
+  const baseClasses = 'w-full sm:w-fit me-2 mb-2 text-center font-medium focus:outline-none focus:ring-4';
   let variantClasses = '';
-  let styleClasses = '';
+  const styleClasses = buttonStyle === 'rounded' ? 'rounded-lg' : 'rounded-full';
   let sizeClasses = '';
 
-  if (variant === 'primary') {
-    variantClasses = 'bg-primary text-white focus:ring-gray-300 hover:bg-gray-900';
-  } else if (variant === 'secondary') {
-    variantClasses = 'bg-secondary focus:ring-teal-300 hover:bg-teal-200';
-  } else if (variant === 'warm') {
-    variantClasses = 'bg-warm text-white focus:ring-red-300 hover:bg-red-700';
-  } else {
-    variantClasses = 'bg-white text-primary border border-gray-200 focus:ring-gray-300 hover:bg-gray-100';
+  switch (variant) {
+    case 'primary':
+      variantClasses = 'bg-primary text-white focus:ring-gray-300 hover:bg-gray-900';
+      break;
+    case 'secondary':
+      variantClasses = 'bg-secondary focus:ring-teal-300 hover:bg-teal-200';
+      break;
+    case 'warm':
+      variantClasses = 'bg-warm text-white focus:ring-red-300 hover:bg-red-700';
+      break;
+    default:
+      variantClasses = 'bg-white text-primary border border-gray-200 focus:ring-gray-300 hover:bg-gray-100';
   }
 
-  if (buttonStyle === 'rounded') {
-    styleClasses = 'rounded-lg';
-  } else {
-    styleClasses = 'rounded-full';
+  switch (size) {
+    case 'small':
+      sizeClasses = 'px-3 py-2 text-sm';
+      break;
+    case 'medium':
+      sizeClasses = 'px-5 py-2.5 text-sm';
+      break;
+    default:
+      sizeClasses = 'px-5 py-3 text-base';
   }
 
-  if (size === 'small') {
-    sizeClasses = 'px-3 py-2 text-sm';
-  } else if (size === 'medium') {
-    sizeClasses = 'px-5 py-2.5 text-sm';
-  } else {
-    sizeClasses = 'px-5 py-3 text-base';
-  }
-
-  return <button className={`${baseClasses} ${variantClasses} ${styleClasses} ${sizeClasses}`}>Hello world</button>;
+  return (
+    <button className={`${baseClasses} ${variantClasses} ${styleClasses} ${sizeClasses}`} {...props}>
+      {children}
+    </button>
+  );
 }

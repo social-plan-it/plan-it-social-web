@@ -14,7 +14,7 @@ export default function AboutUs() {
         Third
       </Button>
       <Button variant="warm" buttonStyle="fullyRounded" size="large">
-        Third
+        Fourth
       </Button>
     </>
   );
