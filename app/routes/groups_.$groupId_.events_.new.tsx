@@ -13,20 +13,21 @@ export let action: ActionFunction = async ({ request, params }) => {
   const name = form.get('eventName');
   const description = form.get('description');
   const location = form.get('location');
-  const date = form.get('date');
+  const dateStr = form.get('date');
 
   if (!params.groupId) return redirect('/groups');
   if (
     typeof name !== 'string' ||
     typeof description !== 'string' ||
     typeof location !== 'string' ||
-    typeof date !== 'string'
+    typeof dateStr !== 'string'
   ) {
     return { formError: `Form not submitted correctly.` };
   }
+  const date = new Date(dateStr);
 
   const ret = await db.event.create({
-    data: { name, description, location, date: date?.toString(), groupId: params.groupId ?? '' },
+    data: { name, description, location, date, groupId: params.groupId ?? '' },
   });
 
   return redirect(`/events/${ret.id}`);
@@ -49,7 +50,7 @@ export default function GroupNew() {
                     <Input label="Location:" name="location" required />
                   </div>
                   <div className="w-1/2 pb-4">
-                    <Input label="Date:" name="date" required />
+                    <Input label="Date:" name="date" type="datetime-local" required />
                   </div>
                 </div>
               </div>
