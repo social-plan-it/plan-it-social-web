@@ -16,6 +16,8 @@ export default function GroupRoute() {
       <Link to="/groups">back to groups</Link>
       <h1>{data.group.name}</h1>
       <p>{data.group.description}</p>
+
+      <Link to={`/groups/${data.group.id}/events/new`}>Create New Event</Link>
     </>
   );
 }
