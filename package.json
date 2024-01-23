@@ -6,6 +6,8 @@
     "lint:fix": "eslint --fix .",
     "format": "run-s format:*",
     "format:prisma": "npx prisma format",
+    "test:e2e": "npx playwright test",
+    "test:e2e:ui": "npx playwright test --ui",
     "dev": "remix dev",
     "typecheck": "tsc",
     "build": "run-s build:*",
@@ -28,6 +30,7 @@
     "zod": "^3.22.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.40.1",
     "@remix-run/dev": "2.1.0",
     "@remix-run/eslint-config": "2.1.0",
     "@remix-run/serve": "2.1.0",

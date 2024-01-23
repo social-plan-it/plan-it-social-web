@@ -57,7 +57,9 @@ export async function action({ request }: ActionFunctionArgs) {
     return { status: 400, message: "Credentials don't match. Please try again." };
   }
 
-  if (!matchesHash(password.toString(), passwordObject.hash)) {
+  const passwordCorrect = await matchesHash(password.toString(), passwordObject.hash);
+
+  if (!passwordCorrect) {
     return { status: 400, message: "Credentials don't match. Please try again." };
   }
 
