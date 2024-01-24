@@ -5,7 +5,9 @@ import { Form } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
 
 import { Card } from '~/components/ui/containers';
-import { Button, Input, TextArea } from '~/components/ui/forms';
+import { Input, TextArea } from '~/components/ui/forms';
+import { Button } from '~/components/ui/button';
+
 import { H1, H2 } from '~/components/ui/headers';
 
 export let action: ActionFunction = async ({ request }) => {
@@ -64,7 +66,9 @@ export default function GroupNew() {
                 <div>
                   <label>Attach Image</label>
                 </div>
-                <Button>Create New Group</Button>
+                <Button variant="warm" buttonStyle="fullyRounded" size="large">
+                  Create a group
+                </Button>
               </div>
             </Form>
           </Card>
