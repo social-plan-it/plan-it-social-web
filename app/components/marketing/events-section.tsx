@@ -1,4 +1,5 @@
 import type { Event, Group } from '@prisma/client';
+import { Link, unstable_useViewTransitionState } from '@remix-run/react';
 
 interface ExtendedEvent extends Event {
   group: Group;
@@ -40,23 +41,28 @@ export function EventCard({ event, index }: { event: ExtendedEvent; index: numbe
   });
   const parts = date.split(', ');
   const formattedTime = `${parts[0]}, ${parts[1]} - ${parts[2]}`;
+  const to = `/events/${event.id}`;
+  const isTransitioning = unstable_useViewTransitionState(to);
 
   return (
-    <div className="flex flex-col space-y-3 w-[350px] mx-6 sm:mx-0 max-w-md p-6 rounded-2xl bg-primary">
-      {event.imgUrl && event.imgAlt && (
-        <img
-          className={`${index === 1 && 'sm:order-2 pt-8'}  w-full object-contain box-border`}
-          src={event.imgUrl}
-          alt={event.imgAlt}
-        />
-      )}
+    <Link to={to} unstable_viewTransition>
+      <div className="flex flex-col space-y-3 w-[350px] mx-6 sm:mx-0 max-w-md p-6 rounded-2xl bg-primary">
+        {event.imgUrl && event.imgAlt && (
+          <img
+            className={`${index === 1 && 'sm:order-2 pt-8'}  w-full object-contain box-border`}
+            src={event.imgUrl}
+            alt={event.imgAlt}
+            style={{ viewTransitionName: isTransitioning ? 'image-expand' : '' }}
+          />
+        )}
 
-      <div>
-        <div className="text-lg sm:text-2xl font-bold text-white">{event.group.name}</div>
-        <h3 className="text-3xl sm:text-4xl font-bold text-white">{event.name}</h3>
-        <p className="text-lg sm:text-2xl text-white">{event.description}</p>
-        <div className="text-lg sm:text-2xl font-bold text-white">{formattedTime}</div>
+        <div>
+          <div className="text-lg sm:text-2xl font-bold text-white">{event.group.name}</div>
+          <h3 className="text-3xl sm:text-4xl font-bold text-white">{event.name}</h3>
+          <p className="text-lg sm:text-2xl text-white">{event.description}</p>
+          <div className="text-lg sm:text-2xl font-bold text-white">{formattedTime}</div>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }
