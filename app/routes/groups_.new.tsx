@@ -5,10 +5,12 @@ import { Form } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
 
 import { Card } from '~/components/ui/containers';
-import { Input, TextArea } from '~/components/ui/forms';
+import { Input, TextArea, Attachment } from '~/components/ui/forms';
 import { Button } from '~/components/ui/button';
 
 import { H1, H2 } from '~/components/ui/headers';
+import Group from './groups';
+
 
 export let action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
@@ -32,7 +34,7 @@ export default function GroupNew() {
           <H1>Create New Group</H1>
           <H2>Your Community Starts Here</H2>
           <Card>
-            <Form method="post">
+            <Form method="post" encType="multipart/form-data">
               <div className="flex pt-4 w-full">
                 <div className="w-1/2">
                   <div className="w-1/2 pb-4">
@@ -63,9 +65,15 @@ export default function GroupNew() {
                 <TextArea label="Description:" name="description" rows={5} required />
               </div>
               <div className="flex-row justify-end">
-                <div>
-                  <label>Attach Image</label>
-                </div>
+                <Input label="New Attachment" type="file" name="attachment" />
+                {/* {attachment ? (
+                  <Attachment
+                    label="Current Attachment"
+                    attachmentUrl={`/groups/new/attachments/${attachment}`}
+                  />
+                ) : (
+                  <Input label="New Attachment" type="file" name="attachment" />
+                )} */}
                 <Button variant="warm" buttonStyle="fullyRounded" size="large">
                   Create a group
                 </Button>

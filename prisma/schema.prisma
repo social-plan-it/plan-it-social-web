@@ -39,6 +39,7 @@ model Group {
   description String  @db.Text
   events      Event[]
   users       User[]
+  attachment  String?
 }
 
 model User_Group {
