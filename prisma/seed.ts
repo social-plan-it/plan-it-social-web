@@ -1,4 +1,30 @@
 import { db } from '~/modules/database/db.server';
+import { faker } from '@faker-js/faker';
+import { type User, type Password } from '@prisma/client';
+
+type UserAndPWProps = User & {
+  password: Password;
+};
+
+function createRandomUserAndPW(): UserAndPWProps {
+  const firstName = faker.person.firstName();
+  const lastName = faker.person.lastName();
+  const name = faker.internet.userName({ firstName, lastName });
+  const email = faker.internet.email({ firstName, lastName });
+  const userId = faker.string.alphanumeric(10);
+  return {
+    id: userId,
+    email: email,
+    name: name,
+    password: {
+      id: faker.string.alphanumeric(10),
+      userId: userId,
+      hash: faker.string.alphanumeric(10),
+    },
+  };
+}
+
+const users = faker.helpers.multiple(createRandomUserAndPW, { count: 10 });
 
 const events = [
   {
@@ -50,6 +76,22 @@ const groups = [
 
 async function seed() {
   try {
+    for (const user of users) {
+      await db.user.create({
+        data: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          password: {
+            create: {
+              id: user.password.id,
+              hash: user.password.hash,
+            },
+          },
+        },
+      });
+    }
+
     await db.group.createMany({ data: groups });
 
     const groupRecords = await db.group.findMany();
