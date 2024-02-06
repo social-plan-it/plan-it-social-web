@@ -1,3 +1,5 @@
+import { Link } from '@remix-run/react';
+
 export default function AboutUs() {
   return (
     <>
@@ -18,9 +20,13 @@ export default function AboutUs() {
             leberkas ham rump sirloin jerky chicken turkey ground round.
           </h3>
           <div className="w-full sm:w-90 sm:items-end">
-            <div className="w-full sm:w-48 text-white right-2.5 bottom-2.5 bg-warm hover:bg-gray-500 focus:ring-2 focus:outline-none focus:ring-blue-500 font-semibold rounded-lg italic text-md px-2 md:px-4 py-4 lg:text-2xl">
+            <Link
+              className="w-full sm:w-48 text-white right-2.5 bottom-2.5 bg-warm hover:bg-gray-500 focus:ring-2 focus:outline-none focus:ring-blue-500 font-semibold rounded-lg italic text-md px-2 md:px-4 py-4 lg:text-2xl"
+              target="_blank"
+              to="https://discord.com/channels/1047297490199773215/1047297491135107114"
+            >
               Join Group
-            </div>
+            </Link>
           </div>
         </div>
         {/* <div className="flex justify-center content-center bg-secondary">
@@ -31,7 +37,7 @@ export default function AboutUs() {
             <img
               className="w-full"
               src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1706805456/target_g3b96r.png"
-              alt="Arrow in targeet"
+              alt="Arrow in target"
             />
           </div>
           <div className="pb-3 w-full">
