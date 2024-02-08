@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes } from 'react';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant: 'primary' | 'secondary' | 'warm' | 'outlined';
+  variant: 'primary' | 'secondary' | 'warm' | 'outlined' | 'warm-block';
   buttonStyle: 'rounded' | 'fullyRounded';
   size: 'small' | 'medium' | 'large';
   children: React.ReactNode;
