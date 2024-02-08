@@ -3,15 +3,14 @@ import type { ButtonHTMLAttributes } from 'react';
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant: 'primary' | 'secondary' | 'warm' | 'outlined';
   buttonStyle: 'rounded' | 'fullyRounded';
-  size: 'small' | 'medium' | 'large';
   children: React.ReactNode;
 };
 
-export function Button({ variant, buttonStyle, size, children, ...props }: ButtonProps) {
-  const baseClasses = 'w-full sm:w-fit me-2 mb-2 text-center font-medium focus:outline-none focus:ring-4';
+export function Button({ variant, buttonStyle, children, ...props }: ButtonProps) {
+  const baseClasses =
+    'w-full sm:w-fit me-2 mb-2 text-center font-medium focus:outline-none focus:ring-4 px-3 py-2 text-sm sm:px-5 sm:py-2.5 md:py-3 md:text-base';
   let variantClasses = '';
   let styleClasses = '';
-  let sizeClasses = '';
 
   if (variant === 'primary') {
     variantClasses = 'bg-primary text-white focus:ring-gray-300 hover:bg-gray-900';
@@ -29,16 +28,8 @@ export function Button({ variant, buttonStyle, size, children, ...props }: Butto
     styleClasses = 'rounded-full';
   }
 
-  if (size === 'small') {
-    sizeClasses = 'px-3 py-2 text-sm';
-  } else if (size === 'medium') {
-    sizeClasses = 'px-5 py-2.5 text-sm';
-  } else if (size === 'large') {
-    sizeClasses = 'px-5 py-3 text-base';
-  }
-
   return (
-    <button className={`${baseClasses} ${variantClasses} ${styleClasses} ${sizeClasses}`} {...props}>
+    <button className={`${baseClasses} ${variantClasses} ${styleClasses}`} {...props}>
       {children}
     </button>
   );
