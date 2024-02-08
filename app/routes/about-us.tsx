@@ -20,7 +20,7 @@ export default function AboutUs() {
           leberkas ham rump sirloin jerky chicken turkey ground round.
         </h3>
         <div className="w-full sm:w-90 sm:items-end">
-          <Button variant="warm-block">
+          <Button variant="warm-block" buttonStyle="rounded" size="large">
             <a
               target="_blank"
               href="https://discord.com/channels/1047297490199773215/1047297491135107114"
