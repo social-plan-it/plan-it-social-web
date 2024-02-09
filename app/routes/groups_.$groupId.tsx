@@ -13,9 +13,19 @@ export default function GroupRoute() {
 
   return (
     <>
-      <Link to="/groups">back to groups</Link>
-      <h1>{data.group.name}</h1>
-      <p>{data.group.description}</p>
+      <div className="bg-primary flex flex-wrap justify-center align-middle text-white p-2">
+        <div className="w-30 h-[120px] bg-secondary">Image Container</div>
+        <div className="m-2">
+          <h2 className="font-semibold">{data.group.name}</h2>
+          <div className="font-extra-light">
+            <p>{data.group.description}</p>
+            <p>Organized by: Richard Simmons</p>
+            <p>Location, CA, USA</p>
+          </div>
+        </div>
+
+        <Link to="/groups">Groups</Link>
+      </div>
     </>
   );
 }
