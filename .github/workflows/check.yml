@@ -1,12 +1,16 @@
-name: CI
-on: push
+name: Linting and Typechecking
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Install modules
-        run: npm i
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
       - name: Run ESLint
         run: npm run lint
       - name: Run Typecheck
