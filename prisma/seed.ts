@@ -11,15 +11,15 @@ function createRandomUserAndPW(): UserAndPWProps {
   const lastName = faker.person.lastName();
   const name = faker.internet.userName({ firstName, lastName });
   const email = faker.internet.email({ firstName, lastName });
-  const userId = faker.string.alphanumeric(10);
+  const userId = faker.string.uuid();
   return {
     id: userId,
     email: email,
     name: name,
     password: {
-      id: faker.string.alphanumeric(10),
+      id: faker.string.uuid(),
       userId: userId,
-      hash: faker.string.alphanumeric(10),
+      hash: faker.string.uuid(),
     },
   };
 }
