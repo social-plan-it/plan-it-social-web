@@ -5,6 +5,8 @@ import { json } from '@remix-run/node';
 
 import { Button } from '~/components/ui/button';
 
+import { Image } from '~/components/ui/images';
+
 export const loader: LoaderFunction = async ({ params }) => {
   const group = await db.group.findFirstOrThrow({ where: { id: params.groupId } });
   return json({ group });
@@ -16,39 +18,105 @@ export default function GroupRoute() {
   return (
     <div className="bg-primary text-white flex flex-col items-center">
       <div className="md:flex md:flex-col md:max-w-screen-xl">
-        <div style={{ border: '2px solid orange' }} className="md:flex md:flex-row" >
-          <div className="md:px-8">
-          <div style={{ width: '280px', height: '300px', backgroundColor: 'white', color: 'black', borderRadius: '100%' }} >Image</div>
+        <div className="p-2 justify-center md:p-10 md:flex md:flex-row">
+          <div className="rounded-full h-[300px] w-[280px] justify-center items-center md:m-8">
+            <Image
+              className="w-full"
+              src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708118888/default-group-photo_xhcpqt.png"
+              alt="Buddies taking a selfie"
+            />
           </div>
-          
-          <div style={{ border: '2px solid pink' }} className='md:px-12 md:flex md:flex-col md:space-y-8' >
-            <div>
-            <h2 className="font-extrabold md:text-5xl" >{data.group.name}</h2>
-            <h3>Organized by: Name Here</h3>
+          <div className="md:my-8 md:mx-10 md:flex md:flex-col md:place-content-between">
+            <div className="flex flex-col md:flex-row md:place-content-between">
+              <div>
+                <h2 className="font-extrabold md:text-5xl md:mb-4">{data.group.name}</h2>
+                <h3 className="md:font-extrabold md:text-2xl md:mb-2">Headline: Group headline here</h3>
+                <div>
+                  <div className="flex flex-row items-center">
+                    <div className="m-2 bg-[#0A66C2] rounded-full h-8 w-8 justify-center items-center">
+                      <Image
+                        className="w-full"
+                        src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708120241/avatar-astronaut_icc950.png"
+                        alt="Astronaut avatar"
+                      />
+                    </div>
+                    <p>Organized by: Name Here</p>
+                  </div>
+                </div>
+              </div>
+              <div className="px-4 flex flex-row justify-center">
+                <div className="m-2 rounded-full h-8 w-8 justify-center items-center">
+                  <Image
+                    className="w-full"
+                    src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708118009/discord_ncsvl3.png"
+                    alt="Discord Icon"
+                  />
+                </div>
+                <div className="m-2 rounded-full h-8 w-8 justify-center items-center">
+                  <Image
+                    className="w-full"
+                    src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708118305/twitter_pjiutd.png"
+                    alt="Twitter Icon"
+                  />
+                </div>
+              </div>
             </div>
-            <div className="flex">
-              <div>315 Members</div>
-              <div>Location, USA</div>
-              <div>Share</div>
+
+            <div className="flex place-content-evenly flex-wrap">
+              <div className="bg-white mt-2 text-black rounded-3xl px-4 flex flex-row items-center">
+                <div className="m-2 rounded-full h-8 w-8 justify-center items-center">
+                  <Image
+                    className="w-full"
+                    src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708120241/avatar-astronaut_icc950.png"
+                    alt="Astronaut avatar"
+                  />
+                </div>
+                <p>315 Members</p>
+              </div>
+              <div className="bg-white mt-2 text-black rounded-3xl px-4 flex flex-row items-center">
+                <div className="m-2 rounded-full h-8 w-8 justify-center items-center">
+                  <Image
+                    className="w-full"
+                    src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708121513/location_wf4qsz.png"
+                    alt="GPS Icon"
+                  />
+                </div>
+                <p>Location, USA</p>
+              </div>
+              <div className="bg-white mt-2 text-black hover:bg-warm hover:text-secondary rounded-3xl px-4 flex flex-row items-center">
+                <div className="m-2 rounded-full h-8 w-8 justify-center items-center">
+                  <Image
+                    className="w-full"
+                    src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708121700/share_hmihwe.png"
+                    alt="Arrowed share icon"
+                  />
+                </div>
+                <p>Share</p>
+              </div>
             </div>
           </div>
         </div>
-        
-        <div style={{ border: '2px solid yellow' }} className="min-w-[280px] p-10 md:flex md:flex-row">
-          <div style={{ border: '2px solid yellow' }} className="md:w-1/2 md:p-4">
+
+        <div className="min-w-[280px] min-h-[280px] p-2 md:p-10 md:flex md:flex-row">
+          <div className="md:w-1/2 p-2 md:p-4">
+            <h2 className="font-extrabold md:text-2xl">What we're about</h2>
             <p>{data.group.description}</p>
           </div>
-          <div style={{ border: '2px solid yellow' }} className="md:w-1/2 md:p-4">
-            <h2>Upcoming Events</h2>
+          <div className="md:w-1/2 p-2 md:p-4 md:border-secondary md:border-2 rounded-lg">
+            <h2 className="font-extrabold md:text-2xl">Upcoming Events</h2>
+            <div className="flex flex-col">
+              <div className="bg-white rounded-lg text-black p-2 min-h-[64px] my-2">
+                <p>No Upcoming Events scheduled at this time</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div className='py-32'>
-      <Button variant="warm-block" buttonStyle="rounded" size="large">
-        <Link to="/groups">Back to groups</Link>
-      </Button>
+      <div className="py-32">
+        <Button variant="warm-block" buttonStyle="rounded" size="large">
+          <Link to="/groups">Back to groups</Link>
+        </Button>
       </div>
-      
     </div>
   );
 }
