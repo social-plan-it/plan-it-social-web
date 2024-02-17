@@ -14,17 +14,20 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function GroupRoute() {
   const data = useLoaderData<typeof loader>();
-
   return (
     <div className="bg-primary text-white flex flex-col items-center">
       <div className="md:flex md:flex-col md:max-w-screen-xl">
         <div className="p-2 justify-center md:p-10 md:flex md:flex-row md:border-b-2 md:border-b-white">
           <div className="m-auto rounded-full h-[300px] w-[280px] justify-center items-center md:m-8">
-            <Image
-              className="w-full"
-              src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708118888/default-group-photo_xhcpqt.png"
-              alt="Buddies taking a selfie"
-            />
+            {!data.group.imgUrl && !data.group.ImgAlt ? (
+              <Image
+                className="w-full"
+                src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708118888/default-group-photo_xhcpqt.png"
+                alt="Buddies taking a selfie"
+              />
+            ) : (
+              <Image className="w-full" src={data.group.imgUrl} alt={data.group.ImgAlt} />
+            )}
           </div>
           <div className="md:my-8 md:mx-10 md:flex md:flex-col md:place-content-between">
             <div className="flex flex-col md:flex-row md:place-content-between">
@@ -105,9 +108,17 @@ export default function GroupRoute() {
           <div className="md:w-1/2 p-2 md:p-4 md:border-secondary md:border-2 rounded-lg">
             <h2 className="font-extrabold md:text-2xl">Upcoming Events</h2>
             <div className="flex flex-col">
-              <div className="bg-white rounded-lg text-black p-2 min-h-[64px] my-2">
-                <p>No Upcoming Events scheduled at this time</p>
-              </div>
+              {!data.group.events ? (
+                <div className="bg-white rounded-lg text-black p-2 min-h-[64px] my-2">
+                  <p>No Upcoming Events scheduled at this time</p>
+                </div>
+              ) : (
+                data.group.events.map((item) => (
+                  <div key={item.id} className="bg-white rounded-lg text-black p-2 min-h-[64px] my-2">
+                    <p>{item}</p>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>
