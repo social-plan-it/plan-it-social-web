@@ -18,8 +18,8 @@ export default function GroupRoute() {
   return (
     <div className="bg-primary text-white flex flex-col items-center">
       <div className="md:flex md:flex-col md:max-w-screen-xl">
-        <div className="p-2 justify-center md:p-10 md:flex md:flex-row">
-          <div className="rounded-full h-[300px] w-[280px] justify-center items-center md:m-8">
+        <div className="p-2 justify-center md:p-10 md:flex md:flex-row md:border-b-2 md:border-b-white">
+          <div className="m-auto rounded-full h-[300px] w-[280px] justify-center items-center md:m-8">
             <Image
               className="w-full"
               src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708118888/default-group-photo_xhcpqt.png"
@@ -28,7 +28,7 @@ export default function GroupRoute() {
           </div>
           <div className="md:my-8 md:mx-10 md:flex md:flex-col md:place-content-between">
             <div className="flex flex-col md:flex-row md:place-content-between">
-              <div>
+              <div className="m-auto">
                 <h2 className="font-extrabold md:text-5xl md:mb-4">{data.group.name}</h2>
                 <h3 className="md:font-extrabold md:text-2xl md:mb-2">Headline: Group headline here</h3>
                 <div>
@@ -99,7 +99,7 @@ export default function GroupRoute() {
 
         <div className="min-w-[280px] min-h-[280px] p-2 md:p-10 md:flex md:flex-row">
           <div className="md:w-1/2 p-2 md:p-4">
-            <h2 className="font-extrabold md:text-2xl">What we're about</h2>
+            <h2 className="font-extrabold md:text-2xl">What we are about</h2>
             <p>{data.group.description}</p>
           </div>
           <div className="md:w-1/2 p-2 md:p-4 md:border-secondary md:border-2 rounded-lg">

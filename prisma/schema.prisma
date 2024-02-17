@@ -36,6 +36,9 @@ model Password {
 model Group {
   id          String  @id @default(uuid())
   name        String
+  imageUrl    String?
+  imageAlt    String?
+  headline    String 
   description String  @db.Text
   events      Event[]
   users       User[]
