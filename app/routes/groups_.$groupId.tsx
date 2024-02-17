@@ -113,7 +113,7 @@ export default function GroupRoute() {
                   <p>No Upcoming Events scheduled at this time</p>
                 </div>
               ) : (
-                data.group.events.map((item) => (
+                data.group.events.map((item: Array) => (
                   <div key={item.id} className="bg-white rounded-lg text-black p-2 min-h-[64px] my-2">
                     <p>{item}</p>
                   </div>
