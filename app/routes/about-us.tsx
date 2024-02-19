@@ -1,10 +1,9 @@
 import { Image } from '~/components/ui/images';
-import { Button } from '~/components/ui/button';
 
 export default function AboutUs() {
   return (
     <div className="bg-primary text-white flex flex-col justify-center content-center">
-      <div className="max-w-screen-md mx-auto sm:w-4/5 flex flex-col px-8 py-8 items-center justify-center">
+      <div className="max-w-screen-md mx-auto sm:w-4/5 flex flex-col px-8 py-8 justify-center">
         <div className="w-[320px] flex self-start mx-auto pb-3">
           <Image
             className="w-full"
@@ -19,17 +18,15 @@ export default function AboutUs() {
           Shank jerky shoulder short loin corned beef chislic ham cupim. Ribeye andouille jowl, short ribs chislic
           leberkas ham rump sirloin jerky chicken turkey ground round.
         </h3>
-        <div className="w-full sm:w-90 sm:items-end">
-          <Button variant="warm-block" buttonStyle="rounded" size="large">
-            <a
-              target="_blank"
-              href="https://discord.com/channels/1047297490199773215/1047297491135107114"
-              rel="noreferrer"
-            >
-              Join Group
-            </a>
-          </Button>
-        </div>
+        <a
+          target="_blank"
+          href="https://discord.com/channels/1047297490199773215/1047297491135107114"
+          rel="noreferrer"
+          className="w-full sm:w-fit px-5 py-3 text-base me-2 mb-2 text-center font-medium focus:outline-none focus:ring-4 bg-warm text-white focus:ring-red-300 hover:bg-red-700 rounded-lg "
+        >
+          {' '}
+          Join Group{' '}
+        </a>
       </div>
       {/* <div className="flex justify-center content-center bg-secondary">
           <h1>TODO: Place holder for event images marquee</h1>
