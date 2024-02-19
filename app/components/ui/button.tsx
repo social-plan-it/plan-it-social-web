@@ -1,14 +1,24 @@
 import type { ButtonHTMLAttributes } from 'react';
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+type BaseButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant: 'primary' | 'secondary' | 'warm' | 'outlined';
   buttonStyle: 'rounded' | 'fullyRounded';
   children: React.ReactNode;
-  icon?: boolean;
   disabled?: boolean;
 };
 
-export function Button({ variant, buttonStyle, icon, disabled, children, ...props }: ButtonProps) {
+type ButtonProps = BaseButtonProps & {
+  icon?: false;
+};
+
+type ButtonAndIconProps = BaseButtonProps & {
+  icon?: true;
+  'aria-label': string;
+};
+
+type CombinedButtonProps = ButtonProps | ButtonAndIconProps;
+
+export function Button({ variant, buttonStyle, icon, disabled, children, ...props }: CombinedButtonProps) {
   let baseClasses =
     'w-full sm:w-fit me-2 mb-2 text-center font-medium focus:outline-none focus:ring-4 px-3 py-2 text-sm sm:px-5 sm:py-2.5 md:py-3 md:text-base';
   let variantClasses = '';
