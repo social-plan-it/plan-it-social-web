@@ -6,6 +6,7 @@ type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {
   src: string;
   width: number;
   height: number;
+  piority?: boolean;
 };
 
 export function Image({ ...props }: ImageProps) {
