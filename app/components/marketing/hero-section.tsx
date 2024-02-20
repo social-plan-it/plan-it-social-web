@@ -59,14 +59,7 @@ export default function HeroSection() {
           </Form>
         </div>
         <div className="w-4/5 mb-3 max-w-[600px] flex self-start">
-          <Image
-            className="w-full"
-            src="/imgs/Hero-Image.png"
-            alt="group of people"
-            height={379}
-            width={553}
-            priority
-          />
+          <Image className="w-full" src="/imgs/Hero-Image.png" alt="group of people" height={379} width={553} piority />
         </div>
       </div>
     </section>
