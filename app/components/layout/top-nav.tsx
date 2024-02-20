@@ -12,6 +12,9 @@ export function TopNav() {
 
   return (
     <nav className="bg-gray-800 p-4">
+      <a href="#main" className="sr-only focus:not-sr-only">
+        Skip to content
+      </a>
       <div className="flex justify-start items-center max-w-screen-2xl mx-auto">
         <div className="text-white text-xl font-semibold flex justify-between items-center py-4 w-full">
           <Link to="/">

@@ -74,7 +74,7 @@ function Shell({ children }: { children: React.ReactNode }) {
       </head>
       <body className="min-h-screen w-full flex flex-col">
         <TopNav />
-        {children}
+        <section id="main">{children}</section>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
