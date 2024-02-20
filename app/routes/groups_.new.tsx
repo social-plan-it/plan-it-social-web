@@ -66,7 +66,7 @@ export default function GroupNew() {
                 <div>
                   <label>Attach Image</label>
                 </div>
-                <Button variant="warm" buttonStyle="fullyRounded" size="large">
+                <Button variant="warm" buttonStyle="fullyRounded">
                   Create a group
                 </Button>
               </div>
