@@ -19,7 +19,7 @@ export default function GroupRoute() {
       <div className="md:flex md:flex-col md:max-w-screen-xl">
         <div className="p-2 justify-center md:p-10 md:flex md:flex-row md:border-b-2 md:border-b-white">
           <div className="m-auto rounded-full h-[300px] w-[280px] justify-center items-center md:m-8">
-            {!data.group.imgUrl && !data.group.ImgAlt ? (
+            {!data.group.imgUrl && !data.group.imgAlt ? (
               <Image
                 className="w-full"
                 src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708118888/default-group-photo_xhcpqt.png"
