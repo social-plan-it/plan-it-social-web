@@ -12,7 +12,7 @@ export function TopNav() {
 
   return (
     <nav className="bg-gray-800 p-4">
-      <a href="#main" className="sr-only focus:not-sr-only">
+      <a href="#main" className="sr-only focus:not-sr-only text-white">
         Skip to content
       </a>
       <div className="flex justify-start items-center max-w-screen-2xl mx-auto">
