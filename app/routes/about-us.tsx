@@ -9,6 +9,8 @@ export default function AboutUs() {
             className="w-full"
             src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1706807323/solar-system_pzkazh.png"
             alt="Solar system"
+            width={512}
+            height={512}
           />
         </div>
         <h2 className="w-50 pb-3 sm:w-100 font-bold sm:font-extrabold sm:text-4xl">
@@ -37,6 +39,8 @@ export default function AboutUs() {
             className="w-full"
             src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1706805456/target_g3b96r.png"
             alt="Arrow in target"
+            width={512}
+            height={512}
           />
         </div>
         <div className="pb-3 w-full">
@@ -52,6 +56,8 @@ export default function AboutUs() {
             className="w-full"
             src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1706806762/binoculars_vuhkgz.png"
             alt="Kid looking through binoculars"
+            width={512}
+            height={512}
           />
         </div>
         <div className="pb-3 w-full">
@@ -67,6 +73,8 @@ export default function AboutUs() {
             className="w-full"
             src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1706806983/crowd_ld0rvy.png"
             alt="Diversity"
+            width={512}
+            height={512}
           />
         </div>
         <div className="pb-3 w-full">
