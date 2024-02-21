@@ -24,9 +24,11 @@ export default function GroupRoute() {
                 className="w-full"
                 src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708118888/default-group-photo_xhcpqt.png"
                 alt="Buddies taking a selfie"
+                width={288}
+                height={288}
               />
             ) : (
-              <Image className="w-full" src={data.group.imgUrl} alt={data.group.ImgAlt} />
+              <Image className="w-full" src={data.group.imgUrl} alt={data.group.ImgAlt} width={288} height={288} />
             )}
           </div>
           <div className="md:my-8 md:mx-10 md:flex md:flex-col md:place-content-between">
@@ -41,6 +43,8 @@ export default function GroupRoute() {
                         className="w-full"
                         src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708120241/avatar-astronaut_icc950.png"
                         alt="Astronaut avatar"
+                        width={32}
+                        height={32}
                       />
                     </div>
                     <p>Organized by: Name Here</p>
@@ -53,6 +57,8 @@ export default function GroupRoute() {
                     className="w-full"
                     src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708118009/discord_ncsvl3.png"
                     alt="Discord Icon"
+                    width={32}
+                    height={32}
                   />
                 </div>
                 <div className="m-2 rounded-full h-8 w-8 justify-center items-center">
@@ -60,6 +66,8 @@ export default function GroupRoute() {
                     className="w-full"
                     src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708118305/twitter_pjiutd.png"
                     alt="Twitter Icon"
+                    width={32}
+                    height={32}
                   />
                 </div>
               </div>
@@ -72,6 +80,8 @@ export default function GroupRoute() {
                     className="w-full"
                     src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708120241/avatar-astronaut_icc950.png"
                     alt="Astronaut avatar"
+                    width={32}
+                    height={32}
                   />
                 </div>
                 <p>315 Members</p>
@@ -82,6 +92,8 @@ export default function GroupRoute() {
                     className="w-full"
                     src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708121513/location_wf4qsz.png"
                     alt="GPS Icon"
+                    width={32}
+                    height={32}
                   />
                 </div>
                 <p>Location, USA</p>
@@ -92,6 +104,8 @@ export default function GroupRoute() {
                     className="w-full"
                     src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708121700/share_hmihwe.png"
                     alt="Arrowed share icon"
+                    width={32}
+                    height={32}
                   />
                 </div>
                 <p>Share</p>
@@ -124,7 +138,7 @@ export default function GroupRoute() {
         </div>
       </div>
       <div className="py-32 w-full flex justify-center">
-        <Button variant="warm" buttonStyle="rounded" size="large">
+        <Button variant="warm" buttonStyle="rounded">
           <Link to="/groups">Back to groups</Link>
         </Button>
       </div>
