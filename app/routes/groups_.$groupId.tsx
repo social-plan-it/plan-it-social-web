@@ -18,7 +18,7 @@ export default function GroupRoute() {
     <div className="bg-primary text-white flex flex-col items-center">
       <div className="md:flex md:flex-col md:max-w-screen-xl">
         <div className="p-2 justify-center md:p-10 md:flex md:flex-row md:border-b-2 md:border-b-white">
-          <div className="m-auto rounded-full h-[300px] w-[280px] justify-center items-center md:m-8">
+          <div className="m-auto rounded-full h-56 w-52  md:h-80 md:w-72 justify-center items-center md:m-8">
             {!data.group.imgUrl && !data.group.imgAlt ? (
               <Image
                 className="w-full"
@@ -123,8 +123,8 @@ export default function GroupRoute() {
           </div>
         </div>
       </div>
-      <div className="py-32">
-        <Button variant="warm-block" buttonStyle="rounded" size="large">
+      <div className="py-32 w-full flex justify-center">
+        <Button variant="warm" buttonStyle="rounded" size="large">
           <Link to="/groups">Back to groups</Link>
         </Button>
       </div>
