@@ -21,7 +21,7 @@
     "@prisma/client": "^5.1.1",
     "@remix-run/node": "2.1.0",
     "@remix-run/react": "2.1.0",
-    "@unpic/react": "^0.1.10",
+    "@unpic/react": "^0.1.11",
     "bcryptjs": "^2.4.3",
     "clsx": "^2.0.0",
     "google-auth-library": "^9.0.0",

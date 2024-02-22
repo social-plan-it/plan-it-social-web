@@ -8,7 +8,7 @@ type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {
   background?: string;
   width?: number;
   height?: number;
-  piority?: boolean;
+  priority?: boolean;
 };
 
 export function Image({ ...props }: ImageProps) {
