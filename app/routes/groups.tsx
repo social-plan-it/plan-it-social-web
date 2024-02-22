@@ -1,6 +1,7 @@
 import { useGroups } from '~/hooks/useGroups';
 import { Link } from '@remix-run/react';
 import { Button } from '~/components/ui/button';
+import { Image } from '~/components/ui/images';
 
 export default function Group() {
   const groups = useGroups();
@@ -21,11 +22,17 @@ export default function Group() {
                   to={group.id}
                 >
                   <div style={{ width: '210px', borderRadius: '16px', display: 'flex', alignSelf: 'flex-start' }}>
-                    <img
-                      style={{ backgroundSize: 'cover', backgroundPosition: 'center' }}
-                      className="w-full"
+                    <Image
+                      style={{
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        display: 'flex',
+                        alignSelf: 'flex-start',
+                      }}
                       src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg"
                       alt="place holder"
+                      layout="fullWidth"
+                      background="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708619241/loading_pwxqyd.png"
                     />
                   </div>
                   <div className="mx-2">

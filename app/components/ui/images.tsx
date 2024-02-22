@@ -4,8 +4,10 @@ import { Image as UnpicImage } from '@unpic/react';
 type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {
   alt: string;
   src: string;
-  width: number;
-  height: number;
+  layout?: string;
+  background?: string;
+  width?: number;
+  height?: number;
   piority?: boolean;
 };
 
