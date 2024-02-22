@@ -1,26 +1,30 @@
-import { Card } from '~/components/ui/containers';
 import { useGroups } from '~/hooks/useGroups';
 import { Link } from '@remix-run/react';
-import { LinkButton } from '~/components/ui/forms';
+import { Button } from '~/components/ui/button';
 
 export default function Group() {
   const groups = useGroups();
   return (
-    <>
-      <Card>
-        <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+    <div className="bg-primary py-8">
+      <div style={{ border: 'solid 2px purple' }} className="m-auto max-w-screen-xl">
+        <ul style={{ border: 'solid 2px pink' }} className="w-full flex flex-wrap p-8 text-secondary">
           {groups?.map((group) => {
             return (
-              <li key={group.id}>
-                <Link to={group.id}>{group.name}</Link>
+              <li style={{ listStyle: 'none', border: 'solid 2px fuscia' }} className="flex flex-wrap" key={group.id}>
+                <Link style={{ border: 'red 2px solid' }} className="m-1" to={group.id}>
+                  <h2>{group.name}</h2>
+                  <h3>group-headline-here</h3>
+                </Link>
               </li>
             );
           })}
         </ul>
-      </Card>
-      <div className="px-6 py-6 sm:px-16 max-w-sm">
-        <LinkButton to="/groups/new">Create New Group</LinkButton>
       </div>
-    </>
+      <div style={{ border: '2px solid white' }} className="m-auto max-w-screen-xl">
+        <Button variant="warm" buttonStyle="rounded">
+          <Link to="/groups/new">Create New Group</Link>
+        </Button>
+      </div>
+    </div>
   );
 }
