@@ -21,18 +21,13 @@ export default function Group() {
                   className="m-1 flex flex-col justify-center items-center"
                   to={group.id}
                 >
-                  <div style={{ width: '210px', borderRadius: '16px', display: 'flex', alignSelf: 'flex-start' }}>
+                  <div className="w-[13.13rem]">
                     <Image
-                      style={{
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        display: 'flex',
-                        alignSelf: 'flex-start',
-                      }}
+                      className="bg-contain bg-center flex self-start rounded-lg"
                       src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg"
                       alt="place holder"
-                      layout="fullWidth"
                       background="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708619241/loading_pwxqyd.png"
+                      layout="fullWidth"
                     />
                   </div>
                   <div className="mx-2">
