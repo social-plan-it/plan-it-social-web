@@ -1,4 +1,4 @@
-import type { ActionFunction, ActionFunctionArgs } from '@remix-run/node';
+import type { ActionFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { Form, useParams, useSubmit } from '@remix-run/react';
 
@@ -8,8 +8,8 @@ import { Card } from '~/components/ui/containers';
 import { Input, TextArea } from '~/components/ui/forms';
 import { Button } from '~/components/ui/button';
 
-import { H1, H2 } from '~/components/ui/headers';
-import { I } from '@unpic/react/dist/image--yl1Sa1U';
+import { H1 } from '~/components/ui/headers';
+import React from 'react';
 
 /*
   name        String
@@ -33,7 +33,7 @@ export async function action({ request }: ActionFunctionArgs) {
   console.log(groupId, 'groupId', name, 'name', date, 'date', description, 'description');
 
   if (!groupId) {
-    return { formError: `Group not found.` };
+    throw Error('Group not found.');
   }
 
   const eventData = {
@@ -55,13 +55,12 @@ export default function GroupNew() {
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    let rawForm = event.currentTarget;
-    let formData = new FormData(rawForm);
+    let rawform = event.currentTarget;
+    let formData = new FormData(rawform);
     formData.append('groupId', groupId ?? '');
-    console.log('formData', formData, event.currentTarget, groupId);
     submit(formData, {
-      method: rawForm.getAttribute('method') ?? rawForm.method,
-      action: rawForm.getAttribute('action') ?? rawForm.action,
+      method: rawform.getAttribute('method') ?? rawform.method,
+      action: rawform.getAttribute('action') ?? rawform.action,
     });
   }
 
