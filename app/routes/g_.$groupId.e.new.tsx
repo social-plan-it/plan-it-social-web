@@ -17,10 +17,8 @@ export async function action({ request }: ActionFunctionArgs) {
   const description = form.get('description') as string | null;
   const groupId = form.get('groupId') as string | null;
 
-  console.log(groupId, 'groupId', name, 'name', date, 'date', description, 'description');
-
   if (!groupId) {
-    throw Error('Group not found.');
+    throw Error('Group ID not Provided.');
   }
 
   const eventData = {

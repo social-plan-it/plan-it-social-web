@@ -140,7 +140,7 @@ export default function GroupRoute() {
         to={`/g/${groupId}/e/new`}
         className="w-full rounded-lg sm:w-fit me-2 mb-2 text-center font-medium focus:outline-none focus:ring-4 px-3 py-2 text-sm sm:px-5 sm:py-2.5 md:py-3 md:text-base bg-warm text-white focus:ring-red-300 hover:bg-red-700"
       >
-        Create New Events
+        Create New Event
       </Link>
       <Link
         to="/groups"
