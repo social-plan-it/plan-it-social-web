@@ -13,6 +13,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 };
 
 export default function GroupRoute() {
+  const { groupId } = useParams();
   const data = useLoaderData<typeof loader>();
   return (
     <div className="bg-primary text-white flex flex-col items-center">
@@ -137,6 +138,9 @@ export default function GroupRoute() {
           </div>
         </div>
       </div>
+      <Button variant="warm" buttonStyle="rounded">
+        <Link to={`/g/${groupId}/e/new`}>Create New Events</Link>
+      </Button>
       <div className="py-32 w-full flex justify-center">
         <Button variant="warm" buttonStyle="rounded">
           <Link to="/groups">Back to groups</Link>
