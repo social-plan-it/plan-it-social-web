@@ -1,7 +1,8 @@
 import type { LoaderFunction } from '@remix-run/node';
-import { useParams, useLoaderData, Link } from '@remix-run/react';
+import { useParams, useLoaderData } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
 import { json } from '@remix-run/node';
+import { LinkButton } from '~/components/ui/forms';
 
 import { Image } from '~/components/ui/images';
 
@@ -136,18 +137,8 @@ export default function GroupRoute() {
           </div>
         </div>
       </div>
-      <Link
-        to={`/g/${groupId}/e/new`}
-        className="w-full rounded-lg sm:w-fit me-2 mb-2 text-center font-medium focus:outline-none focus:ring-4 px-3 py-2 text-sm sm:px-5 sm:py-2.5 md:py-3 md:text-base bg-warm text-white focus:ring-red-300 hover:bg-red-700"
-      >
-        Create New Event
-      </Link>
-      <Link
-        to="/groups"
-        className="w-full rounded-lg sm:w-fit me-2 mb-2 text-center font-medium focus:outline-none focus:ring-4 px-3 py-2 text-sm sm:px-5 sm:py-2.5 md:py-3 md:text-base bg-warm text-white focus:ring-red-300 hover:bg-red-700"
-      >
-        Back to groups
-      </Link>
+      <LinkButton to={`/g/${groupId}/e/new`}>Create New Event</LinkButton>
+      <LinkButton to="/groups">Back to groups</LinkButton>
     </div>
   );
 }
