@@ -10,18 +10,8 @@ import { Button } from '~/components/ui/button';
 
 import { H1 } from '~/components/ui/headers';
 import React from 'react';
+import type { FormMethod } from '@remix-run/react';
 
-/*
-  name        String
-  date        DateTime
-  description String   @db.Text
-  imgUrl      String?
-  imgAlt      String?
-  location    String?
-  group       Group    @relation(fields: [groupId], references: [id])
-  groupId     String
-  users       User[]
-  */
 
 export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
@@ -59,8 +49,8 @@ export default function GroupNew() {
     let formData = new FormData(rawform);
     formData.append('groupId', groupId ?? '');
     submit(formData, {
-      method: rawform.getAttribute('method') ?? rawform.method,
-      action: rawform.getAttribute('action') ?? rawform.action,
+      method: rawform.method as FormMethod,
+      action: rawform.action,
     });
   }
 
