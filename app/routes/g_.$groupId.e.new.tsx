@@ -1,17 +1,14 @@
+import type { FormEvent } from 'react';
 import type { ActionFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
+import type { FormMethod } from '@remix-run/react';
 import { Form, useParams, useSubmit } from '@remix-run/react';
 
 import { db } from '~/modules/database/db.server';
-
 import { Card } from '~/components/ui/containers';
 import { Input, TextArea } from '~/components/ui/forms';
 import { Button } from '~/components/ui/button';
-
 import { H1 } from '~/components/ui/headers';
-import React from 'react';
-import type { FormMethod } from '@remix-run/react';
-
 
 export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
@@ -43,7 +40,7 @@ export default function GroupNew() {
 
   const submit = useSubmit();
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     let rawform = event.currentTarget;
     let formData = new FormData(rawform);
