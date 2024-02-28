@@ -1,8 +1,6 @@
-import type { FormEvent } from 'react';
 import type { ActionFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
-import type { FormMethod } from '@remix-run/react';
-import { Form, useParams, useSubmit } from '@remix-run/react';
+import { Form } from '@remix-run/react';
 
 import { db } from '~/modules/database/db.server';
 import { Card } from '~/components/ui/containers';
