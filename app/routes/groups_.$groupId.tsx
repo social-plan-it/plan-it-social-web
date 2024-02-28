@@ -137,7 +137,7 @@ export default function GroupRoute() {
           </div>
         </div>
       </div>
-      <LinkButton to={`/g/${groupId}/e/new`}>Create New Event</LinkButton>
+      <LinkButton to={`/groups/${groupId}/events/new`}>Create New Event</LinkButton>
       <LinkButton to="/groups">Back to groups</LinkButton>
     </div>
   );
