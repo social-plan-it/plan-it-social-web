@@ -22,8 +22,7 @@ export default function Group() {
                       className="bg-contain bg-center flex self-start rounded-full"
                       src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg"
                       alt="place holder"
-                      background="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708619241/loading_pwxqyd.png"
-                      layout="fullWidth"
+                      // background="https://res.cloudinary.com/dxctpvd8v/image/upload/v1709096811/SocialPlanit-Loading_qedebk.png"
                       width={210}
                       height={210}
                     />
