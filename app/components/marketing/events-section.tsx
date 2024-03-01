@@ -7,10 +7,10 @@ interface ExtendedEvent extends Event {
 
 export function EventsSection({ events }: { events: ExtendedEvent[] }) {
   return (
-    <section className="bg-secondary">
-      <div className="sm:ml-24 pt-10 pb-20 space-y-3 ">
-        <h2 className="text-center sm:text-left sm:text-5xl text-4xl font-bold italic text-primary">Upcoming Events</h2>
-        <div className="flex flex-wrap gap-6 justify-center sm:justify-start">
+    <section className="bg-secondary pb-8">
+      <div className="mx-auto py-8 md:max-w-screen-xl">
+        <h2 className="text-center pb-8 sm:text-4xl text-4xl font-bold italic text-primary">Upcoming Events</h2>
+        <div className="flex flex-wrap gap-6 justify-center sm:place-content-center">
           <EventsCards events={events} />
         </div>
       </div>
