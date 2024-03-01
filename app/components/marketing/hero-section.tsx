@@ -4,8 +4,7 @@ import { Image } from '../ui/images';
 export default function HeroSection() {
   return (
     <section className="bg-secondary pt-10 pb-40">
-      <div className="mx-auto max-w-screen-xl flex flex-wrap-reverse justify-center"
-      >
+      <div className="mx-auto max-w-screen-xl flex flex-wrap-reverse justify-center">
         <div className="w-4/5 max-w-[45%] min-w-[270px]">
           <h1 className="text-gray-800 font-bold text-4xl pb-8 w-full">Social made easy, memories made forever</h1>
           <p className="text-gray-800 font-bold text-lg pb-8 w-full">
