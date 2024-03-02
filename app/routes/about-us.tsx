@@ -16,7 +16,7 @@ export default function AboutUs() {
         <h2 className="w-50 pb-3 sm:w-100 font-bold sm:font-extrabold sm:text-4xl">Empower Community Building</h2>
         <h3 className="w-50 sm:text-lg sm:w-90 sm:font-semibold pb-6">
           Our open-source platform empowers you to create and manage your own communities, fostering a space for
-          individuals with shared interests to connect, collaborate, and thrive."
+          individuals with shared interests to connect, collaborate, and thrive.
         </h3>
         <a
           href="/groups"
@@ -61,7 +61,9 @@ export default function AboutUs() {
           <h2 className="sm:w-100 font-bold sm:font-extrabold sm:text-4xl">Uncover Diverse Passions</h2>
         </div>
         <h3 className="w-50 sm:text-lg sm:w-90 sm:font-semibold pb-6">
-          Explore a vibrant tapestry of communities dedicated to anything you can imagine!
+          Explore a vibrant tapestry of communities dedicated to anything you can imagine! From book clubs and art
+          enthusiasts to tech aficionados and board game nights, discover new passions and expand your horizons through
+          community hosted events.
         </h3>
       </div>
       <div className="max-w-screen-md mx-auto sm:w-4/5 flex flex-col px-8 py-8 items-center justify-center">
