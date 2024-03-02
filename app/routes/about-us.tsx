@@ -13,21 +13,16 @@ export default function AboutUs() {
             height={512}
           />
         </div>
-        <h2 className="w-50 pb-3 sm:w-100 font-bold sm:font-extrabold sm:text-4xl">
-          Ham hock pork shank, chislic chicken pork chop picanha. Alcatra turkey ribeye kevin fatback leberkas.
-        </h2>
+        <h2 className="w-50 pb-3 sm:w-100 font-bold sm:font-extrabold sm:text-4xl">Empower Community Building</h2>
         <h3 className="w-50 sm:text-lg sm:w-90 sm:font-semibold pb-6">
-          Shank jerky shoulder short loin corned beef chislic ham cupim. Ribeye andouille jowl, short ribs chislic
-          leberkas ham rump sirloin jerky chicken turkey ground round.
+          Our open-source platform empowers you to create and manage your own communities, fostering a space for
+          individuals with shared interests to connect, collaborate, and thrive."
         </h3>
         <a
-          target="_blank"
-          href="https://discord.com/channels/1047297490199773215/1047297491135107114"
-          rel="noreferrer"
+          href="/groups"
           className="w-full sm:w-fit px-5 py-3 text-base me-2 mb-2 text-center font-medium focus:outline-none focus:ring-4 bg-warm text-white focus:ring-red-300 hover:bg-red-700 rounded-lg "
         >
-          {' '}
-          Join Group{' '}
+          Join Group
         </a>
       </div>
       {/* <div className="flex justify-center content-center bg-secondary">
@@ -44,10 +39,12 @@ export default function AboutUs() {
           />
         </div>
         <div className="pb-3 w-full">
-          <h2 className="sm:w-100 font-bold sm:font-extrabold sm:text-4xl">MISSION</h2>
+          <h2 className="sm:w-100 font-bold sm:font-extrabold sm:text-4xl">Experience Unparalleled Flexibility</h2>
         </div>
         <h3 className="w-50 sm:text-lg sm:w-90 sm:font-semibold pb-6">
-          Shank jerky shoulder short loin corned beef chislic ham cupim. Ribeye andouille jowl, short ribs chislic.
+          Enjoy the freedom to shape your social experience on your terms. Our platform offers customizable features,
+          allowing you to tailor event formats, communication channels, and community guidelines to perfectly suit your
+          unique needs!
         </h3>
       </div>
       <div className="max-w-screen-md mx-auto sm:w-4/5 flex flex-col px-8 py-8 items-center justify-center">
@@ -61,10 +58,10 @@ export default function AboutUs() {
           />
         </div>
         <div className="pb-3 w-full">
-          <h2 className="sm:w-100 font-bold sm:font-extrabold sm:text-4xl">VISION</h2>
+          <h2 className="sm:w-100 font-bold sm:font-extrabold sm:text-4xl">Uncover Diverse Passions</h2>
         </div>
         <h3 className="w-50 sm:text-lg sm:w-90 sm:font-semibold pb-6">
-          Shank jerky shoulder short loin corned beef chislic ham cupim. Ribeye andouille jowl, short ribs chislic.
+          Explore a vibrant tapestry of communities dedicated to anything you can imagine!
         </h3>
       </div>
       <div className="max-w-screen-md mx-auto sm:w-4/5 flex flex-col px-8 py-8 items-center justify-center">
@@ -78,10 +75,11 @@ export default function AboutUs() {
           />
         </div>
         <div className="pb-3 w-full">
-          <h2 className="sm:w-100 font-bold sm:font-extrabold sm:text-4xl">CULTURE</h2>
+          <h2 className="sm:w-100 font-bold sm:font-extrabold sm:text-4xl">Foster Meaningful Connections</h2>
         </div>
         <h3 className="w-50 sm:text-lg sm:w-90 sm:font-semibold pb-6">
-          Shank jerky shoulder short loin corned beef chislic ham cupim. Ribeye andouille jowl, short ribs chislic.
+          Facilitates genuine connections with like-minded individuals who share your interests. Find your tribe, spark
+          engaging discussions, and build lasting friendships through shared experiences.
         </h3>
       </div>
     </div>
