@@ -1,4 +1,4 @@
-import type { LoaderFunctionArgs } from '@remix-run/node';
+import type { LoaderFunction } from '@remix-run/node';
 import { useParams, useLoaderData, Link } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
 import { json } from '@remix-run/node';
@@ -7,10 +7,10 @@ import { Button } from '~/components/ui/button';
 
 import { Image } from '~/components/ui/images';
 
-export async function loader({ params }: LoaderFunctionArgs) {
-  const group = await db.group.findFirstOrThrow({ where: { id: params.groupId }, include: { events: true } });
+export const loader: LoaderFunction = async ({ params }) => {
+  const group = await db.group.findFirstOrThrow({ where: { id: params.groupId } });
   return json({ group });
-}
+};
 
 export default function GroupRoute() {
   const data = useLoaderData<typeof loader>();
@@ -28,13 +28,7 @@ export default function GroupRoute() {
                 height={288}
               />
             ) : (
-              <Image
-                className="w-full"
-                src={data.group.imgUrl ?? ''}
-                alt={data.group.imgAlt ?? ''}
-                width={288}
-                height={288}
-              />
+              <Image className="w-full" src={data.group.imgUrl} alt={data.group.imgAlt} width={288} height={288} />
             )}
           </div>
           <div className="md:my-8 md:mx-10 md:flex md:flex-col md:place-content-between">
