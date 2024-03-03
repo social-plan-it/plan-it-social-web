@@ -9,7 +9,7 @@ import { Image } from '~/components/ui/images';
 import { eventsDataPatcher } from '~/modules/events/event';
 
 export const loader: LoaderFunction = async ({ params }) => {
-  const group = await db.group.findFirstOrThrow({ where: { id: params.groupId } });
+  const group = await db.group.findFirstOrThrow({ where: { id: params.groupId }, include: { events: true } });
   return json({ group });
 };
 

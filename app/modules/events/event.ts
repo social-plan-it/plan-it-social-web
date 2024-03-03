@@ -15,6 +15,10 @@ export function eventDataPatcher(event: RawEvent): FullEvent {
 }
 
 export function eventsDataPatcher(events: RawEvent[]): FullEvent[] {
+  if (!events) {
+    return [];
+  }
+
   return events.map((event) => {
     return eventDataPatcher(event);
   });
