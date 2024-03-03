@@ -37,6 +37,9 @@ model Group {
   id          String  @id @default(uuid())
   name        String
   description String  @db.Text
+  imgUrl      String?
+  imgAlt      String?
+  socialLinks Json?
   events      Event[]
   users       User[]
 }
