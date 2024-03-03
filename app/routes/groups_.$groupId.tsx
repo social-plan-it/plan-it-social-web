@@ -31,11 +31,7 @@ export default function GroupRoute() {
                 height={288}
               />
             ) : (
-<<<<<<< Updated upstream
-              <Image className="w-full" src={data.group.imgUrl} alt={data.group.ImgAlt} width={288} height={288} />
-=======
               <Image className="w-full" src={group.imgUrl ?? ''} alt={group.imgAlt ?? ''} width={288} height={288} />
->>>>>>> Stashed changes
             )}
           </div>
           <div className="md:my-8 md:mx-10 md:flex md:flex-col md:place-content-between">
