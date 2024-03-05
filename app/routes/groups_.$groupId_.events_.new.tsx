@@ -29,7 +29,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
   return redirect(`/groups/${eventData.groupId}`);
 }
 
-export default function GroupNew() {
+export default function Page() {
   return (
     <div className="grow py-20 lg:py-40 bg-secondary w-full flex flex-col items-center justify-center">
       <div className="flex w-full items-center justify-center flex-col">
