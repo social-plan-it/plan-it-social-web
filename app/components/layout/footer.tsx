@@ -101,12 +101,25 @@ export default function Footer() {
               </a>
             </li>
           </ul>
+          <ul className="mb-8">
+            <li className="text-lg">Photo Credits</li>
+            <li className="pb-1">
+              <a className="text-gray-400  font-thin" target="_blank" href="https://www.flaticon.com" rel="noreferrer">
+                Flaticon.com
+              </a>
+            </li>
+            <li className="pb-1">
+              <a className="text-gray-400  font-thin" target="_blank" href="https://www.pexels.com" rel="noreferrer">
+                Pexels.com
+              </a>
+            </li>
+          </ul>
         </div>
         <img className="sm:hidden ml-8 pt-4" src={VercelBanner} alt="Vercel Banner" />
         {/*Bottom Links*/}
         <div className="mx-8  pt-20    ">
           <ul className="flex flex-col justify-center  sm:flex-row   sm:space-x-8">
-            <li className="mb-4 ml-8">@ 2023 Social Plan-it</li>
+            <li className="mb-4 ml-8">@ 2024 Social Plan-it</li>
             <li className="mb-4 ml-8">
               <a href="/">Terms of Service</a>
             </li>
