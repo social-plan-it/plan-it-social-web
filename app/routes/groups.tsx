@@ -35,7 +35,7 @@ export default function Group() {
           })}
         </ul>
       </div>
-      <div className="m-auto max-w-screen-xl flex justify-center items-center my-4">
+      <div className="m-auto max-w-screen-xl flex justify-center items-center py-4">
         <Button variant="warm" buttonStyle="rounded">
           <Link to="/groups/new">Create New Group</Link>
         </Button>
