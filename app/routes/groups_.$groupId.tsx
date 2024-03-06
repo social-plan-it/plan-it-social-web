@@ -28,7 +28,7 @@ export default function GroupRoute() {
                 height={288}
               />
             ) : (
-              <Image className="w-full" src={data.group.imgUrl} alt={data.group.ImgAlt} width={288} height={288} />
+              <Image className="w-full" src={data.group.imgUrl} alt={data.group.imgAlt} width={288} height={288} />
             )}
           </div>
           <div className="md:my-8 md:mx-10 md:flex md:flex-col md:place-content-between">
