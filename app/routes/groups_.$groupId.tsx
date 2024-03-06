@@ -1,9 +1,8 @@
 import type { LoaderFunction } from '@remix-run/node';
-import { useParams, useLoaderData, Link } from '@remix-run/react';
+import { useParams, useLoaderData } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
 import { json } from '@remix-run/node';
-
-import { Button } from '~/components/ui/button';
+import { LinkButton } from '~/components/ui/forms';
 
 import { Image } from '~/components/ui/images';
 
@@ -13,6 +12,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 };
 
 export default function GroupRoute() {
+  const { groupId } = useParams();
   const data = useLoaderData<typeof loader>();
   return (
     <div className="bg-primary text-white flex flex-col items-center">
@@ -137,11 +137,8 @@ export default function GroupRoute() {
           </div>
         </div>
       </div>
-      <div className="py-32 w-full flex justify-center">
-        <Button variant="warm" buttonStyle="rounded">
-          <Link to="/groups">Back to groups</Link>
-        </Button>
-      </div>
+      <LinkButton to={`/groups/${groupId}/events/new`}>Create New Event</LinkButton>
+      <LinkButton to="/groups">Back to groups</LinkButton>
     </div>
   );
 }
