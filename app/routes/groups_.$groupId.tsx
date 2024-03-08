@@ -22,17 +22,16 @@ export default function GroupRoute() {
       <div className="md:flex md:flex-col md:max-w-screen-xl">
         <div className="p-2 justify-center md:p-10 md:flex md:flex-row md:border-b-2 md:border-b-white">
           <div className="m-auto rounded-full h-56 w-52  md:h-80 md:w-72 justify-center items-center md:m-8">
-            {!group.imgUrl && !group.imgAlt ? (
-              <Image
-                className="w-full"
-                src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708118888/default-group-photo_xhcpqt.png"
-                alt="Buddies taking a selfie"
-                width={288}
-                height={288}
-              />
-            ) : (
-              <Image className="w-full" src={group.imgUrl ?? ''} alt={group.imgAlt ?? ''} width={288} height={288} />
-            )}
+            <Image
+              className="w-full"
+              src={
+                group.imgUrl ??
+                'https://res.cloudinary.com/dxctpvd8v/image/upload/v1708118888/default-group-photo_xhcpqt.png'
+              }
+              alt={group.imgAlt ?? `${group.name} group`}
+              width={288}
+              height={288}
+            />
           </div>
           <div className="md:my-8 md:mx-10 md:flex md:flex-col md:place-content-between">
             <div className="flex flex-col md:flex-row md:place-content-between">
