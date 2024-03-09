@@ -22,7 +22,6 @@ model User {
   email    String    @unique
   name     String
   password Password?
-  groups   Group[]
   events   Event[]
 }
 
@@ -40,7 +39,6 @@ model Group {
   imgUrl      String?
   imgAlt      String?
   events      Event[]
-  users       User[]
 }
 
 model User_Group {
