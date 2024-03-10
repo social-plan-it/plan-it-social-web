@@ -15,7 +15,6 @@ export const loader: LoaderFunction = async ({ params }) => {
 export default function GroupRoute() {
   const { groupId } = useParams();
   const data = useLoaderData<typeof loader>();
-  console.log(data);
   return (
     <div className="bg-primary text-white flex flex-col items-center">
       <div className="md:flex md:flex-col md:max-w-screen-xl">
