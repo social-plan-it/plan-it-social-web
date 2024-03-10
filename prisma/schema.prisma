@@ -44,15 +44,13 @@ model Group {
 }
 
 model User_Group {
-  userId  String
+  userId  String @unique
   user    User   @relation(fields: [userId], references: [id])
-  groupId String
+  groupId String @unique
   group   Group  @relation(fields: [groupId], references: [id])
   role    Role
 
   @@id([userId, groupId])
-  @@index([groupId, userId])
-  @@index([userId, groupId])
 }
 
 model Event {
