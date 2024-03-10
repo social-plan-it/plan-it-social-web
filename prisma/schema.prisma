@@ -18,12 +18,13 @@ enum Role {
 }
 
 model User {
-  id       String    @id @default(uuid())
-  email    String    @unique
-  name     String
-  password Password?
-  groups   Group[]
-  events   Event[]
+  id          String            @id @default(uuid())
+  email       String            @unique
+  name        String
+  password    Password?
+  groups      Group[]
+  events      Event[]
+  socialLinks UserSocialLink[]
 }
 
 model Password {
@@ -34,24 +35,28 @@ model Password {
 }
 
 model Group {
-  id          String       @id @default(uuid())
+  id          String             @id @default(uuid())
   name        String
-  description String       @db.Text
+  description String             @db.Text
   imgUrl      String?
   imgAlt      String?
   events      Event[]
   users       User[]
-  socalLinks  SocialLink[]
+  socalLinks  GroupSocialLink[]
 }
 
-model SocialLink {
-  groupId String @id
-  Group   Group  @relation(fields: [groupId], references: [id])
+model GroupSocialLink {
+  groupId String @id @unique
+  group   Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)
   type    String
   url     String
-  
+}
 
-  @@index([groupId])
+model UserSocialLink {
+  userId String @id @unique
+  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type   String
+  url    String
 }
 
 model User_Group {
