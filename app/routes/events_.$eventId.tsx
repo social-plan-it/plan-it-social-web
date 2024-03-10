@@ -38,7 +38,7 @@ export async function action({ params, request }: ActionFunctionArgs) {
     data: { users: { connect: { id: userSession.userId } } },
   });
 
-  return event;
+  return json({ event });
 }
 
 export default function EventRoute() {
