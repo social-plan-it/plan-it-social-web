@@ -34,13 +34,24 @@ model Password {
 }
 
 model Group {
-  id          String  @id @default(uuid())
+  id          String       @id @default(uuid())
   name        String
-  description String  @db.Text
+  description String       @db.Text
   imgUrl      String?
   imgAlt      String?
   events      Event[]
   users       User[]
+  socalLinks  SocialLink[]
+}
+
+model SocialLink {
+  groupId String @id
+  Group   Group  @relation(fields: [groupId], references: [id])
+  type    String
+  url     String
+  
+
+  @@index([groupId])
 }
 
 model User_Group {
