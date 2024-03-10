@@ -75,4 +75,5 @@ export async function requireUserSession(request: Request) {
   if (!session) {
     return redirect('/login');
   }
+  return session;
 }
