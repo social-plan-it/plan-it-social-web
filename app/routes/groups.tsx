@@ -1,7 +1,7 @@
 import { useGroups } from '~/hooks/useGroups';
 import { Link } from '@remix-run/react';
-import { Button } from '~/components/ui/button';
 import { Image } from '~/components/ui/images';
+import { LinkButton } from '~/components/ui/forms';
 
 export default function Group() {
   const groups = useGroups();
@@ -14,7 +14,7 @@ export default function Group() {
               <li className="flex flex-wrap justify-center my-2 mx-auto md:m-2" key={group.id}>
                 <Link to={group.id}>
                   <div className="border-slate-100 border-2 rounded-2xl  m-1 px-4 py-4 flex flex-col justify-center items-center md:w-80 hover:transform hover:scale-105 transition-transform duration-300">
-                    <div className="w-[13.13rem] h-[13.13rem]">
+                    <div className="w-52 h-52">
                       <Image
                         className="bg-contain bg-center flex self-start rounded-full"
                         src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg"
@@ -35,10 +35,8 @@ export default function Group() {
           })}
         </ul>
       </div>
-      <div className="m-auto max-w-screen-xl flex justify-center items-center py-4">
-        <Button variant="warm" buttonStyle="rounded">
-          <Link to="/groups/new">Create New Group</Link>
-        </Button>
+      <div className="md:w-52 m-auto flex justify-center items-center py-4">
+        <LinkButton to="/groups/new">Create New Group</LinkButton>
       </div>
     </div>
   );
