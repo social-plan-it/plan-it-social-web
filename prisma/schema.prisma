@@ -45,17 +45,25 @@ model Group {
   socalLinks  GroupSocialLink[]
 }
 
+enum SocalLinkType {
+  FACEBOOK
+  TWITTER
+  INSTAGRAM
+  LINKEDIN
+  DISCORD
+  WEBSITE
+}
 model GroupSocialLink {
   groupId String @id @unique
   group   Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)
-  type    String
+  type    SocalLinkType
   url     String
 }
 
 model UserSocialLink {
   userId String @id @unique
   User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  type   String
+  type   SocalLinkType
   url    String
 }
 
