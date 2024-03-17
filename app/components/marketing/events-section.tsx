@@ -28,14 +28,6 @@ export function EventsCards({ events }: { events: ExtendedEvent[] }) {
   );
 }
 
-function truncateText(text: string, maxLength: number): string {
-  if (text.length <= maxLength) {
-    return text;
-  } else {
-    return text.substring(0, maxLength - 3) + '...';
-  }
-}
-
 export function EventCard({ event, index }: { event: ExtendedEvent; index: number }) {
   const date = event.date.toLocaleString('en-US', {
     weekday: 'short',
@@ -72,10 +64,10 @@ export function EventCard({ event, index }: { event: ExtendedEvent; index: numbe
         )}
 
         <div>
-          <div className="font-bold text-white">{event.group.name}</div>
-          <h3 className="font-bold text-white">{event.name}</h3>
-          <p className="text-white">{truncateText(event.description, 50)}</p>
-          <div className="font-bold text-white">{formattedTime}</div>
+          <div className="font-bold text-white line-clamp-1">{event.group.name}</div>
+          <h3 className="font-bold text-white line-clamp-2">{event.name}</h3>
+          <p className="text-white line-clamp-3">{event.description}</p>
+          <div className="font-bold text-white line-clamp-1">{formattedTime}</div>
         </div>
       </div>
     </Link>
