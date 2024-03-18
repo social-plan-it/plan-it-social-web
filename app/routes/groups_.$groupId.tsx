@@ -8,7 +8,8 @@ import { Image } from '~/components/ui/images';
 
 export const loader: LoaderFunction = async ({ params }) => {
   const group = await db.group.findFirstOrThrow({ where: { id: params.groupId } });
-  return json({ group });
+  const user_group = await db.user_Group.findMany({ where: { groupId: group.id } });
+  return json({ group, user_group });
 };
 
 export default function GroupRoute() {
@@ -84,7 +85,9 @@ export default function GroupRoute() {
                     height={32}
                   />
                 </div>
-                <p>315 Members</p>
+                <p>
+                  {data.user_group.length} Member{data.user_group.length > 1 ? 's' : ''}
+                </p>
               </div>
               <div className="bg-white mt-2 text-black rounded-3xl px-4 flex flex-row items-center">
                 <div className="m-2 rounded-full h-8 w-8 justify-center items-center">

@@ -18,12 +18,12 @@ enum Role {
 }
 
 model User {
-  id       String    @id @default(uuid())
-  email    String    @unique
-  name     String
-  password Password?
-  groups   Group[]
-  events   Event[]
+  id         String       @id @default(uuid())
+  email      String       @unique
+  name       String
+  password   Password?
+  events     Event[]
+  User_Group User_Group[]
 }
 
 model Password {
@@ -34,18 +34,20 @@ model Password {
 }
 
 model Group {
-  id          String  @id @default(uuid())
+  id          String       @id @default(uuid())
   name        String
-  description String  @db.Text
+  description String       @db.Text
   imgUrl      String?
   imgAlt      String?
   events      Event[]
-  users       User[]
+  users       User_Group[]
 }
 
 model User_Group {
-  userId  String
-  groupId String
+  userId  String @unique
+  user    User   @relation(fields: [userId], references: [id])
+  groupId String @unique
+  group   Group  @relation(fields: [groupId], references: [id])
   role    Role
 
   @@id([userId, groupId])

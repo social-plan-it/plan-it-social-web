@@ -9,7 +9,7 @@ import { Input, TextArea } from '~/components/ui/forms';
 import { Button } from '~/components/ui/button';
 
 import { H1, H2 } from '~/components/ui/headers';
-import { requireUserSession } from '~/modules/session/session.server';
+import { getUserSession, requireUserSession } from '~/modules/session/session.server';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   return requireUserSession(request);
@@ -24,7 +24,13 @@ export let action: ActionFunction = async ({ request }) => {
     return { formError: `Form not submitted correctly.` };
   }
 
-  await db.group.create({ data: { name, description } });
+  const userSession = await getUserSession(request);
+  if (!userSession || !userSession.userId) {
+    return redirect('/login');
+  }
+
+  const new_group = await db.group.create({ data: { name, description } });
+  await db.user_Group.create({ data: { userId: userSession.userId, groupId: new_group.id, role: 'ADMIN' } });
 
   return redirect(`/groups/`);
 };
