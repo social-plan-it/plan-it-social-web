@@ -51,12 +51,10 @@ export async function getCurrentUser(request: Request) {
 
   if (session) {
     const currentUser = await db.user.findUnique({ where: { id: session.userId } });
-
     if (currentUser) {
       return currentUser;
     }
   }
-
   return null;
 }
 
@@ -73,7 +71,7 @@ export async function logout(request: Request) {
 export async function requireUserSession(request: Request) {
   const session = await getUserSession(request);
   if (!session) {
-    return redirect('/login');
+    throw redirect('/login');
   }
   return session;
 }
