@@ -1,9 +1,10 @@
 name: Publish Storybook to GitHub Pages
 on:
+  workflow_dispatch:
   push:
     branches: [main]
 jobs:
-  test:
+  build-and-deploy:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -20,7 +21,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: '/storybook-static'
+          path: './storybook-static'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
