@@ -7,10 +7,10 @@ interface ExtendedEvent extends Event {
 
 export function EventsSection({ events }: { events: ExtendedEvent[] }) {
   return (
-    <section className="bg-secondary">
-      <div className="sm:ml-24 pt-10 pb-20 space-y-3 ">
-        <h2 className="text-center sm:text-left sm:text-5xl text-4xl font-bold italic text-primary">Upcoming Events</h2>
-        <div className="flex flex-wrap gap-6 justify-center sm:justify-start">
+    <section className="bg-secondary pb-8">
+      <div className="mx-auto py-8 md:max-w-screen-xl">
+        <h2 className="text-center pb-8 sm:text-4xl text-4xl font-bold italic text-primary">Upcoming Events</h2>
+        <div className="flex flex-wrap gap-6 justify-center sm:place-content-center">
           <EventsCards events={events} />
         </div>
       </div>
@@ -46,21 +46,28 @@ export function EventCard({ event, index }: { event: ExtendedEvent; index: numbe
 
   return (
     <Link to={to} unstable_viewTransition>
-      <div className="flex flex-col space-y-3 w-[350px] mx-6 sm:mx-0 max-w-md p-6 rounded-2xl bg-primary">
-        {event.imgUrl && event.imgAlt && (
+      <div className="flex flex-col space-y-3 w-64 md:h-96 md:w-72 mx-6 sm:mx-0 max-w-md p-6 rounded-2xl bg-primary hover:transform hover:scale-105 transition-transform duration-300 hover:border">
+        {event.imgUrl && event.imgAlt ? (
           <img
             className={`${index === 1 && 'sm:order-2 pt-8'}  w-full object-contain box-border`}
             src={event.imgUrl}
             alt={event.imgAlt}
             style={{ viewTransitionName: isTransitioning ? 'image-expand' : '' }}
           />
+        ) : (
+          <img
+            className={`${index === 1 && 'sm:order-2 pt-8'}  w-full object-contain box-border`}
+            src={'https://res.cloudinary.com/dxctpvd8v/image/upload/v1709188683/default-event-photo_bvdslj.png'}
+            alt={'Default animated event zoom meeting'}
+            style={{ viewTransitionName: isTransitioning ? 'image-expand' : '' }}
+          />
         )}
 
         <div>
-          <div className="text-lg sm:text-2xl font-bold text-white">{event.group.name}</div>
-          <h3 className="text-3xl sm:text-4xl font-bold text-white">{event.name}</h3>
-          <p className="text-lg sm:text-2xl text-white">{event.description}</p>
-          <div className="text-lg sm:text-2xl font-bold text-white">{formattedTime}</div>
+          <div className="font-bold text-white line-clamp-1">{event.group.name}</div>
+          <h3 className="font-bold text-white line-clamp-2">{event.name}</h3>
+          <p className="text-white line-clamp-3">{event.description}</p>
+          <div className="font-bold text-white line-clamp-1">{formattedTime}</div>
         </div>
       </div>
     </Link>

@@ -5,11 +5,9 @@ export default function EventsPage() {
   const events = useEvents();
 
   return (
-    <div className="sm:p-16">
-      <h1 className="text-center sm:text-left sm:text-5xl text-4xl font-bold italic text-primary sm:p-8">
-        Upcoming Events
-      </h1>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(22rem,1fr))] gap-y-8">
+    <div className="flex flex-col p-8 justify-center items-center md:items-start m-auto md:max-w-screen-xl ">
+      <h1 className="font-bold italic mb-4 text-primary md:text-3xl">Upcoming Events</h1>
+      <div className="flex flex-col md:flex-row flex-wrap gap-y-4 gap-x-2">
         {events?.map((event, index) => {
           return <EventCard key={event.id} event={event} index={index} />;
         })}

@@ -4,7 +4,7 @@ import { Image } from '../ui/images';
 export default function HeroSection() {
   return (
     <section className="bg-secondary pt-10 pb-40">
-      <div className="mx-auto w-screen max-w-screen-xl flex flex-wrap-reverse space-x-10 justify-center">
+      <div className="mx-auto max-w-screen-xl flex flex-wrap-reverse justify-center">
         <div className="w-4/5 max-w-[45%] min-w-[270px]">
           <h1 className="text-gray-800 font-bold text-4xl pb-8 w-full">Social made easy, memories made forever</h1>
           <p className="text-gray-800 font-bold text-lg pb-8 w-full">
@@ -58,8 +58,15 @@ export default function HeroSection() {
             </div>
           </Form>
         </div>
-        <div className="w-4/5 mb-3 max-w-[600px] flex self-start">
-          <Image className="w-full" src="/imgs/Hero-Image.png" alt="group of people" height={379} width={553} piority />
+        <div className="mx-auto w-4/5 md:w-1/2">
+          <Image
+            className="w-full mx-auto"
+            src="/imgs/Hero-Image.png"
+            alt="group of people"
+            height={379}
+            width={553}
+            piority
+          />
         </div>
       </div>
     </section>
