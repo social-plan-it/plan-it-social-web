@@ -1,4 +1,4 @@
-import type { ActionFunctionArgs } from '@remix-run/node';
+import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { Form } from '@remix-run/react';
 
@@ -7,6 +7,11 @@ import { Card } from '~/components/ui/containers';
 import { Input, TextArea } from '~/components/ui/forms';
 import { Button } from '~/components/ui/button';
 import { H1 } from '~/components/ui/headers';
+import { requireUserSession } from '~/modules/session/session.server';
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  return requireUserSession(request);
+}
 
 export async function action({ request, params }: ActionFunctionArgs) {
   const form = await request.formData();

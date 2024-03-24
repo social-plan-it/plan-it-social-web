@@ -69,3 +69,11 @@ export async function logout(request: Request) {
     },
   });
 }
+
+export async function requireUserSession(request: Request) {
+  const session = await getUserSession(request);
+  if (!session) {
+    throw redirect('/login');
+  }
+  return session;
+}
