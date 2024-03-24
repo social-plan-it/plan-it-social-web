@@ -1,8 +1,21 @@
 import type { ButtonHTMLAttributes } from 'react';
 
+export const variants = {
+  primary: 'primary',
+  secondary: 'secondary',
+  warm: 'warm',
+  outlined: 'outlined',
+  tertiary: 'tertiary',
+} as const;
+
+export const buttonStyles = {
+  rounded: 'rounded',
+  fullyRounded: 'fullyRounded',
+} as const;
+
 type BaseButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant: 'primary' | 'secondary' | 'warm' | 'outlined';
-  buttonStyle: 'rounded' | 'fullyRounded';
+  variant: (typeof variants)[keyof typeof variants];
+  buttonStyle: (typeof buttonStyles)[keyof typeof buttonStyles];
   children: React.ReactNode;
   disabled?: boolean;
 };
