@@ -30,9 +30,6 @@ export async function loader({ params }: LoaderFunctionArgs) {
 export async function action({ params, request }: ActionFunctionArgs) {
   const userSession = await requireUserSession(request);
 
-  if (!('userId' in userSession)) {
-    throw new Error('Unable to locate userId, please try logging in again.');
-  }
   const event = await db.event.update({
     where: { id: params.eventId },
     data: { users: { connect: { id: userSession.userId } } },
