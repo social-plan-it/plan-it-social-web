@@ -7,7 +7,7 @@ const meta: Meta<typeof Image> = {
   component: Image,
   tags: ['autodocs'],
   argTypes: {
-    piority: {
+    priority: {
       control: { type: 'boolean' },
     },
   },
@@ -22,6 +22,6 @@ export const ShortText: Story = {
     src: 'https://via.placeholder.com/100',
     width: 100,
     height: 100,
-    piority: true,
+    priority: true,
   },
 };
