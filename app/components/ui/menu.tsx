@@ -14,10 +14,10 @@ export function TopNavUserMenu() {
       }
     >
       <>
-        <Menu.Item as="div">
+        <Menu.Item>
           <Link to="/settings">Settings</Link>
         </Menu.Item>
-        <Menu.Item as="div">
+        <Menu.Item>
           <LogoutButton />
         </Menu.Item>
       </>
@@ -27,7 +27,7 @@ export function TopNavUserMenu() {
 
 export function StyledMenu({ button, children }: { button: any; children: ReactElement }) {
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu>
       <div>
         <Menu.Button>{button}</Menu.Button>
       </div>
