@@ -1,17 +1,10 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const config = require('./.prettierrc');
+const config = require('./.prettierrc.cjs');
 
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
   parser: '@typescript-eslint/parser',
-  extends: [
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-    'prettier',
-    '@remix-run/eslint-config',
-    '@remix-run/eslint-config/node',
-  ],
+  extends: ['plugin:react/recommended', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended', 'prettier', '@remix-run/eslint-config', '@remix-run/eslint-config/node', 'plugin:storybook/recommended'],
   plugins: ['@typescript-eslint', 'html', 'jsx-a11y'],
   parserOptions: {
     ecmaVersion: 2020,

@@ -18,12 +18,14 @@ enum Role {
 }
 
 model User {
-  id         String       @id @default(uuid())
-  email      String       @unique
-  name       String
-  password   Password?
-  events     Event[]
-  User_Group User_Group[]
+  id               String          @id @default(uuid())
+  email            String          @unique
+  name             String
+  password         Password?
+  groups           Group[]
+  events           Event[]
+  authenticators   Authenticator[]
+  currentChallenge String?
 }
 
 model Password {
@@ -31,6 +33,19 @@ model Password {
   userId String @unique
   user   User   @relation(fields: [userId], references: [id])
   hash   String
+}
+
+model Authenticator {
+  id                   String  @id @default(uuid())
+  userId               String
+  user                 User    @relation(fields: [userId], references: [id])
+  credentialID         String  @db.Text
+  credentialPublicKey  Bytes
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+
+  @@index([userId])
 }
 
 model Group {
