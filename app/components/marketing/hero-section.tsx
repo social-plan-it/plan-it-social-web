@@ -58,14 +58,14 @@ export default function HeroSection() {
             </div>
           </Form>
         </div>
-        <div className="mx-auto w-4/5 md:w-1/2">
+        <div className="w-4/5 mb-3 max-w-[600px] flex self-start">
           <Image
-            className="w-full mx-auto"
+            className="w-full"
             src="/imgs/Hero-Image.png"
             alt="group of people"
             height={379}
             width={553}
-            piority
+            priority
           />
         </div>
       </div>
