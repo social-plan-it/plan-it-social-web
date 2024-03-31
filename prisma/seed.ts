@@ -21,6 +21,7 @@ function createRandomUserAndPW(): UserAndPWProps {
       userId: userId,
       hash: faker.string.uuid(),
     },
+    currentChallenge: null,
   };
 }
 

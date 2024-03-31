@@ -23,6 +23,8 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           PUBLIC_GOOGLE_CLIENT_ID: ${{ secrets.PUBLIC_GOOGLE_CLIENT_ID }}
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+          WEBAUTHN_RELYING_PARTY_ID: ${{ secrets.WEBAUTHN_RELYING_PARTY_ID}}
+          WEBAUTHN_ORIGIN: ${{ secrets.WEBAUTHN_ORIGIN}}
       - uses: actions/upload-artifact@v3
         if: always()
         with:

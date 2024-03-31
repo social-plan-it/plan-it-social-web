@@ -1,6 +1,11 @@
 import type { LoaderFunctionArgs, ActionFunctionArgs } from '@remix-run/node';
+import type { FormEvent } from 'react';
+
 import { redirect } from '@remix-run/node';
-import { Form, Link, useActionData, useNavigation } from '@remix-run/react';
+import { Form, Link, useActionData, useNavigation, useSubmit } from '@remix-run/react';
+import { startAuthentication } from '@simplewebauthn/browser';
+import { useState } from 'react';
+import { Button } from '~/components/ui/button';
 import { Card } from '~/components/ui/containers';
 import { Input } from '~/components/ui/forms';
 import { matchesHash } from '~/modules/database/crypto.server';
@@ -9,12 +14,34 @@ import { badRequest } from '~/modules/response/response.server';
 import { SignInWithGoogleButton } from '~/modules/session/buttons';
 import { verifyGoogleToken } from '~/modules/session/google-auth.server';
 import { createUserSession, getUserSession } from '~/modules/session/session.server';
+import { verifyPasskeyAuthenticationResponse } from '~/modules/session/webauthn.server';
 
 export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
   const email = form.get('email');
   const password = form.get('password');
   const credential = form.get('credential');
+  const authenticationResponseJson = form.get('authenticationResponseJson');
+
+  if (typeof authenticationResponseJson === 'string' && typeof email === 'string') {
+    const user = await db.user.findUnique({ where: { email }, include: { authenticators: true } });
+    if (!user) {
+      return badRequest({ passkeyError: 'No passkeys exists for this account. Please sign in with password instead.' });
+    }
+
+    try {
+      const authenticationResponse = JSON.parse(authenticationResponseJson);
+      const { verified } = await verifyPasskeyAuthenticationResponse(user, authenticationResponse);
+      if (verified) {
+        const headers = await createUserSession(user.id);
+        return redirect('/', { headers });
+      }
+
+      return badRequest({ passkeyError: 'Sign in with passkey failed.' });
+    } catch {
+      return badRequest({ passkeyError: 'Sign in with passkey failed.' });
+    }
+  }
 
   if (typeof credential === 'string') {
     try {
@@ -80,6 +107,41 @@ export default function Component() {
   const actionData = useActionData<typeof action>();
   const navigation = useNavigation();
   const isPending = navigation.state === 'submitting' || navigation.state === 'loading';
+
+  const submit = useSubmit();
+
+  const [email, setEmail] = useState('');
+  const [processingPasskey, setProcessingPasskey] = useState(false);
+  const [passkeyError, setPasskeyError] = useState('');
+
+  async function handleSignInWithPasskey(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setProcessingPasskey(true);
+    setPasskeyError('');
+
+    try {
+      const resp = await fetch('/generate-authentication-options', {
+        method: 'POST',
+        body: JSON.stringify({ email }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const options = await resp.json();
+      if (!options) {
+        setPasskeyError('No passkeys exists for this account. Please sign in with password instead.');
+        return;
+      }
+
+      const authenticationResponse = await startAuthentication(options);
+      submit({ authenticationResponseJson: JSON.stringify(authenticationResponse), email }, { method: 'POST' });
+    } catch {
+      setPasskeyError('Failed to sign in with passkey.');
+    } finally {
+      setProcessingPasskey(false);
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-center">
       <div className="max-w-[400px] w-full">
@@ -108,7 +170,7 @@ export default function Component() {
             <button type="submit" disabled={isPending}>
               {isPending ? 'Logging in...' : 'Log In'}
             </button>
-            {actionData && actionData.message && <p className="text-red-500">{actionData.message}</p>}
+            {actionData && 'message' in actionData && <p className="text-red-500">{actionData.message}</p>}
 
             <SignInWithGoogleButton />
 
@@ -116,6 +178,30 @@ export default function Component() {
               New here? <Link to="/signup">Sign up</Link>
             </p>
           </Form>
+
+          <div className="flex flex-col items-center gap-3 my-4">
+            <p>or</p>
+            <form onSubmit={handleSignInWithPasskey} method="post" className="flex flex-col gap-3 items-center">
+              <Input
+                name="email"
+                type="email"
+                autoComplete="email"
+                placeholder="Email"
+                label="Email"
+                required
+                showLabel={false}
+                centerText
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
+              <Button variant="primary" buttonStyle="fullyRounded" disabled={processingPasskey || isPending}>
+                {processingPasskey || isPending ? 'Signing in...' : 'Sign in with Passkey'}
+              </Button>
+
+              {passkeyError && <p className="text-red-500">{passkeyError}</p>}
+              {actionData && 'passkeyError' in actionData && <p className="text-red-500">{actionData.passkeyError}</p>}
+            </form>
+          </div>
         </Card>
       </div>
     </div>
