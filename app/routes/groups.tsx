@@ -1,6 +1,4 @@
 import { Form, Link, useLoaderData } from '@remix-run/react';
-import { useGroups } from '~/hooks/useGroups';
-import { Link } from '@remix-run/react';
 import { Image } from '~/components/ui/images';
 import { LinkButton } from '~/components/ui/forms';
 import { db } from '~/modules/database/db.server';
