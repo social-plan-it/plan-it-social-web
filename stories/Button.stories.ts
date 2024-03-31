@@ -3,7 +3,7 @@ import { Button, buttonStyles, variants } from '../app/components/ui/button';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: 'ui/Button',
+  title: 'Example/Button',
   component: Button,
   tags: ['autodocs'],
   argTypes: {
@@ -16,10 +16,10 @@ const meta = {
       control: { type: 'radio' },
     },
   },
-};
+} satisfies Meta<typeof Button>;
 
 export default meta;
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const PrimaryRounded: Story = {
