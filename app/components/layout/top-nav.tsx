@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Form, Link, useNavigation } from '@remix-run/react';
 import { useCurrentUser } from '~/hooks/useCurrentUser';
+import { TopNavUserMenu } from '~/components/ui/menu';
 
 export function TopNav() {
   const currentUser = useCurrentUser();
@@ -40,7 +41,9 @@ export function TopNav() {
               </Link>
             </ul>
             {currentUser ? (
-              <LogoutButton className="text-2xl py-1 hover:py-0" />
+              <div>
+                <TopNavUserMenu />
+              </div>
             ) : (
               <ul className="flex">
                 <Link to="/login">
@@ -86,7 +89,12 @@ export function TopNav() {
             Groups
           </Link>
           {currentUser ? (
-            <LogoutButton className="w-full text-left text-white py-2 px-4 hover:bg-gray-700" />
+            <>
+              <Link className="block text-white py-2 px-4 hover:bg-gray-700" to="/settings">
+                Settings
+              </Link>
+              <LogoutButton className="w-full text-left text-white py-2 px-4 hover:bg-gray-700" />
+            </>
           ) : (
             <>
               <Link className="block text-white py-2 px-4 hover:bg-gray-700" to="/login">
@@ -103,7 +111,7 @@ export function TopNav() {
   );
 }
 
-function LogoutButton({ className }: { className?: string }) {
+export function LogoutButton({ className }: { className?: string }) {
   const navigation = useNavigation();
   const formAction = '/logout';
   const isPending =
