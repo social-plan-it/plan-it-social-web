@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Form, Link, useNavigation } from '@remix-run/react';
 import { useCurrentUser } from '~/hooks/useCurrentUser';
-import { TopNavUserMenu } from '~/components/ui/menu';
+import { StyledMenu } from '~/components/ui/menu';
+import { UserCircleIcon } from '../ui/icons';
+import { Menu } from '@headlessui/react';
 
 export function TopNav() {
   const currentUser = useCurrentUser();
@@ -41,9 +43,7 @@ export function TopNav() {
               </Link>
             </ul>
             {currentUser ? (
-              <div>
-                <TopNavUserMenu />
-              </div>
+              <TopNavUserMenu />
             ) : (
               <ul className="flex">
                 <Link to="/login">
@@ -123,5 +123,28 @@ export function LogoutButton({ className }: { className?: string }) {
         {isPending ? 'Logging out...' : 'Log Out'}
       </button>
     </Form>
+  );
+}
+
+export function TopNavUserMenu() {
+  return (
+    <div>
+      <StyledMenu
+        button={
+          <div className="w-8">
+            <UserCircleIcon />
+          </div>
+        }
+      >
+        <>
+          <Menu.Item>
+            <Link to="/settings">Settings</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <LogoutButton />
+          </Menu.Item>
+        </>
+      </StyledMenu>
+    </div>
   );
 }

@@ -1,29 +1,5 @@
 import { Menu, Transition } from '@headlessui/react';
 import { type ReactElement } from 'react';
-import { UserCircleIcon } from '~/components/ui/icons';
-import { Link } from '~/components/ui/links';
-import { LogoutButton } from '~/components/layout/top-nav';
-
-export function TopNavUserMenu() {
-  return (
-    <StyledMenu
-      button={
-        <div className="w-8">
-          <UserCircleIcon />
-        </div>
-      }
-    >
-      <>
-        <Menu.Item>
-          <Link to="/settings">Settings</Link>
-        </Menu.Item>
-        <Menu.Item>
-          <LogoutButton />
-        </Menu.Item>
-      </>
-    </StyledMenu>
-  );
-}
 
 export function StyledMenu({ button, children }: { button: any; children: ReactElement }) {
   return (
