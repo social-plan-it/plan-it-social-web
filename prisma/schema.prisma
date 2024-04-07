@@ -57,6 +57,7 @@ model User_Group {
   group   Group  @relation(fields: [groupId], references: [id])
 
   @@id([userId, groupId])
+  @@index([groupId, userId])
 }
 
 model Event {
@@ -72,24 +73,6 @@ model Event {
   users       User[]
 
   @@index([groupId], map: "groupId")
-}
-
-model EventToUser {
-  A String
-  B String
-
-  @@unique([A, B], map: "_EventToUser_AB_unique")
-  @@index([B], map: "_EventToUser_B_index")
-  @@map("_EventToUser")
-}
-
-model GroupToUser {
-  A String
-  B String
-
-  @@unique([A, B], map: "_GroupToUser_AB_unique")
-  @@index([B], map: "_GroupToUser_B_index")
-  @@map("_GroupToUser")
 }
 
 enum Role {
