@@ -9,7 +9,7 @@ import { eventsDataPatcher } from '~/modules/events/event';
 
 export const loader: LoaderFunction = async ({ params }) => {
   const group = await db.group.findFirstOrThrow({ where: { id: params.groupId } });
-  const user_groups = await db.user_Group.findMany({ where: { groupId: group.id } });
+  const user_groups = await db.userGroup.findMany({ where: { groupId: group.id } });
   return json({ group, user_groups });
 };
 

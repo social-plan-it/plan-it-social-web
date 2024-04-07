@@ -16,7 +16,7 @@ model User {
   password         Password?
   events           Event[]
   authenticators   Authenticator[]
-  user_groups      User_Group[]
+  user_groups      UserGroup[]
 }
 
 model Password {
@@ -46,10 +46,10 @@ model Group {
   imgAlt      String?
   imgUrl      String?
   events      Event[]
-  user_groups User_Group[]
+  user_groups UserGroup[]
 }
 
-model User_Group {
+model UserGroup {
   userId  String
   groupId String
   role    Role

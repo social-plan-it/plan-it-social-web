@@ -30,7 +30,7 @@ export let action: ActionFunction = async ({ request }) => {
   }
 
   const new_group = await db.group.create({ data: { name, description } });
-  await db.user_Group.create({ data: { userId: userSession.userId, groupId: new_group.id, role: 'ADMIN' } });
+  await db.userGroup.create({ data: { userId: userSession.userId, groupId: new_group.id, role: 'ADMIN' } });
 
   return redirect(`/groups/`);
 };
