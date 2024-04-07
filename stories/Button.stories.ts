@@ -1,8 +1,8 @@
-import type { StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Button, buttonStyles, variants } from '../app/components/ui/button';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
-const meta = {
+const meta: Meta<typeof Button> = {
   title: 'ui/Button',
   component: Button,
   tags: ['autodocs'],
