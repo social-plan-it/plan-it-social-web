@@ -1,17 +1,8 @@
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  isRouteErrorResponse,
-  useRouteError,
-} from '@remix-run/react';
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, isRouteErrorResponse, useRouteError } from '@remix-run/react';
 import type { LinksFunction, LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import stylesheet from './styles/tailwind.css';
-import faviconAssetUrl from './imgs/favicon.svg';
+import stylesheet from './styles/tailwind.css?url';
+import faviconAssetUrl from './imgs/favicon.svg?url';
 import { TopNav } from '~/components/layout/top-nav';
 import Footer from './components/layout/footer';
 import { ErrorMessage } from '~/components/ui/error-message';
@@ -22,10 +13,10 @@ export const meta: MetaFunction = ({ error }: any) => {
   const title = !error
     ? 'Plan It Social'
     : isRouteErrorResponse(error)
-    ? 'An error occured'
-    : error instanceof Error
-    ? 'Something went wrong'
-    : 'Unknown error';
+      ? 'An error occured'
+      : error instanceof Error
+        ? 'Something went wrong'
+        : 'Unknown error';
 
   return [{ title: title }];
 };
@@ -77,7 +68,6 @@ function Shell({ children }: { children: React.ReactNode }) {
         <main id="main">{children}</main>
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
         <Footer />
       </body>
     </html>
