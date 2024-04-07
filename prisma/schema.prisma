@@ -18,8 +18,8 @@ enum Role {
 }
 
 model User {
-  id          String            @id @default(uuid())
-  email       String            @unique
+  id          String           @id @default(uuid())
+  email       String           @unique
   name        String
   password    Password?
   groups      Group[]
@@ -35,9 +35,9 @@ model Password {
 }
 
 model Group {
-  id          String             @id @default(uuid())
+  id          String            @id @default(uuid())
   name        String
-  description String             @db.Text
+  description String            @db.Text
   imgUrl      String?
   imgAlt      String?
   events      Event[]
@@ -53,18 +53,23 @@ enum SocalLinkType {
   DISCORD
   WEBSITE
 }
+
 model GroupSocialLink {
-  groupId String @id @unique
-  group   Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  groupId String
+  group   Group         @relation(fields: [groupId], references: [id], onDelete: Cascade)
   type    SocalLinkType
   url     String
+
+  @@id([groupId, type])
 }
 
 model UserSocialLink {
-  userId String @id @unique
-  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  User   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   type   SocalLinkType
   url    String
+
+  @@id([userId, type])
 }
 
 model User_Group {
