@@ -76,6 +76,7 @@ const groups = [
 ];
 
 async function seed() {
+  console.log('Seeding data...');
   try {
     for (const user of users) {
       await db.user.create({
@@ -112,4 +113,4 @@ async function seed() {
   }
 }
 
-seed();
+await seed();
