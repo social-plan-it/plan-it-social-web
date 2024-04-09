@@ -1,8 +1,9 @@
-import type { LoaderFunctionArgs } from '@remix-run/node';
-import { useParams, useLoaderData, Link } from '@remix-run/react';
+import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
+import { useParams, useLoaderData, Link, Form } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
 import { json } from '@remix-run/node';
 import { eventDataPatcher } from '~/modules/events/event';
+import { requireUserSession } from '~/modules/session/session.server';
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const event = await db.event.findFirst({
@@ -23,6 +24,17 @@ export async function loader({ params }: LoaderFunctionArgs) {
       statusText: 'Event ID Not Found',
     });
   }
+  return json({ event });
+}
+
+export async function action({ params, request }: ActionFunctionArgs) {
+  const userSession = await requireUserSession(request);
+
+  const event = await db.event.update({
+    where: { id: params.eventId },
+    data: { users: { connect: { id: userSession.userId } } },
+  });
+
   return json({ event });
 }
 
@@ -73,9 +85,14 @@ export default function EventRoute() {
             return <li key={user.id}>{user.name}</li>;
           })}
         </ul>
-        <button className="w-full md:px-[30px] md:py-[15px] md:w-max bg-warm rounded-full py-4 text-white">
-          Join Event
-        </button>
+        <Form method="post">
+          <button
+            className="w-full md:px-[30px] md:py-[15px] md:w-max bg-warm rounded-full py-4 text-white"
+            type="submit"
+          >
+            Join Event
+          </button>
+        </Form>
       </div>
     </>
   );
