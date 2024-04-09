@@ -47,7 +47,6 @@ model Group {
   imgAlt      String?
   imgUrl      String?
   events      Event[]
-  users       User[]
   socalLinks  GroupSocialLink[]
   user_groups UserGroup[]
 }
