@@ -8,13 +8,13 @@ import { Image } from '~/components/ui/images';
 import { eventsDataPatcher } from '~/modules/events/event';
 
 export const loader: LoaderFunction = async ({ params }) => {
-  const group = await db.group.findFirstOrThrow({ where: { id: params.groupId }, include: { events: true } });
-  return json({ group });
+  const group = await db.group.findFirstOrThrow({ where: { id: params.groupId } });
+  const user_groups = await db.userGroup.findMany({ where: { groupId: group.id } });
+  return json({ group, user_groups });
 };
 
 export default function GroupRoute() {
-  const rawData = useLoaderData<typeof loader>();
-  const group = rawData.group;
+  const { group, user_groups } = useLoaderData<typeof loader>();
   const events = eventsDataPatcher(group.events);
   return (
     <div className="bg-primary text-white flex flex-col items-center">
@@ -85,7 +85,9 @@ export default function GroupRoute() {
                     height={32}
                   />
                 </div>
-                <p>315 Members</p>
+                <p>
+                  {user_groups.length} Member{user_groups.length > 1 ? 's' : ''}
+                </p>
               </div>
               <div className="bg-white mt-2 text-black rounded-3xl px-4 flex flex-row items-center">
                 <div className="m-2 rounded-full h-8 w-8 justify-center items-center">
