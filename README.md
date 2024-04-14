@@ -41,6 +41,7 @@ mv .env.example .env
 ```
 
 Then, you'll need to fill in the `.env` file with the appropriate values.
+Come to the Discord server or meetup for help with this step.
 
 
 Afterwards, start the Remix development server like so:
