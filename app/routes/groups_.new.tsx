@@ -1,4 +1,4 @@
-import type { ActionFunction } from '@remix-run/node';
+import type { ActionFunction, LoaderFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { Form } from '@remix-run/react';
 
@@ -9,6 +9,11 @@ import { Input, TextArea } from '~/components/ui/forms';
 import { Button } from '~/components/ui/button';
 
 import { H1, H2 } from '~/components/ui/headers';
+import { getUserSession, requireUserSession } from '~/modules/session/session.server';
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  return requireUserSession(request);
+}
 
 export let action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
@@ -19,7 +24,13 @@ export let action: ActionFunction = async ({ request }) => {
     return { formError: `Form not submitted correctly.` };
   }
 
-  await db.group.create({ data: { name, description } });
+  const userSession = await getUserSession(request);
+  if (!userSession || !userSession.userId) {
+    return redirect('/login');
+  }
+
+  const new_group = await db.group.create({ data: { name, description } });
+  await db.userGroup.create({ data: { userId: userSession.userId, groupId: new_group.id, role: 'ADMIN' } });
 
   return redirect(`/groups/`);
 };

@@ -26,7 +26,7 @@
     "@remix-run/react": "^2.8.1",
     "@simplewebauthn/browser": "^9.0.1",
     "@simplewebauthn/server": "^9.0.3",
-    "@unpic/react": "^0.1.10",
+    "@unpic/react": "^0.1.11",
     "bcryptjs": "^2.4.3",
     "clsx": "^2.0.0",
     "google-auth-library": "^9.0.0",
