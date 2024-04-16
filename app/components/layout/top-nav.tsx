@@ -75,7 +75,7 @@ export function TopNav() {
         </button>
       </div>
       {isMenuOpen && (
-        <div className="mt-4">
+        <div className="mt-4 md:hidden">
           <Link className="block text-white py-2 px-4 hover:bg-gray-700" to="/">
             Home
           </Link>

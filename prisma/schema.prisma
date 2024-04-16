@@ -1,69 +1,64 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider     = "mysql"
+  provider     = "postgresql"
   url          = env("DATABASE_URL")
+  directUrl    = env("DIRECT_URL")
   relationMode = "prisma"
-}
-
-enum Role {
-  ADMIN
-  USER
-  APPLICANT
 }
 
 model User {
   id               String          @id @default(uuid())
   email            String          @unique
   name             String
+  currentChallenge String?
   password         Password?
-  groups           Group[]
   events           Event[]
   authenticators   Authenticator[]
-  currentChallenge String?
+  user_groups      UserGroup[]
 }
 
 model Password {
   id     String @id @default(uuid())
   userId String @unique
-  user   User   @relation(fields: [userId], references: [id])
   hash   String
+  user   User   @relation(fields: [userId], references: [id])
 }
 
 model Authenticator {
   id                   String  @id @default(uuid())
   userId               String
-  user                 User    @relation(fields: [userId], references: [id])
   credentialID         String  @db.Text
   credentialPublicKey  Bytes
   counter              Int
   credentialDeviceType String
   credentialBackedUp   Boolean
+  user                 User    @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
 
 model Group {
-  id          String  @id @default(uuid())
+  id          String       @id @default(uuid())
   name        String
-  description String  @db.Text
-  imgUrl      String?
+  description String       @db.Text
   imgAlt      String?
+  imgUrl      String?
   events      Event[]
-  users       User[]
+  user_groups UserGroup[]
 }
 
-model User_Group {
+model UserGroup {
   userId  String
   groupId String
   role    Role
+  user    User   @relation(fields: [userId], references: [id])
+  group   Group  @relation(fields: [groupId], references: [id])
 
   @@id([userId, groupId])
+  @@index([groupId, userId])
 }
 
 model Event {
@@ -71,12 +66,18 @@ model Event {
   name        String
   date        DateTime
   description String   @db.Text
-  imgUrl      String?
+  groupId     String
   imgAlt      String?
+  imgUrl      String?
   location    String?
   group       Group    @relation(fields: [groupId], references: [id])
-  groupId     String
   users       User[]
 
-  @@index([groupId], name: "groupId")
+  @@index([groupId], map: "groupId")
+}
+
+enum Role {
+  ADMIN
+  USER
+  APPLICANT
 }
