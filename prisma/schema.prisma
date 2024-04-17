@@ -10,12 +10,13 @@ datasource db {
 }
 
 model User {
-  id               String          @id @default(uuid())
-  email            String          @unique
+  id               String           @id @default(uuid())
+  email            String           @unique
   name             String
   currentChallenge String?
   password         Password?
   events           Event[]
+  socialLinks      UserSocialLink[]
   authenticators   Authenticator[]
   user_groups      UserGroup[]
 }
@@ -41,13 +42,41 @@ model Authenticator {
 }
 
 model Group {
-  id          String       @id @default(uuid())
+  id          String            @id @default(uuid())
   name        String
-  description String       @db.Text
+  description String            @db.Text
   imgAlt      String?
   imgUrl      String?
   events      Event[]
+  socalLinks  GroupSocialLink[]
   user_groups UserGroup[]
+}
+
+enum SocalLinkType {
+  FACEBOOK
+  TWITTER
+  INSTAGRAM
+  LINKEDIN
+  DISCORD
+  WEBSITE
+}
+
+model GroupSocialLink {
+  groupId String
+  group   Group         @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  type    SocalLinkType
+  url     String
+
+  @@id([groupId, type])
+}
+
+model UserSocialLink {
+  userId String
+  User   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type   SocalLinkType
+  url    String
+
+  @@id([userId, type])
 }
 
 model UserGroup {
