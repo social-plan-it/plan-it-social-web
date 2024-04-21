@@ -15,7 +15,7 @@
     "build:remix": "remix vite:build",
     "build:db": "npx prisma generate",
     "update:db": "npx prisma db push",
-    "seed:db": "ts-node --require tsconfig-paths/register prisma/seed.ts",
+    "seed:db": "npx tsx prisma/seed.ts",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

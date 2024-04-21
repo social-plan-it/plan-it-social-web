@@ -5,7 +5,7 @@ interface FullEvent extends Event {
   users?: User[];
 }
 
-type RawEvent = Omit<Event, 'date'> & { date: string };
+type RawEvent = Omit<FullEvent, 'date'> & { date: string };
 
 export function eventDataPatcher(event: RawEvent): FullEvent {
   return {
