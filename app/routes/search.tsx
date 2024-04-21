@@ -2,7 +2,6 @@ import { Form, useLoaderData } from '@remix-run/react';
 import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { db } from '~/modules/database/db.server';
 import { EventsCards } from '~/components/marketing/events-section';
-import type { Event } from '@prisma/client';
 import { eventsDataPatcher } from '~/modules/events/event';
 
 export const meta: MetaFunction = () => {
