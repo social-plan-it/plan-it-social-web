@@ -1,11 +1,7 @@
-import type { Event, Group } from '@prisma/client';
 import { Link, unstable_useViewTransitionState } from '@remix-run/react';
+import { type FullEvent } from '~/modules/events/event';
 
-interface ExtendedEvent extends Event {
-  group: Group;
-}
-
-export function EventsSection({ events }: { events: ExtendedEvent[] }) {
+export function EventsSection({ events }: { events: FullEvent[] }) {
   return (
     <section className="bg-secondary pb-8">
       <div className="mx-auto py-8 md:max-w-screen-xl">
@@ -18,7 +14,7 @@ export function EventsSection({ events }: { events: ExtendedEvent[] }) {
   );
 }
 
-export function EventsCards({ events }: { events: ExtendedEvent[] }) {
+export function EventsCards({ events }: { events: FullEvent[] }) {
   return (
     <>
       {events.map((event, index) => {
@@ -28,7 +24,7 @@ export function EventsCards({ events }: { events: ExtendedEvent[] }) {
   );
 }
 
-export function EventCard({ event, index }: { event: ExtendedEvent; index: number }) {
+export function EventCard({ event, index }: { event: FullEvent; index: number }) {
   const date = event.date.toLocaleString('en-US', {
     weekday: 'short',
     month: 'short',
@@ -64,7 +60,7 @@ export function EventCard({ event, index }: { event: ExtendedEvent; index: numbe
         )}
 
         <div>
-          <div className="font-bold text-white line-clamp-1">{event.group.name}</div>
+          <div className="font-bold text-white line-clamp-1">{event.group?.name}</div>
           <h3 className="font-bold text-white line-clamp-2">{event.name}</h3>
           <p className="text-white line-clamp-3">{event.description}</p>
           <div className="font-bold text-white line-clamp-1">{formattedTime}</div>
