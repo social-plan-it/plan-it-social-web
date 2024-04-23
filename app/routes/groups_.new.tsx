@@ -1,6 +1,7 @@
-import type { ActionFunction, LoaderFunctionArgs } from '@remix-run/node';
+import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
-import { Form } from '@remix-run/react';
+import { Form, useActionData } from '@remix-run/react';
+import { createClient } from '@supabase/supabase-js';
 
 import { db } from '~/modules/database/db.server';
 
@@ -9,33 +10,51 @@ import { Input, TextArea } from '~/components/ui/forms';
 import { Button } from '~/components/ui/button';
 
 import { H1, H2 } from '~/components/ui/headers';
-import { getUserSession, requireUserSession } from '~/modules/session/session.server';
+import { requireUserSession } from '~/modules/session/session.server';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   return requireUserSession(request);
 }
 
-export let action: ActionFunction = async ({ request }) => {
+export async function action({ request }: ActionFunctionArgs) {
+  const userSession = await requireUserSession(request);
   const form = await request.formData();
   const name = form.get('groupName');
   const description = form.get('description');
+  const groupImage = form.get('groupImage');
 
   if (typeof name !== 'string' || typeof description !== 'string') {
-    return { formError: `Form not submitted correctly.` };
+    return { error: { message: `Form not submitted correctly.` } };
   }
 
-  const userSession = await getUserSession(request);
-  if (!userSession || !userSession.userId) {
-    return redirect('/login');
+  let groupImageUrl = null;
+  if (groupImage && groupImage instanceof File && groupImage.name) {
+    // Create a single supabase client for interacting with your database
+    if (!process.env.SUPABASE_SECRET) throw new Error('SUPABASE_SECRET is not defined');
+    const supabase = createClient('https://fzzehiiwadkmbvpouotf.supabase.co', process.env.SUPABASE_SECRET);
+    const uuid = crypto.randomUUID();
+    const { data, error } = await supabase.storage
+      .from('group-cover-images')
+      .upload(`${uuid}-${groupImage.name}`, groupImage, {
+        cacheControl: '3600',
+        upsert: false,
+      });
+    if (error) {
+      return { error: { message: `Error uploading image: ${error.message}` } };
+    }
+    groupImageUrl = `https://fzzehiiwadkmbvpouotf.supabase.co/storage/v1/object/public/group-cover-images/${data.path}`;
   }
 
-  const new_group = await db.group.create({ data: { name, description } });
+  // TODO generate alt text or prompt user for alt text
+  const new_group = await db.group.create({
+    data: { name, description, imgUrl: groupImageUrl, imgAlt: 'Group image' },
+  });
   await db.userGroup.create({ data: { userId: userSession.userId, groupId: new_group.id, role: 'ADMIN' } });
-
   return redirect(`/groups/`);
-};
+}
 
 export default function GroupNew() {
+  const actionData = useActionData<typeof action>();
   return (
     <div className="grow py-20 lg:py-40 bg-secondary w-full flex flex-col items-center justify-center">
       <div className="flex w-full items-center justify-center flex-col">
@@ -43,7 +62,7 @@ export default function GroupNew() {
           <H1>Create New Group</H1>
           <H2>Your Community Starts Here</H2>
           <Card>
-            <Form method="post">
+            <Form method="post" encType="multipart/form-data">
               <div className="flex pt-4 w-full">
                 <div className="w-1/2">
                   <div className="w-1/2 pb-4">
@@ -73,13 +92,14 @@ export default function GroupNew() {
               <div className="flex-col pb-4">
                 <TextArea label="Description:" name="description" rows={5} required />
               </div>
+              <div className="flex-row pb-4">
+                <Input label="Attach Image" name="groupImage" type="file" />
+              </div>
               <div className="flex-row justify-end">
-                <div>
-                  <label>Attach Image</label>
-                </div>
                 <Button variant="warm" buttonStyle="fullyRounded">
                   Create a group
                 </Button>
+                {actionData && <div>{actionData.error.message}</div>}
               </div>
             </Form>
           </Card>
