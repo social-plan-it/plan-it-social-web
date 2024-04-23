@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import type { LoaderFunction } from '@remix-run/node';
 import { useParams, useLoaderData } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
@@ -17,7 +16,6 @@ export const loader: LoaderFunction = async ({ params }) => {
 export default function GroupRoute() {
   const { group, user_groups } = useLoaderData<typeof loader>();
   const events = eventsDataPatcher(group.events);
-
   return (
     <div className="bg-primary text-white flex flex-col items-center">
       <div className="md:flex md:flex-col md:max-w-screen-xl">

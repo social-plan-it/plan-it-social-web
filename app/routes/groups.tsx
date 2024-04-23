@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Form, Link, useLoaderData } from '@remix-run/react';
 import { Image } from '~/components/ui/images';
 import { LinkButton } from '~/components/ui/forms';
@@ -24,7 +23,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export default function Group() {
   const { groups } = useLoaderData<typeof loader>();
   console.log('groups', groups);
-
   return (
     <div className="bg-primary">
       <div className="m-auto max-w-screen-xl">
