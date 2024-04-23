@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Form, Link, useLoaderData } from '@remix-run/react';
 import { Image } from '~/components/ui/images';
 import { LinkButton } from '~/components/ui/forms';
@@ -23,6 +24,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export default function Group() {
   const { groups } = useLoaderData<typeof loader>();
   console.log('groups', groups);
+
   return (
     <div className="bg-primary">
       <div className="m-auto max-w-screen-xl">
@@ -69,9 +71,17 @@ export default function Group() {
                     <div className="w-52 h-52">
                       <Image
                         className="bg-contain bg-center flex self-start rounded-full"
-                        src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg"
+                        src={
+                          group.imgUrl
+                            ? group.imgUrl
+                            : 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg'
+                        }
                         alt="Group meeting around an office table"
-                        background="https://res.cloudinary.com/dxctpvd8v/image/upload/v1709096811/SocialPlanit-Loading_qedebk.png"
+                        background={
+                          group.imgUrl
+                            ? ''
+                            : 'https://res.cloudinary.com/dxctpvd8v/image/upload/v1709096811/SocialPlanit-Loading_qedebk.png'
+                        }
                         width={210}
                         height={210}
                       />
