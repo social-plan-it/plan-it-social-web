@@ -3,6 +3,44 @@ import { Link } from '@remix-run/react';
 
 import clsx from 'clsx';
 
+export const MAX_FILE_SIZE_MB = 8;
+export const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+
+type ImageUploadProps = InputHTMLAttributes<HTMLInputElement> & {
+  label: ReactNode;
+  centerText?: boolean;
+  showLabel?: boolean;
+  maxFileSizeMB?: number;
+  fileAccept?: string;
+};
+export function ImageUpload({
+  label,
+  fileAccept = 'image/*',
+  centerText = false,
+  showLabel = true,
+  maxFileSizeMB = MAX_FILE_SIZE_MB,
+  ...props
+}: ImageUploadProps) {
+  function checkFileSize(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // default 8MB
+    if (file.size > (maxFileSizeMB ?? 8) * 1024 * 1024) {
+      alert('File size is too large');
+      event.target.value = '';
+      throw new Error('File size is too large');
+    }
+  }
+
+  return (
+    <label className="flex flex-col w-full">
+      <span className={clsx({ 'bold pb-1': showLabel, 'sr-only': !showLabel })}>{label}</span>
+      <input {...props} type="file" accept={fileAccept} onChange={checkFileSize} />
+    </label>
+  );
+}
+
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   label: ReactNode;
   centerText?: boolean;

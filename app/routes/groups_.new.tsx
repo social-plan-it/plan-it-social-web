@@ -2,15 +2,16 @@ import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { Form, useActionData } from '@remix-run/react';
 import { createClient } from '@supabase/supabase-js';
+import { z } from 'zod';
 
 import { db } from '~/modules/database/db.server';
 
 import { Card } from '~/components/ui/containers';
-import { Input, TextArea } from '~/components/ui/forms';
+import { ImageUpload, Input, MAX_FILE_SIZE_MB, TextArea } from '~/components/ui/forms';
 import { Button } from '~/components/ui/button';
-
 import { H1, H2 } from '~/components/ui/headers';
 import { requireUserSession } from '~/modules/session/session.server';
+import { badRequest } from '~/modules/response/response.server';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   return requireUserSession(request);
@@ -26,6 +27,36 @@ export async function action({ request }: ActionFunctionArgs) {
   if (typeof name !== 'string' || typeof description !== 'string') {
     return { error: { message: `Form not submitted correctly.` } };
   }
+
+  console.log(1);
+
+  const formObject = Object.fromEntries(form);
+  const newGroupFrom = await z
+    .object({
+      groupName: z.string().min(1, 'Group name is required.'),
+      description: z.string().min(1, 'Description is required.'),
+      groupImage: z
+        .any()
+        .refine(
+          (file) => !file || file?.size <= MAX_FILE_SIZE_MB * 1024 * 1024,
+          `File size can't exceed ${MAX_FILE_SIZE_MB}MB.`,
+        )
+        .refine((file) => !file || file.type?.startsWith('image'), 'Only images are supported.'),
+    })
+    .safeParseAsync(formObject);
+
+  if (!newGroupFrom.success) {
+    return badRequest({
+      success: false,
+      fields: {
+        groupName: formObject.groupName,
+        description: formObject.description,
+        groupImage: formObject.groupImage,
+      },
+      error: { message: `the following fields contains errors: ${newGroupFrom.error}` },
+    });
+  }
+  console.log(2);
 
   let groupImageUrl = null;
   if (groupImage && groupImage instanceof File && groupImage.name) {
@@ -93,7 +124,7 @@ export default function GroupNew() {
                 <TextArea label="Description:" name="description" rows={5} required />
               </div>
               <div className="flex-row pb-4">
-                <Input label="Attach Image" name="groupImage" type="file" />
+                <ImageUpload label="Attach Image" name="groupImage" type="file" />
               </div>
               <div className="flex-row justify-end">
                 <Button variant="warm" buttonStyle="fullyRounded">
