@@ -28,8 +28,6 @@ export async function action({ request }: ActionFunctionArgs) {
     return { error: { message: `Form not submitted correctly.` } };
   }
 
-  console.log(1);
-
   const formObject = Object.fromEntries(form);
   const newGroupFrom = await z
     .object({
@@ -56,7 +54,6 @@ export async function action({ request }: ActionFunctionArgs) {
       error: { message: `the following fields contains errors: ${newGroupFrom.error}` },
     });
   }
-  console.log(2);
 
   let groupImageUrl = null;
   if (groupImage && groupImage instanceof File && groupImage.name) {
