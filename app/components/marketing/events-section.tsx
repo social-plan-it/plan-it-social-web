@@ -60,7 +60,7 @@ export function EventCard({ event, index }: { event: FullEvent; index: number })
         )}
 
         <div>
-          <div className="font-bold text-white line-clamp-1">{event.group?.name}</div>
+          {event.group?.name && <div className="font-bold text-white line-clamp-1">{event.group?.name}</div>}
           <h3 className="font-bold text-white line-clamp-2">{event.name}</h3>
           <p className="text-white line-clamp-3">{event.description}</p>
           <div className="font-bold text-white line-clamp-1">{formattedTime}</div>

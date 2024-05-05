@@ -10,8 +10,16 @@ import { eventsDataPatcher } from '~/modules/events/event';
 export async function loader({ params }: LoaderFunctionArgs) {
   const group = await db.group.findFirstOrThrow({
     where: { id: params.groupId },
-    include: { events: true, user_groups: true },
+    include: {
+      events: true,
+      _count: {
+        select: {
+          user_groups: true,
+        },
+      },
+    },
   });
+  console.log('group', group);
   return json({ group });
 }
 
@@ -88,7 +96,7 @@ export default function GroupRoute() {
                   />
                 </div>
                 <p>
-                  {group.user_groups.length} Member{group.user_groups.length > 1 ? 's' : ''}
+                  {group._count.user_groups} Member{group._count.user_groups > 1 ? 's' : ''}
                 </p>
               </div>
               <div className="bg-white mt-2 text-black rounded-3xl px-4 flex flex-row items-center">
