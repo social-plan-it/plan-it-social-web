@@ -13,6 +13,7 @@ import { H1, H2 } from '~/components/ui/headers';
 import { requireUserSession } from '~/modules/session/session.server';
 import { badRequest } from '~/modules/response/response.server';
 
+
 export async function loader({ request }: LoaderFunctionArgs) {
   return requireUserSession(request);
 }
