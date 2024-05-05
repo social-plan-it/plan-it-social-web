@@ -1,4 +1,4 @@
-import type { ImgHTMLAttributes } from 'react';
+import { useState, type ImgHTMLAttributes } from 'react';
 import type { ImageProps as UnpicImageProps } from '@unpic/react';
 import { Image as UnpicImage } from '@unpic/react';
 
@@ -11,5 +11,18 @@ type ImageProps = ImgHTMLAttributes<HTMLImageElement> &
   };
 
 export function Image({ ...props }: ImageProps) {
-  return <UnpicImage {...props} />;
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div>
+      <div className={`w-full h-full rounded-3xl ${loaded ? 'bg-transparent' : 'bg-slate-200 animate-pulse'}`}>
+        <UnpicImage
+          {...props}
+          onLoad={() => {
+            setLoaded(true);
+          }}
+        />
+      </div>
+    </div>
+  );
 }
