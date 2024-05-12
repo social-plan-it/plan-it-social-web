@@ -69,16 +69,11 @@ export default function Group() {
                     <div className="w-52 h-52">
                       <Image
                         className="bg-contain bg-center flex self-start rounded-full"
-                        src={
-                          group.imgUrl
-                            ? group.imgUrl
-                            : 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg'
-                        }
+                        src={group.imgUrl ?? 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg'}
                         alt="Group meeting around an office table"
                         background={
-                          group.imgUrl
-                            ? ''
-                            : 'https://res.cloudinary.com/dxctpvd8v/image/upload/v1709096811/SocialPlanit-Loading_qedebk.png'
+                          group.imgUrl ??
+                          'https://res.cloudinary.com/dxctpvd8v/image/upload/v1709096811/SocialPlanit-Loading_qedebk.png'
                         }
                         width={210}
                         height={210}
