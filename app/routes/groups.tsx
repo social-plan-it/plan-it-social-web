@@ -22,7 +22,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function Group() {
   const { groups } = useLoaderData<typeof loader>();
-  console.log('groups', groups);
   return (
     <div className="bg-primary">
       <div className="m-auto max-w-screen-xl">
