@@ -70,9 +70,7 @@ export default function Group() {
                         className="bg-contain bg-center flex self-start rounded-full"
                         src={group.imgUrl ?? 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg'}
                         alt="Group meeting around an office table"
-                        background={
-                          'https://res.cloudinary.com/dxctpvd8v/image/upload/v1709096811/SocialPlanit-Loading_qedebk.png'
-                        }
+                        background="https://res.cloudinary.com/dxctpvd8v/image/upload/v1709096811/SocialPlanit-Loading_qedebk.png"
                         width={210}
                         height={210}
                       />
