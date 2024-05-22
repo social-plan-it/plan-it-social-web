@@ -21,6 +21,11 @@ interface ImageDetails {
 }
 
 const staticImage: { [key: string]: ImageDetails } = {
+  avatarAstronaut: {
+    url: 'https://res.cloudinary.com/dxctpvd8v/image/upload/v1716394728/SocialPlanIt/avatar-astronaut_100x100.webp',
+    altText: 'Astronaut',
+    title: 'Astronaut',
+  },
   companyLogoHorizontal: {
     url: 'https://res.cloudinary.com/dxctpvd8v/image/upload/v1716391878/SocialPlanIt/SocialPlan-it-logo-Horizontal_760x121.webp',
     altText: 'Social Planet logo horizontal',
@@ -46,6 +51,11 @@ const staticImage: { [key: string]: ImageDetails } = {
     altText: 'Two friends taking a selfie',
     title: 'Two Friends in a Selfie',
   },
+  discord: {
+    url: 'https://res.cloudinary.com/dxctpvd8v/image/upload/v1716391871/SocialPlanIt/purple_discord_logo-100x100.webp',
+    altText: 'Discord logo in purple circle',
+    title: 'Discord',
+  },
   diverseGroupOfThree: {
     url: 'https://res.cloudinary.com/dxctpvd8v/image/upload/v1716391871/SocialPlanIt/Diverse_group_of_three-512x512.webp',
     altText: 'Diverse group of three characters',
@@ -65,11 +75,6 @@ const staticImage: { [key: string]: ImageDetails } = {
     url: 'https://res.cloudinary.com/dxctpvd8v/image/upload/v1716391883/SocialPlanIt/SocialPlanit-Loading-220x220.webp',
     altText: 'Circular silhouette of a spaceship headed to Saturn',
     title: 'Loading Photo',
-  },
-  discord: {
-    url: 'https://res.cloudinary.com/dxctpvd8v/image/upload/v1716391871/SocialPlanIt/purple_discord_logo-100x100.webp',
-    altText: 'Discord logo in purple circle',
-    title: 'Discord',
   },
   favicon: {
     url: 'https://res.cloudinary.com/dxctpvd8v/image/upload/v1716391880/SocialPlanIt/SocialPlan-it-logo-Favicon.webp',

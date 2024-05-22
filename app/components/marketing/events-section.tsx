@@ -1,5 +1,6 @@
 import type { Event, Group } from '@prisma/client';
 import { Link, unstable_useViewTransitionState } from '@remix-run/react';
+import { staticImage } from '../ui/images';
 
 interface ExtendedEvent extends Event {
   group: Group;
@@ -57,8 +58,9 @@ export function EventCard({ event, index }: { event: ExtendedEvent; index: numbe
         ) : (
           <img
             className={`${index === 1 && 'sm:order-2 pt-8'}  w-full object-contain box-border`}
-            src={'https://res.cloudinary.com/dxctpvd8v/image/upload/v1709188683/default-event-photo_bvdslj.png'}
-            alt={'Default animated event zoom meeting'}
+            src={staticImage.defaultEventPhoto.url}
+            alt={staticImage.defaultEventPhoto.altText}
+            title={staticImage.defaultEventPhoto.title}
             style={{ viewTransitionName: isTransitioning ? 'image-expand' : '' }}
           />
         )}

@@ -1,4 +1,4 @@
-import { Image } from '~/components/ui/images';
+import { Image, staticImage } from '~/components/ui/images';
 
 export default function AboutUs() {
   return (
@@ -7,8 +7,9 @@ export default function AboutUs() {
         <div className="w-[320px] flex self-start mx-auto pb-3">
           <Image
             className="w-full"
-            src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1706807323/solar-system_pzkazh.png"
-            alt="Solar system"
+            src={staticImage.happySun.url}
+            alt={staticImage.happySun.url}
+            title={staticImage.happySun.url}
             width={512}
             height={512}
           />
@@ -32,8 +33,9 @@ export default function AboutUs() {
         <div className="w-[320px] flex self-start mx-auto pb-3">
           <Image
             className="w-full"
-            src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1706805456/target_g3b96r.png"
-            alt="Arrow in target"
+            src={staticImage.targetWithArrow.url}
+            alt={staticImage.targetWithArrow.altText}
+            title={staticImage.targetWithArrow.title}
             width={512}
             height={512}
           />
@@ -51,8 +53,9 @@ export default function AboutUs() {
         <div className="w-[320px] flex self-start mx-auto pb-3">
           <Image
             className="w-full"
-            src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1706806762/binoculars_vuhkgz.png"
-            alt="Kid looking through binoculars"
+            src={staticImage.kidWithBinoculars.url}
+            alt={staticImage.kidWithBinoculars.altText}
+            title={staticImage.kidWithBinoculars.title}
             width={512}
             height={512}
           />
@@ -70,8 +73,9 @@ export default function AboutUs() {
         <div className="w-[320px] flex self-start mx-auto pb-3">
           <Image
             className="w-full"
-            src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1706806983/crowd_ld0rvy.png"
-            alt="Diversity"
+            src={staticImage.diverseGroupOfThree.url}
+            alt={staticImage.diverseGroupOfThree.altText}
+            title={staticImage.diverseGroupOfThree.title}
             width={512}
             height={512}
           />

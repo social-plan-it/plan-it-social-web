@@ -4,7 +4,7 @@ import { db } from '~/modules/database/db.server';
 import { json } from '@remix-run/node';
 import { LinkButton } from '~/components/ui/forms';
 
-import { Image } from '~/components/ui/images';
+import { Image, staticImage } from '~/components/ui/images';
 import { eventsDataPatcher } from '~/modules/events/event';
 
 export const loader: LoaderFunction = async ({ params }) => {
@@ -23,10 +23,7 @@ export default function GroupRoute() {
           <div className="m-auto rounded-full h-56 w-52  md:h-80 md:w-72 justify-center items-center md:m-8">
             <Image
               className="w-full"
-              src={
-                group.imgUrl ??
-                'https://res.cloudinary.com/dxctpvd8v/image/upload/v1708118888/default-group-photo_xhcpqt.png'
-              }
+              src={group.imgUrl ?? `${staticImage.defaultGroupPhoto.url}`}
               alt={group.imgAlt ?? `${group.name} group`}
               width={288}
               height={288}
@@ -42,8 +39,9 @@ export default function GroupRoute() {
                     <div className="m-2 bg-[#0A66C2] rounded-full h-8 w-8 justify-center items-center">
                       <Image
                         className="w-full"
-                        src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708120241/avatar-astronaut_icc950.png"
-                        alt="Astronaut avatar"
+                        src={staticImage.avatarAstronaut.url}
+                        alt={staticImage.avatarAstronaut.altText}
+                        title={staticImage.avatarAstronaut.title}
                         width={32}
                         height={32}
                       />
@@ -56,8 +54,9 @@ export default function GroupRoute() {
                 <div className="m-2 rounded-full h-8 w-8 justify-center items-center">
                   <Image
                     className="w-full"
-                    src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708118009/discord_ncsvl3.png"
-                    alt="Discord Icon"
+                    src={staticImage.discord.url}
+                    alt={staticImage.discord.altText}
+                    title={staticImage.discord.title}
                     width={32}
                     height={32}
                   />
@@ -65,8 +64,9 @@ export default function GroupRoute() {
                 <div className="m-2 rounded-full h-8 w-8 justify-center items-center">
                   <Image
                     className="w-full"
-                    src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708118305/twitter_pjiutd.png"
-                    alt="Twitter Icon"
+                    src={staticImage.twitter.url}
+                    alt={staticImage.twitter.altText}
+                    title={staticImage.twitter.title}
                     width={32}
                     height={32}
                   />
@@ -79,8 +79,9 @@ export default function GroupRoute() {
                 <div className="m-2 rounded-full h-8 w-8 justify-center items-center">
                   <Image
                     className="w-full"
-                    src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708120241/avatar-astronaut_icc950.png"
-                    alt="Astronaut avatar"
+                    src={staticImage.avatarAstronaut.url}
+                    alt={staticImage.avatarAstronaut.altText}
+                    title={staticImage.avatarAstronaut.title}
                     width={32}
                     height={32}
                   />
@@ -93,8 +94,9 @@ export default function GroupRoute() {
                 <div className="m-2 rounded-full h-8 w-8 justify-center items-center">
                   <Image
                     className="w-full"
-                    src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708121513/location_wf4qsz.png"
-                    alt="GPS Icon"
+                    src={staticImage.gpsLocation.url}
+                    alt={staticImage.gpsLocation.altText}
+                    title={staticImage.gpsLocation.title}
                     width={32}
                     height={32}
                   />
@@ -105,8 +107,9 @@ export default function GroupRoute() {
                 <div className="m-2 rounded-full h-8 w-8 justify-center items-center">
                   <Image
                     className="w-full"
-                    src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1708121700/share_hmihwe.png"
-                    alt="Arrowed share icon"
+                    src={staticImage.share.url}
+                    alt={staticImage.share.altText}
+                    title={staticImage.share.title}
                     width={32}
                     height={32}
                   />

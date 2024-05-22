@@ -4,6 +4,7 @@ import { useCurrentUser } from '~/hooks/useCurrentUser';
 import { StyledMenu } from '~/components/ui/menu';
 import { UserCircleIcon } from '../ui/icons';
 import { Menu } from '@headlessui/react';
+import { staticImage } from '../ui/images';
 
 export function TopNav() {
   const currentUser = useCurrentUser();
@@ -23,8 +24,9 @@ export function TopNav() {
           <Link to="/">
             <img
               className="w-1/3"
-              src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1683267003/SocialPlanIt/SocialPlan-it-logo-Horizontal_xwm3xt.png"
-              alt="Social Plan It horizontal logo"
+              src={staticImage.companyLogoHorizontal.url}
+              alt={staticImage.companyLogoHorizontal.altText}
+              title={staticImage.companyLogoHorizontal.title}
             />
           </Link>
           <div className="hidden md:flex justify-between w-3/4 py-4">
