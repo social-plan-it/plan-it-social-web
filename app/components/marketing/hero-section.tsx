@@ -58,12 +58,12 @@ export default function HeroSection() {
             </div>
           </Form>
         </div>
-        <div className="w-4/5 mb-3 max-w-[600px] flex self-start">
+        <div className="w-4/5 mb-3 max-w-[600px] flex self-start m-4">
           <Image
             className="w-full"
-            src={staticImage.saturnSilhouette.url}
-            alt={staticImage.saturnSilhouette.altText}
-            title={staticImage.saturnSilhouette.title}
+            src={staticImage.largeGroup.url}
+            alt={staticImage.largeGroup.altText}
+            title={staticImage.largeGroup.title}
             height={379}
             width={553}
             priority

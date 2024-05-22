@@ -101,5 +101,25 @@ const staticImage: { [key: string]: ImageDetails } = {
     altText: 'Twitter logo in blue circle',
     title: 'Twitter',
   },
+  largeGroup: {
+    url: 'https://res.cloudinary.com/dxctpvd8v/image/upload/v1716412303/SocialPlanIt/Large-Group-Hero-Image_553x379.webp',
+    altText: 'Large group of friends',
+    title: 'Large Group',
+  },
+  womenCollaborating: {
+    url: 'https://res.cloudinary.com/dxctpvd8v/image/upload/v1716412303/SocialPlanIt/Women-collaborating_500x500.webp',
+    altText: 'Four women collaborating on a laptop',
+    title: 'Women Collaborating',
+  },
+  friendsOnABench: {
+    url: 'https://res.cloudinary.com/dxctpvd8v/image/upload/v1716412303/SocialPlanIt/Group-of-friends-on-a-bench_500x500.webp',
+    altText: '5 friends on a bench',
+    title: 'Friends on a bench',
+  },
+  womenOnStaircase: {
+    url: 'https://res.cloudinary.com/dxctpvd8v/image/upload/v1716412303/SocialPlanIt/Women-on-a-staircase_500x500.webp',
+    altText: 'Women on a staircase',
+    title: 'Women on a Staircase',
+  },
 };
 export { staticImage };

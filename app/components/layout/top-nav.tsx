@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { Form, Link, useNavigation } from '@remix-run/react';
 import { useCurrentUser } from '~/hooks/useCurrentUser';
 import { StyledMenu } from '~/components/ui/menu';
-import { UserCircleIcon } from '../ui/icons';
 import { Menu } from '@headlessui/react';
-import { staticImage } from '../ui/images';
+import { staticImage, Image } from '../ui/images';
 
 export function TopNav() {
   const currentUser = useCurrentUser();
@@ -22,11 +21,12 @@ export function TopNav() {
       <div className="flex justify-start items-center max-w-screen-2xl mx-auto">
         <div className="text-white text-xl font-semibold flex justify-between items-center py-4 w-full">
           <Link to="/">
-            <img
-              className="w-1/3"
+            <Image
               src={staticImage.companyLogoHorizontal.url}
               alt={staticImage.companyLogoHorizontal.altText}
               title={staticImage.companyLogoHorizontal.title}
+              width={180}
+              height={28.66}
             />
           </Link>
           <div className="hidden md:flex justify-between w-3/4 py-4">
@@ -133,9 +133,13 @@ export function TopNavUserMenu() {
     <div>
       <StyledMenu
         button={
-          <div className="w-8">
-            <UserCircleIcon />
-          </div>
+          <Image
+            src={staticImage.avatarAstronaut.url}
+            alt={staticImage.avatarAstronaut.altText}
+            title={staticImage.avatarAstronaut.title}
+            width={60}
+            height={60}
+          />
         }
       >
         <>
