@@ -1,8 +1,6 @@
 import { Form } from '@remix-run/react';
 import { Image, staticImage } from '../ui/images';
 
-
-
 export default function HeroSection() {
   return (
     <section className="bg-secondary pt-10 pb-40">
@@ -69,8 +67,7 @@ export default function HeroSection() {
             height={379}
             width={553}
             priority
-          >
-          </Image>
+          ></Image>
         </div>
       </div>
     </section>
