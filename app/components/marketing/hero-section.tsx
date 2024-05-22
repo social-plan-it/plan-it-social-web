@@ -1,5 +1,7 @@
 import { Form } from '@remix-run/react';
-import { Image } from '../ui/images';
+import { Image, staticImage } from '../ui/images';
+
+
 
 export default function HeroSection() {
   return (
@@ -61,12 +63,14 @@ export default function HeroSection() {
         <div className="w-4/5 mb-3 max-w-[600px] flex self-start">
           <Image
             className="w-full"
-            src="/imgs/Hero-Image.png"
-            alt="group of people"
+            src={staticImage.saturnSilhouette.url}
+            alt={staticImage.saturnSilhouette.altText}
+            title={staticImage.saturnSilhouette.title}
             height={379}
             width={553}
             priority
-          />
+          >
+          </Image>
         </div>
       </div>
     </section>

@@ -13,3 +13,18 @@ type ImageProps = ImgHTMLAttributes<HTMLImageElement> &
 export function Image({ ...props }: ImageProps) {
   return <UnpicImage {...props} />;
 }
+
+interface ImageDetails {
+  url: string;
+  altText: string;
+  title: string;
+}
+
+const staticImage: { [key: string]: ImageDetails } = {
+  saturnSilhouette: {
+    url: 'https://res.cloudinary.com/dxctpvd8v/image/upload/v1716359837/SocialPlanIt/Planet_Silhouette_White.webp',
+    altText: 'Silhouette of a saturn shape',
+    title: 'Saturn Silhouette',
+  },
+};
+export { staticImage };
