@@ -1,4 +1,4 @@
-import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
+import type { MetaFunction, ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { useParams, useLoaderData, Link, Form } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
 import { json } from '@remix-run/node';
@@ -102,3 +102,12 @@ export function ErrorBoundary() {
   const { eventId } = useParams();
   return <div className="error-container">There was an error loading event by the id {eventId}.</div>;
 }
+
+export const meta: MetaFunction = ({ data }) => {
+  const eventFullName = data.event.name;
+  const regex = /^[^:]+/;
+  const eventName = eventFullName.match(regex);
+  const eventDescription = data.event.description;
+
+  return [{ title: `${eventName} | Social Plan-It` }, { name: 'description', content: `${eventDescription}` }];
+};
