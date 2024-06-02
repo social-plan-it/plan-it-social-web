@@ -3,19 +3,19 @@
 Welcome to `plan-it-social-web`! These are some quick notes on how to start contributing to our open source project. A good place to start is to join our [Discord server](https://discord.gg/tTD7PvwpuX).
 
 The group meets most Mondays 6pm PST ([meetup](https://www.meetup.com/all-things-web-react-html-css-javascript-tutoring/))
+Small Co-working sessions are held on Sunday 9am PST on [Discord](https://discord.gg/tTD7PvwpuX)
 
-## Helpful Links
+## Community
 
 - [Discord server](https://discord.gg/tTD7PvwpuX)
-- [Figma wire-frame](https://www.figma.com/file/6e3cBuEHOIpWvqT31Zd29p/Social-Plan-it?type=design&node-id=0-1&mode=design&t=DpLSfRITCDDG1pj0-0)
-- [GitHub](https://github.com/social-plan-it)
 - [Meetup](https://www.meetup.com/all-things-web-react-html-css-javascript-tutoring/)
 
 ## What we're using
 
+- [GitHub](https://github.com/social-plan-it)
 - [Figma](https://www.figma.com/)
-- [MySQL](https://www.mysql.com/)
-- [PlanetScale] (https://planetscale.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Supabase](https://supabase.com/)
 - [Prisma](https://www.prisma.io/)
 - [React 18](https://react.dev)
 - [Remix](https://remix.run/docs)
@@ -23,13 +23,24 @@ The group meets most Mondays 6pm PST ([meetup](https://www.meetup.com/all-things
 - [TypeScript](https://www.typescriptlang.org/)
 - [Vercel](https://vercel.com/)
 
+## Design Development
+
+- [Figma wire-frame](https://www.figma.com/file/6e3cBuEHOIpWvqT31Zd29p/Social-Plan-it?type=design&node-id=0-1&mode=design&t=DpLSfRITCDDG1pj0-0)
+
 ## Development
 
-To run your Remix app locally, make sure your project's local dependencies are installed:
+To run your Remix app locally, make sure your project's local dependencies are installed and environment variables are set up:
 
 ```sh
 npm install
 ```
+
+```sh
+mv .env.example .env
+```
+
+Then, you'll need to fill in the `.env` file with the appropriate values.
+Come to the Discord server or meetup for help with this step.
 
 Afterwards, start the Remix development server like so:
 
@@ -42,6 +53,14 @@ Open up [http://localhost:3000](http://localhost:3000) and you should be ready t
 If you're used to using the `vercel dev` command provided by [Vercel CLI](https://vercel.com/cli) instead, you can also use that, but it's not needed.
 
 <img align="center" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSagMR3FC2rPHvoqZFjHunC5DkmFLdeNzok9d7P8OHW&s" width="50%" alt="Vercel" >
+
+## Storybook ( UI Component Development )
+
+```sh
+npm run storybook
+```
+
+then visit [http://localhost:6006](http://localhost:6006) to see all the components in action.
 
 ## Contributing
 
@@ -58,21 +77,9 @@ If you're used to using the `vercel dev` command provided by [Vercel CLI](https:
 7. Push your changes to your fork with `git push`
 8. Create a pull request
 9. Iterate on the solution
-10. Get merged
+10. Get merged!
 
-## Formatting and Linting
-
-Please utilize our formatting and linting command `npm run lint`. Also included in our documentation, are great instructions on how to [setup this functionality to automatically run on save in VS code](./docs/formatting-and-linting.md).
-
-## Type Checking
-
-This project uses TypeScript to enforce static typing, enhancing code quality and catching potential issues early in the development process. Before submitting a pull request, ensure that your changes pass TypeScript type checking. Run the following command locally:
-
-```bash
-npm run typecheck
-```
-
-### VS Code Setup
+## VS Code Setup
 
 Use the following settings to format your files on save:
 
@@ -100,3 +107,40 @@ We've created some handy scripts to help with database management with Prisma. O
 - `npm run update:db` - [prototype your schema](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push) to iterate on schema design locally
 
 - `npm run seed:db` - [consistently create data by seeding](https://www.prisma.io/docs/guides/migrate/seed-database) data into our database. We have a slightly different setup than when is in the Prisma docs. We are using `--require tsconfig-paths/register` to use the `~` path feature in Remix ([ref: Kent C. Dodds](https://github.com/remix-run/blues-stack/issues/143#issuecomment-1515339235))
+
+## Running Tests
+
+### Code Style
+
+We use ESLint to enforce code style. You can run the linter using the following command:
+
+```sh
+npm run lint
+```
+
+for auto fix
+
+```sh
+npm run lint:fix
+```
+
+Also included in our documentation, are great instructions on how to [setup this functionality to automatically run on save in VS code](./docs/formatting-and-linting.md).
+
+### Type Checking
+
+We use TypeScript to enforce static typing. You can run the type checker using the following command:
+
+```sh
+npm run typecheck
+```
+
+### End-to-End Test
+
+You can run the test suite using the following commands:
+
+```sh
+npm run test:e2e
+```
+
+Please ensure that the tests are passing when submitting a pull request.
+Or get help from the Discord community to get them passing.
