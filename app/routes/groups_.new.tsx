@@ -7,12 +7,11 @@ import { z } from 'zod';
 import { db } from '~/modules/database/db.server';
 
 import { Card } from '~/components/ui/containers';
-import { ImageUpload, Input, MAX_FILE_SIZE_MB, TextArea } from '~/components/ui/forms';
+import { ACCEPTED_IMAGE_TYPES, ImageUpload, Input, MAX_FILE_SIZE_MB, TextArea } from '~/components/ui/forms';
 import { Button } from '~/components/ui/button';
 import { H1, H2 } from '~/components/ui/headers';
 import { requireUserSession } from '~/modules/session/session.server';
 import { badRequest } from '~/modules/response/response.server';
-
 
 export async function loader({ request }: LoaderFunctionArgs) {
   return requireUserSession(request);
@@ -35,15 +34,15 @@ export async function action({ request }: ActionFunctionArgs) {
       groupName: z.string().min(1, 'Group name is required.'),
       description: z.string().min(1, 'Description is required.'),
       groupImage: z
-        .any()
+        .instanceof(File)
         .refine(
           (file) => !file || file?.size <= MAX_FILE_SIZE_MB * 1024 * 1024,
           `File size can't exceed ${MAX_FILE_SIZE_MB}MB.`,
         )
         .refine(
-					(file) => ACCEPTED_IMAGE_TYPES.includes(file.type),
-					'Only images are supported.'
-				)
+          (file) => ACCEPTED_IMAGE_TYPES.split(', ').includes(file.type),
+          `Only ${ACCEPTED_IMAGE_TYPES} are supported.`,
+        ),
     })
     .safeParseAsync(formObject);
 
