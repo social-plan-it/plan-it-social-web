@@ -122,7 +122,7 @@ export default function GroupNew() {
                 <TextArea label="Description:" name="description" rows={5} required />
               </div>
               <div className="flex-row pb-4">
-                <ImageUpload label="Attach Image" name="groupImage" type="file" />
+                <ImageUpload label="Attach Image" name="groupImage" />
               </div>
               <div className="flex-row justify-end">
                 <Button variant="warm" buttonStyle="fullyRounded">
