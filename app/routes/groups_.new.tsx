@@ -29,6 +29,7 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   const formObject = Object.fromEntries(form);
+  console.log('1');
   const newGroupFrom = await z
     .object({
       groupName: z.string().min(1, 'Group name is required.'),
@@ -58,29 +59,40 @@ export async function action({ request }: ActionFunctionArgs) {
     });
   }
 
-  let groupImageUrl = null;
+  console.log('2');
+
+  let groupImageUrl = '';
   if (groupImage && groupImage instanceof File && groupImage.name) {
     // Create a single supabase client for interacting with your database
     if (!process.env.SUPABASE_SECRET) throw new Error('SUPABASE_SECRET is not defined');
     const supabase = createClient('https://fzzehiiwadkmbvpouotf.supabase.co', process.env.SUPABASE_SECRET);
     const uuid = crypto.randomUUID();
-    const { data, error } = await supabase.storage
-      .from('group-cover-images')
-      .upload(`${uuid}-${groupImage.name}`, groupImage, {
-        cacheControl: '3600',
-        upsert: false,
-      });
-    if (error) {
-      return { error: { message: `Error uploading image: ${error.message}` } };
+    try {
+      const { data, error } = await supabase.storage
+        .from('group-cover-images')
+        .upload(`${uuid}-${groupImage.name}`, groupImage, {
+          cacheControl: '3600',
+          upsert: false,
+        });
+      groupImageUrl = `https://fzzehiiwadkmbvpouotf.supabase.co/storage/v1/object/public/group-cover-images/${data.path}`;
+      if (error) {
+        return { error: { message: `Error uploading image: ${error.message}` } };
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
     }
-    groupImageUrl = `https://fzzehiiwadkmbvpouotf.supabase.co/storage/v1/object/public/group-cover-images/${data.path}`;
   }
+
+  console.log('3');
 
   // TODO generate alt text or prompt user for alt text
   const new_group = await db.group.create({
     data: { name, description, imgUrl: groupImageUrl, imgAlt: 'Group image' },
   });
   await db.userGroup.create({ data: { userId: userSession.userId, groupId: new_group.id, role: 'ADMIN' } });
+
+  console.log('4');
+
   return redirect(`/groups/`);
 }
 
