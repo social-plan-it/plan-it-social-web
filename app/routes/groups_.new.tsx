@@ -40,7 +40,10 @@ export async function action({ request }: ActionFunctionArgs) {
           (file) => !file || file?.size <= MAX_FILE_SIZE_MB * 1024 * 1024,
           `File size can't exceed ${MAX_FILE_SIZE_MB}MB.`,
         )
-        .refine((file) => !file || file.type?.startsWith('image'), 'Only images are supported.'),
+        .refine(
+					(file) => ACCEPTED_IMAGE_TYPES.includes(file.type),
+					'Only images are supported.'
+				)
     })
     .safeParseAsync(formObject);
 
