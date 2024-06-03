@@ -1,6 +1,6 @@
 import type { Event, Group } from '@prisma/client';
 import { Link, unstable_useViewTransitionState } from '@remix-run/react';
-import { staticImage } from '../ui/images';
+import { Image, staticImage } from '../ui/images';
 
 interface ExtendedEvent extends Event {
   group: Group;
@@ -49,19 +49,23 @@ export function EventCard({ event, index }: { event: ExtendedEvent; index: numbe
     <Link to={to} unstable_viewTransition>
       <div className="flex flex-col space-y-3 w-64 md:h-96 md:w-72 mx-6 sm:mx-0 max-w-md p-6 rounded-2xl bg-primary hover:transform hover:scale-105 transition-transform duration-300 hover:border">
         {event.imgUrl && event.imgAlt ? (
-          <img
+          <Image
             className={`${index === 1 && 'sm:order-2 pt-8'}  w-full object-contain box-border`}
             src={event.imgUrl}
             alt={event.imgAlt}
             style={{ viewTransitionName: isTransitioning ? 'image-expand' : '' }}
+            width={300}
+            height={200}
           />
         ) : (
-          <img
+          <Image
             className={`${index === 1 && 'sm:order-2 pt-8'}  w-full object-contain box-border`}
             src={staticImage.defaultEventPhoto.url}
             alt={staticImage.defaultEventPhoto.altText}
             title={staticImage.defaultEventPhoto.title}
             style={{ viewTransitionName: isTransitioning ? 'image-expand' : '' }}
+            width={300}
+            height={200}
           />
         )}
 
