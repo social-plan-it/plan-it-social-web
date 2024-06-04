@@ -63,7 +63,7 @@ export default function Group() {
           {groups?.map((group: Group) => {
             return (
               <li className="flex flex-wrap justify-center my-2 mx-auto md:m-2" key={group.id}>
-                <Link to={group.id}>
+                <Link to={group.id} prefetch="intent">
                   <div className="border-slate-100 border-2 rounded-2xl  m-1 px-4 py-4 flex flex-col justify-center items-center md:w-80 hover:transform hover:scale-105 transition-transform duration-300">
                     <div className="w-52 h-52">
                       <Image
