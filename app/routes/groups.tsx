@@ -2,7 +2,7 @@ import { Form, Link, useLoaderData } from '@remix-run/react';
 import { Image } from '~/components/ui/images';
 import { LinkButton } from '~/components/ui/forms';
 import { db } from '~/modules/database/db.server';
-import { type LoaderFunctionArgs } from '@remix-run/node';
+import type { MetaFunction, LoaderFunctionArgs } from '@remix-run/node';
 import type { Group } from '@prisma/client';
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -92,3 +92,10 @@ export default function Group() {
     </div>
   );
 }
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'Groups | Social Plan-It' },
+    { name: 'description', content: "We have an array of groups you'd love. Come join a group!" },
+  ];
+};
