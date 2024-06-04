@@ -1,10 +1,6 @@
-import type { Event, Group } from '@prisma/client';
 import { Link, unstable_useViewTransitionState } from '@remix-run/react';
 import { Image, staticImage } from '../ui/images';
-
-interface ExtendedEvent extends Event {
-  group: Group;
-}
+import { type FullEvent } from '~/modules/events/event';
 
 export function EventsSection({ events }: { events: FullEvent[] }) {
   return (
