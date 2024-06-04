@@ -1,6 +1,6 @@
 import type { Event, Group, User } from '@prisma/client';
 
-interface FullEvent extends Event {
+export interface FullEvent extends Event {
   group?: Group;
   users?: User[];
 }
