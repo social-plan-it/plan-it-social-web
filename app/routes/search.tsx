@@ -1,8 +1,8 @@
 import { Form, useLoaderData } from '@remix-run/react';
-import type { LoaderFunction, MetaFunction } from '@remix-run/node';
+import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { db } from '~/modules/database/db.server';
 import { EventsCards } from '~/components/marketing/events-section';
-import type { Event } from '@prisma/client';
+import { eventsDataPatcher } from '~/modules/events/event';
 
 export const meta: MetaFunction = () => {
   return [
@@ -16,7 +16,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const loader: LoaderFunction = async ({ request }) => {
+export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const query = url.searchParams.get('q');
 
@@ -48,14 +48,11 @@ export const loader: LoaderFunction = async ({ request }) => {
   });
 
   return { events, query };
-};
+}
 
 export default function SearchPage() {
   const { events, query } = useLoaderData<typeof loader>();
-  const deserializedEvents = events.map((event: Event) => ({
-    ...event,
-    date: new Date(event.date),
-  }));
+  const deserializedEvents = eventsDataPatcher(events);
 
   return (
     <>
