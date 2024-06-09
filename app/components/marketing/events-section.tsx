@@ -1,11 +1,7 @@
-import type { Event, Group } from '@prisma/client';
 import { Link, unstable_useViewTransitionState } from '@remix-run/react';
+import { type FullEvent } from '~/modules/events/event';
 
-interface ExtendedEvent extends Event {
-  group: Group;
-}
-
-export function EventsSection({ events }: { events: ExtendedEvent[] }) {
+export function EventsSection({ events }: { events: FullEvent[] }) {
   return (
     <section className="bg-secondary pb-8">
       <div className="mx-auto py-8 md:max-w-screen-xl">
@@ -18,7 +14,7 @@ export function EventsSection({ events }: { events: ExtendedEvent[] }) {
   );
 }
 
-export function EventsCards({ events }: { events: ExtendedEvent[] }) {
+export function EventsCards({ events }: { events: FullEvent[] }) {
   return (
     <>
       {events.map((event, index) => {
@@ -28,7 +24,7 @@ export function EventsCards({ events }: { events: ExtendedEvent[] }) {
   );
 }
 
-export function EventCard({ event, index }: { event: ExtendedEvent; index: number }) {
+export function EventCard({ event, index }: { event: FullEvent; index: number }) {
   const date = event.date.toLocaleString('en-US', {
     weekday: 'short',
     month: 'short',
@@ -45,7 +41,7 @@ export function EventCard({ event, index }: { event: ExtendedEvent; index: numbe
   const isTransitioning = unstable_useViewTransitionState(to);
 
   return (
-    <Link to={to} unstable_viewTransition>
+    <Link to={to} unstable_viewTransition prefetch="intent">
       <div className="flex flex-col space-y-3 w-64 md:h-96 md:w-72 mx-6 sm:mx-0 max-w-md p-6 rounded-2xl bg-primary hover:transform hover:scale-105 transition-transform duration-300 hover:border">
         {event.imgUrl && event.imgAlt ? (
           <img
@@ -64,7 +60,7 @@ export function EventCard({ event, index }: { event: ExtendedEvent; index: numbe
         )}
 
         <div>
-          <div className="font-bold text-white line-clamp-1">{event.group.name}</div>
+          {event.group?.name && <div className="font-bold text-white line-clamp-1">{event.group?.name}</div>}
           <h3 className="font-bold text-white line-clamp-2">{event.name}</h3>
           <p className="text-white line-clamp-3">{event.description}</p>
           <div className="font-bold text-white line-clamp-1">{formattedTime}</div>

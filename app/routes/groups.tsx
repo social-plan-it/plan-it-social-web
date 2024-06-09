@@ -2,7 +2,7 @@ import { Form, Link, useLoaderData } from '@remix-run/react';
 import { Image } from '~/components/ui/images';
 import { LinkButton } from '~/components/ui/forms';
 import { db } from '~/modules/database/db.server';
-import { type LoaderFunctionArgs } from '@remix-run/node';
+import type { MetaFunction, LoaderFunctionArgs } from '@remix-run/node';
 import type { Group } from '@prisma/client';
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -63,12 +63,12 @@ export default function Group() {
           {groups?.map((group: Group) => {
             return (
               <li className="flex flex-wrap justify-center my-2 mx-auto md:m-2" key={group.id}>
-                <Link to={group.id}>
+                <Link to={group.id} prefetch="intent">
                   <div className="border-slate-100 border-2 rounded-2xl  m-1 px-4 py-4 flex flex-col justify-center items-center md:w-80 hover:transform hover:scale-105 transition-transform duration-300">
                     <div className="w-52 h-52">
                       <Image
                         className="bg-contain bg-center flex self-start rounded-full"
-                        src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg"
+                        src={group.imgUrl ?? 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg'}
                         alt="Group meeting around an office table"
                         background="https://res.cloudinary.com/dxctpvd8v/image/upload/v1709096811/SocialPlanit-Loading_qedebk.png"
                         width={210}
@@ -92,3 +92,10 @@ export default function Group() {
     </div>
   );
 }
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'Groups | Social Plan-It' },
+    { name: 'description', content: "We have an array of groups you'd love. Come join a group!" },
+  ];
+};
