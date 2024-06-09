@@ -14,8 +14,9 @@ export function Image({ ...props }: ImageProps) {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div>
-      <div className={`w-full h-full rounded-3xl ${loaded ? '' : 'bg-slate-200 animate-pulse'}`}>
+    <div className="relative">
+      {!loaded && <div className="absolute opacity-5 animate-pulse bg-slate-100 w-full h-full" />}
+      <div className="w-full h-full">
         <UnpicImage
           {...props}
           onLoad={() => {
