@@ -71,7 +71,7 @@ export async function action({ request }: ActionFunctionArgs) {
           cacheControl: '3600',
           upsert: false,
         });
-      groupImageUrl = `https://fzzehiiwadkmbvpouotf.supabase.co/storage/v1/object/public/group-cover-images/${data.path}`;
+      groupImageUrl = `https://fzzehiiwadkmbvpouotf.supabase.co/storage/v1/object/public/group-cover-images/${data?.path}`;
       if (error) {
         return { error: { message: `Error uploading image: ${error.message}` } };
       }
