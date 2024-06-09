@@ -15,7 +15,7 @@ export function Image({ ...props }: ImageProps) {
 
   return (
     <div>
-      <div className={`w-full h-full rounded-3xl ${loaded ? 'bg-transparent' : 'bg-slate-200 animate-pulse'}`}>
+      <div className={`w-full h-full rounded-3xl ${loaded ? '' : 'bg-slate-200 animate-pulse'}`}>
         <UnpicImage
           {...props}
           onLoad={() => {
