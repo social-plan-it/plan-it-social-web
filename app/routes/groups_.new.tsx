@@ -29,7 +29,6 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   const formObject = Object.fromEntries(form);
-  console.log('1');
   const newGroupFrom = await z
     .object({
       groupName: z.string().min(1, 'Group name is required.'),
@@ -59,8 +58,6 @@ export async function action({ request }: ActionFunctionArgs) {
     });
   }
 
-  console.log('2');
-
   let groupImageUrl = '';
   if (groupImage && groupImage instanceof File && groupImage.name) {
     // Create a single supabase client for interacting with your database
@@ -83,15 +80,11 @@ export async function action({ request }: ActionFunctionArgs) {
     }
   }
 
-  console.log('3');
-
   // TODO generate alt text or prompt user for alt text
   const new_group = await db.group.create({
     data: { name, description, imgUrl: groupImageUrl, imgAlt: 'Group image' },
   });
   await db.userGroup.create({ data: { userId: userSession.userId, groupId: new_group.id, role: 'ADMIN' } });
-
-  console.log('4');
 
   return redirect(`/groups/`);
 }
