@@ -2,6 +2,7 @@ import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { Form, useActionData } from '@remix-run/react';
 import { createClient } from '@supabase/supabase-js';
+import { Client } from '@upstash/qstash';
 
 import { db } from '~/modules/database/db.server';
 
@@ -45,11 +46,24 @@ export async function action({ request }: ActionFunctionArgs) {
     groupImageUrl = `https://fzzehiiwadkmbvpouotf.supabase.co/storage/v1/object/public/group-cover-images/${data.path}`;
   }
 
-  // TODO generate alt text or prompt user for alt text
   const new_group = await db.group.create({
-    data: { name, description, imgUrl: groupImageUrl, imgAlt: 'Group image' },
+    data: { name, description, imgUrl: groupImageUrl, imgAlt: 'The group image' },
   });
   await db.userGroup.create({ data: { userId: userSession.userId, groupId: new_group.id, role: 'ADMIN' } });
+
+  if (groupImageUrl) {
+    const qstashClient = new Client({
+      token: process.env.QSTASH_TOKEN!,
+    });
+
+    await qstashClient.publishJSON({
+      url: `${process.env.DOMAIN}/api/generate-image-caption`,
+      body: {
+        groupId: new_group.id,
+      },
+    });
+  }
+
   return redirect(`/groups/`);
 }
 
