@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Form, Link, useNavigation } from '@remix-run/react';
 import { useCurrentUser } from '~/hooks/useCurrentUser';
 import { StyledMenu } from '~/components/ui/menu';
-import { UserCircleIcon } from '../ui/icons';
 import { Menu } from '@headlessui/react';
 
 export function TopNav() {
@@ -90,7 +89,7 @@ export function TopNav() {
           </Link>
           {currentUser ? (
             <>
-              <Link className="block text-white py-2 px-4 hover:bg-gray-700" to="/settings">
+              <Link className="block m-4 text-white py-2 px-4 hover:bg-gray-700" to="/settings">
                 Settings
               </Link>
               <LogoutButton className="w-full text-left text-white py-2 px-4 hover:bg-gray-700" />
@@ -127,21 +126,24 @@ export function LogoutButton({ className }: { className?: string }) {
 }
 
 export function TopNavUserMenu() {
+  const currentUser = useCurrentUser();
   return (
     <div>
       <StyledMenu
         button={
-          <div className="w-8">
-            <UserCircleIcon />
+          <div className="w-9 h-9 border-2 border-white rounded-full flex items-center justify-center font-extrabold">
+            {currentUser?.name[0].toUpperCase()}
           </div>
         }
       >
         <>
           <Menu.Item>
-            <Link to="/settings">Settings</Link>
+            <Link className="m-4" to="/settings">
+              Settings
+            </Link>
           </Menu.Item>
           <Menu.Item>
-            <LogoutButton />
+            <LogoutButton className="ml-4" />
           </Menu.Item>
         </>
       </StyledMenu>
