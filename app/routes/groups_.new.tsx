@@ -2,7 +2,6 @@ import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { Form, useActionData } from '@remix-run/react';
 import { createClient } from '@supabase/supabase-js';
-import { Client } from '@upstash/qstash';
 
 import { db } from '~/modules/database/db.server';
 
@@ -12,6 +11,7 @@ import { Button } from '~/components/ui/button';
 
 import { H1, H2 } from '~/components/ui/headers';
 import { requireUserSession } from '~/modules/session/session.server';
+import { invokeBackgroundTask } from '~/modules/background-tasks/invoke';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   return requireUserSession(request);
@@ -52,15 +52,8 @@ export async function action({ request }: ActionFunctionArgs) {
   await db.userGroup.create({ data: { userId: userSession.userId, groupId: new_group.id, role: 'ADMIN' } });
 
   if (groupImageUrl) {
-    const qstashClient = new Client({
-      token: process.env.QSTASH_TOKEN!,
-    });
-
-    await qstashClient.publishJSON({
-      url: `${process.env.DOMAIN}/api/generate-image-caption`,
-      body: {
-        groupId: new_group.id,
-      },
+    await invokeBackgroundTask(`${process.env.DOMAIN}/api/generate-image-caption`, {
+      groupId: new_group.id,
     });
   }
 
