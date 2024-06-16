@@ -20,13 +20,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export async function action({ request }: ActionFunctionArgs) {
   const userSession = await requireUserSession(request);
   const form = await request.formData();
-  const name = form.get('groupName');
-  const description = form.get('description');
+  const name = form.get('groupName') as string;
+  const description = form.get('description') as string;
   const groupImage = form.get('groupImage');
-
-  if (typeof name !== 'string' || typeof description !== 'string') {
-    return { error: { message: `Form not submitted correctly.` } };
-  }
 
   const formObject = Object.fromEntries(form);
   const newGroupFrom = await z
@@ -76,17 +72,16 @@ export async function action({ request }: ActionFunctionArgs) {
         return { error: { message: `Error uploading image: ${error.message}` } };
       }
     } catch (error) {
-      console.error('Error uploading image:', error);
+      return { error: { message: `Unexpected Error during Image Upload: ${error}` } };
     }
   }
 
-  // TODO generate alt text or prompt user for alt text
   const new_group = await db.group.create({
     data: { name, description, imgUrl: groupImageUrl, imgAlt: 'Group image' },
   });
   await db.userGroup.create({ data: { userId: userSession.userId, groupId: new_group.id, role: 'ADMIN' } });
 
-  return redirect(`/groups/`);
+  return redirect(`/groups/${new_group.id}`);
 }
 
 export default function GroupNew() {
