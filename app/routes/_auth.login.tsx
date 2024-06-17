@@ -5,7 +5,6 @@ import { redirect } from '@remix-run/node';
 import { Form, Link, useActionData, useNavigation, useSubmit } from '@remix-run/react';
 import { startAuthentication } from '@simplewebauthn/browser';
 import { useState } from 'react';
-import { Button } from '~/components/ui/button';
 import { Card } from '~/components/ui/containers';
 import { Input } from '~/components/ui/forms';
 import { matchesHash } from '~/modules/database/crypto.server';
@@ -167,21 +166,23 @@ export default function Component() {
               showLabel={false}
               centerText
             />
-            <button type="submit" disabled={isPending}>
+            <button className="w-full text-center font-normal focus:outline-none focus:ring-4 py-3 md:text-base bg-warm text-white focus:ring-red-300 hover:bg-red-700 rounded-full">
               {isPending ? 'Logging in...' : 'Log In'}
             </button>
             {actionData && 'message' in actionData && <p className="text-red-500">{actionData.message}</p>}
-
             <SignInWithGoogleButton />
 
-            <p>
-              New here? <Link to="/signup">Sign up</Link>
+            <p className="text-base">
+              New here?{' '}
+              <Link to="/signup" className="underline underline-offset-4 hover:decoration-2">
+                Sign up
+              </Link>
             </p>
           </Form>
 
           <div className="flex flex-col items-center gap-3 my-4">
             <p>or</p>
-            <form onSubmit={handleSignInWithPasskey} method="post" className="flex flex-col gap-3 items-center">
+            <form onSubmit={handleSignInWithPasskey} method="post" className="flex flex-col w-full gap-3 items-center">
               <Input
                 name="email"
                 type="email"
@@ -193,10 +194,9 @@ export default function Component() {
                 centerText
                 onChange={(e) => setEmail(e.target.value)}
               />
-
-              <Button variant="primary" buttonStyle="fullyRounded" disabled={processingPasskey || isPending}>
+              <button className="w-full text-center font-normal focus:outline-none focus:ring-4 py-3 text-base bg-secondary focus:ring-teal-300 hover:bg-teal-200 rounded-full">
                 {processingPasskey || isPending ? 'Signing in...' : 'Sign in with Passkey'}
-              </Button>
+              </button>
 
               {passkeyError && <p className="text-red-500">{passkeyError}</p>}
               {actionData && 'passkeyError' in actionData && <p className="text-red-500">{actionData.passkeyError}</p>}

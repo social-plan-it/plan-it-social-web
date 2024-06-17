@@ -158,12 +158,19 @@ export default function Component() {
               </p>
             )}
 
-            <button type="submit" disabled={isPending}>
+            <button
+              type="submit"
+              disabled={isPending}
+              className="w-full text-center font-normal focus:outline-none focus:ring-4 py-3 md:text-base bg-warm text-white focus:ring-red-300 hover:bg-red-700 rounded-full"
+            >
               {isPending ? 'Signing up...' : 'Sign Up'}
             </button>
 
             <p>
-              Have an account already? <Link to="/login">Login</Link>
+              Have an account already?{' '}
+              <Link to="/login" className="underline underline-offset-4 hover:decoration-2">
+                Login
+              </Link>
             </p>
           </Form>
         </Card>
