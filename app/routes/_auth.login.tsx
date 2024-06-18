@@ -15,6 +15,7 @@ import { verifyGoogleToken } from '~/modules/session/google-auth.server';
 import { createUserSession, getUserSession } from '~/modules/session/session.server';
 import { verifyPasskeyAuthenticationResponse } from '~/modules/session/webauthn.server';
 import { AuthButton } from '~/components/ui/button';
+import { KeyIcon } from '~/components/ui/icons/button-icons';
 
 export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
@@ -195,7 +196,8 @@ export default function Component() {
                 centerText
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <AuthButton variant="outlined" buttonStyle="fullyRounded">
+              <AuthButton variant="outlined" buttonStyle="fullyRounded" icon>
+                <KeyIcon />
                 {processingPasskey || isPending ? 'Signing in...' : 'Sign in with Passkey'}
               </AuthButton>
 
