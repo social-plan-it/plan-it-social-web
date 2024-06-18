@@ -14,6 +14,7 @@ import { SignInWithGoogleButton } from '~/modules/session/buttons';
 import { verifyGoogleToken } from '~/modules/session/google-auth.server';
 import { createUserSession, getUserSession } from '~/modules/session/session.server';
 import { verifyPasskeyAuthenticationResponse } from '~/modules/session/webauthn.server';
+import { AuthButton } from '~/components/ui/button';
 
 export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
@@ -166,13 +167,9 @@ export default function Component() {
               showLabel={false}
               centerText
             />
-            <button
-              type="submit"
-              disabled={isPending}
-              className="w-full text-center font-normal focus:outline-none focus:ring-4 py-3 md:text-base bg-warm text-white focus:ring-red-300 hover:bg-red-700 rounded-full"
-            >
+            <AuthButton disabled={isPending} variant="primary" buttonStyle="fullyRounded">
               {isPending ? 'Logging in...' : 'Log In'}
-            </button>
+            </AuthButton>
             {actionData && 'message' in actionData && <p className="text-red-500">{actionData.message}</p>}
             <SignInWithGoogleButton />
 
@@ -198,9 +195,9 @@ export default function Component() {
                 centerText
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <button className="w-full text-center font-normal focus:outline-none focus:ring-4 py-3 text-base bg-secondary focus:ring-teal-300 hover:bg-teal-200 rounded-full">
+              <AuthButton variant="outlined" buttonStyle="fullyRounded">
                 {processingPasskey || isPending ? 'Signing in...' : 'Sign in with Passkey'}
-              </button>
+              </AuthButton>
 
               {passkeyError && <p className="text-red-500">{passkeyError}</p>}
               {actionData && 'passkeyError' in actionData && <p className="text-red-500">{actionData.passkeyError}</p>}
