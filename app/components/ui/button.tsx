@@ -30,34 +30,42 @@ type ButtonAndIconProps = BaseButtonProps & {
 
 type CombinedButtonProps = ButtonProps | ButtonAndIconProps;
 
+function getVariantClasses(variant: (typeof variants)[keyof typeof variants]) {
+  switch (variant) {
+    case 'primary':
+      return 'bg-primary text-white focus:ring-gray-300 hover:bg-gray-900';
+
+    case 'secondary':
+      return 'bg-secondary focus:ring-teal-300 hover:bg-teal-200';
+
+    case 'warm':
+      return 'bg-warm text-white focus:ring-red-300 hover:bg-red-700';
+
+    // Outlined style
+    default:
+      return 'bg-white text-primary hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-gray-300 hover:bg-gray-100';
+  }
+}
+
+function getStyleClasses(buttonStyle: (typeof buttonStyles)[keyof typeof buttonStyles]) {
+  return buttonStyle === 'rounded' ? 'rounded-lg' : 'rounded-full';
+}
+
 export function Button({ variant, buttonStyle, icon, disabled, children, ...props }: CombinedButtonProps) {
   let baseClasses =
-    'w-full sm:w-fit me-2 mb-2 text-center font-medium focus:outline-none focus:ring-4 px-3 py-2 text-sm sm:px-5 sm:py-2.5 md:py-3 md:text-base';
-  let variantClasses = '';
-  let styleClasses = '';
+    'w-full sm:w-fit me-2 mb-2 px-3 sm:px-5 py-2 sm:py-2.5 md:py-3 text-center text-sm md:text-base font-medium focus:outline-none focus:ring-4';
 
-  if (variant === 'primary') {
-    variantClasses = 'bg-primary text-white focus:ring-gray-300 hover:bg-gray-900';
-  } else if (variant === 'secondary') {
-    variantClasses = 'bg-secondary focus:ring-teal-300 hover:bg-teal-200';
-  } else if (variant === 'warm') {
-    variantClasses = 'bg-warm text-white focus:ring-red-300 hover:bg-red-700';
-  } else {
-    variantClasses = 'bg-white text-primary border border-gray-200 focus:ring-gray-300 hover:bg-gray-100';
-  }
-
-  if (buttonStyle === 'rounded') {
-    styleClasses = 'rounded-lg';
-  } else {
-    styleClasses = 'rounded-full';
-  }
+  let variantClasses = getVariantClasses(variant);
+  let styleClasses = getStyleClasses(buttonStyle);
 
   if (icon) {
     baseClasses += ' inline-flex items-center justify-center';
   }
 
   if (disabled) {
-    variantClasses += ' opacity-75 cursor-not-allowed';
+    variantClasses =
+      'w-full sm:w-fit me-2 mb-2 px-3 sm:px-5 py-2 sm:py-2.5 md:py-3 text-center text-sm md:text-base font-medium bg-gray-300 text-gray-600 opacity-75 cursor-not-allowed';
+    baseClasses = '';
   }
 
   return (
@@ -68,32 +76,20 @@ export function Button({ variant, buttonStyle, icon, disabled, children, ...prop
 }
 
 export function AuthButton({ variant, buttonStyle, icon, disabled, children, ...props }: CombinedButtonProps) {
-  let baseClasses = 'w-full text-center font-normal focus:outline-none focus:ring-4 py-3 md:text-base';
-  let variantClasses = '';
-  let styleClasses = '';
-  if (variant === 'primary') {
-    variantClasses = 'bg-primary text-white focus:ring-gray-300 hover:bg-gray-900';
-  }
-  if (variant === 'warm') {
-    variantClasses = 'bg-warm text-white focus:ring-red-300 hover:bg-red-700';
-  }
-  if (variant === 'secondary') {
-    variantClasses = 'bg-secondary focus:ring-teal-300 hover:bg-teal-200';
-  }
-  if (variant === 'outlined') {
-    variantClasses = 'bg-white text-primary border border-gray-200 focus:ring-gray-300 hover:bg-gray-100';
-  }
+  let baseClasses = 'w-full py-3 text-center text-base font-normal focus:outline-none focus:ring-4 py-3';
+  let variantClasses = getVariantClasses(variant);
+  let styleClasses = getStyleClasses(buttonStyle);
+
   if (icon) {
     baseClasses += ' inline-flex items-center justify-center';
   }
+
   if (disabled) {
-    variantClasses += ' opacity-75 cursor-not-allowed';
+    variantClasses =
+      'w-full py-3 text-center text-base font-normal bg-gray-300 text-gray-600 opacity-75 cursor-not-allowed';
+    baseClasses = '';
   }
-  if (buttonStyle === 'rounded') {
-    styleClasses = 'rounded-lg';
-  } else {
-    styleClasses = 'rounded-full';
-  }
+
   return (
     <button type="submit" className={`${baseClasses} ${variantClasses} ${styleClasses}`} {...props}>
       {children}
