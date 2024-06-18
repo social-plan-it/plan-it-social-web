@@ -22,9 +22,9 @@ if (!rpID) {
   throw new Error('WEBAUTHN_RELYING_PARTY_ID must be set');
 }
 
-const origin = process.env.WEBAUTHN_ORIGIN ?? '';
+const origin = process.env.DOMAIN ?? '';
 if (!origin) {
-  throw new Error('WEBAUTHN_ORIGIN must be set');
+  throw new Error('DOMAIN must be set');
 }
 
 export async function getPasskeyRegistrationOptions(user: UserWithAuthenticators) {
