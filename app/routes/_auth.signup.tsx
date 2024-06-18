@@ -2,6 +2,7 @@ import type { LoaderFunctionArgs, ActionFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { Form, Link, useActionData, useNavigation } from '@remix-run/react';
 import { z } from 'zod';
+import { AuthButton } from '~/components/ui/button';
 
 import { Card } from '~/components/ui/containers';
 import { Input } from '~/components/ui/forms';
@@ -158,13 +159,9 @@ export default function Component() {
               </p>
             )}
 
-            <button
-              type="submit"
-              disabled={isPending}
-              className="w-full text-center font-normal focus:outline-none focus:ring-4 py-3 md:text-base bg-warm text-white focus:ring-red-300 hover:bg-red-700 rounded-full"
-            >
+            <AuthButton variant="primary" buttonStyle="fullyRounded" disabled={isPending}>
               {isPending ? 'Signing up...' : 'Sign Up'}
-            </button>
+            </AuthButton>
 
             <p>
               Have an account already?{' '}
