@@ -16,19 +16,9 @@ type BaseButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant: (typeof variants)[keyof typeof variants];
   buttonStyle: (typeof buttonStyles)[keyof typeof buttonStyles];
   children: React.ReactNode;
+  icon?: false;
   disabled?: boolean;
 };
-
-type ButtonProps = BaseButtonProps & {
-  icon?: false;
-};
-
-type ButtonAndIconProps = BaseButtonProps & {
-  icon?: true;
-  'aria-label': string;
-};
-
-type CombinedButtonProps = ButtonProps | ButtonAndIconProps;
 
 function getVariantClasses(variant: (typeof variants)[keyof typeof variants]) {
   switch (variant) {
@@ -51,7 +41,7 @@ function getStyleClasses(buttonStyle: (typeof buttonStyles)[keyof typeof buttonS
   return buttonStyle === 'rounded' ? 'rounded-lg' : 'rounded-full';
 }
 
-export function Button({ variant, buttonStyle, icon, disabled, children, ...props }: CombinedButtonProps) {
+export function Button({ variant, buttonStyle, icon, disabled, children, ...props }: BaseButtonProps) {
   let baseClasses =
     'w-full sm:w-fit me-2 mb-2 px-3 sm:px-5 py-2 sm:py-2.5 md:py-3 text-center text-sm md:text-base font-medium focus:outline-none focus:ring-4';
 
@@ -75,7 +65,7 @@ export function Button({ variant, buttonStyle, icon, disabled, children, ...prop
   );
 }
 
-export function AuthButton({ variant, buttonStyle, icon, disabled, children, ...props }: CombinedButtonProps) {
+export function AuthButton({ variant, buttonStyle, icon, disabled, children, ...props }: BaseButtonProps) {
   let baseClasses = 'w-full py-3 text-center text-base font-normal focus:outline-none focus:ring-4 py-3';
   let variantClasses = getVariantClasses(variant);
   let styleClasses = getStyleClasses(buttonStyle);
@@ -92,6 +82,19 @@ export function AuthButton({ variant, buttonStyle, icon, disabled, children, ...
 
   return (
     <button type="submit" className={`${baseClasses} ${variantClasses} ${styleClasses}`} {...props}>
+      {children}
+    </button>
+  );
+}
+
+type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  'aria-label': string;
+  children: React.ReactNode;
+};
+
+export function IconButton({ 'aria-label': ariaLabel, children, ...props }: IconButtonProps) {
+  return (
+    <button aria-label={ariaLabel} {...props}>
       {children}
     </button>
   );
