@@ -21,12 +21,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export async function action({ request }: ActionFunctionArgs) {
   const userSession = await requireUserSession(request);
   const form = await request.formData();
-  const name = form.get('groupName') as string;
-  const description = form.get('description') as string;
-  const groupImage = form.get('groupImage');
-
-  const formObject = Object.fromEntries(form);
-  const newGroupFrom = await z
+  const formObject = await z
     .object({
       groupName: z.string().min(1, 'Group name is required.'),
       description: z.string().min(1, 'Description is required.'),
@@ -41,19 +36,16 @@ export async function action({ request }: ActionFunctionArgs) {
           `Only ${ACCEPTED_IMAGE_TYPES} are supported.`,
         ),
     })
-    .safeParseAsync(formObject);
+    .safeParseAsync(Object.fromEntries(form));
 
-  if (!newGroupFrom.success) {
+  if (!formObject.success) {
     return badRequest({
       success: false,
-      fields: {
-        groupName: formObject.groupName,
-        description: formObject.description,
-        groupImage: formObject.groupImage,
-      },
-      error: { message: `the following fields contains errors: ${newGroupFrom.error}` },
+      error: { message: `the following fields contains errors: ${formObject.error}` },
     });
   }
+
+  const { groupName: name, description, groupImage } = formObject.data;
 
   let groupImageUrl = '';
   if (groupImage && groupImage instanceof File && groupImage.name) {
