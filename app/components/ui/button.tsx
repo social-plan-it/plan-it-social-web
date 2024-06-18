@@ -5,7 +5,6 @@ export const variants = {
   secondary: 'secondary',
   warm: 'warm',
   outlined: 'outlined',
-  tertiary: 'tertiary',
 } as const;
 
 export const buttonStyles = {
