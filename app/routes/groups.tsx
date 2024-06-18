@@ -4,20 +4,24 @@ import { LinkButton } from '~/components/ui/forms';
 import { db } from '~/modules/database/db.server';
 import type { MetaFunction, LoaderFunctionArgs } from '@remix-run/node';
 import type { Group } from '@prisma/client';
+import { findGroups } from '~/modules/database/groups.server';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const query = url.searchParams.get('q');
+  const page = url.searchParams.get('p');
+  const pageNum = page ? Number.parseInt(page, 10) : 0;
+  const pageCount = 24;
 
-  if (!query) {
-    const groups = await db.group.findMany({ take: 24 });
-    return { groups };
-  }
+  //add Zod validation
 
-  const groups = await db.group.findMany({
-    where: { name: { contains: query } },
+  const [groups, count] = await findGroups({
+    query: query || undefined,
+    count: pageCount,
+    skip: pageCount * pageNum,
   });
-  return { groups };
+
+  return { groups, count };
 }
 
 export default function Group() {
