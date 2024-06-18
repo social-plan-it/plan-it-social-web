@@ -166,7 +166,11 @@ export default function Component() {
               showLabel={false}
               centerText
             />
-            <button className="w-full text-center font-normal focus:outline-none focus:ring-4 py-3 md:text-base bg-warm text-white focus:ring-red-300 hover:bg-red-700 rounded-full">
+            <button
+              type="submit"
+              disabled={isPending}
+              className="w-full text-center font-normal focus:outline-none focus:ring-4 py-3 md:text-base bg-warm text-white focus:ring-red-300 hover:bg-red-700 rounded-full"
+            >
               {isPending ? 'Logging in...' : 'Log In'}
             </button>
             {actionData && 'message' in actionData && <p className="text-red-500">{actionData.message}</p>}
