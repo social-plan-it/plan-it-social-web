@@ -2,7 +2,7 @@ import type { LoaderFunctionArgs, ActionFunctionArgs } from '@remix-run/node';
 import type { FormEvent } from 'react';
 
 import { redirect } from '@remix-run/node';
-import { Form, Link, useActionData, useNavigation, useSubmit } from '@remix-run/react';
+import { Form, useActionData, useNavigation, useSubmit } from '@remix-run/react';
 import { startAuthentication } from '@simplewebauthn/browser';
 import { useState } from 'react';
 import { Card } from '~/components/ui/containers';
@@ -14,7 +14,7 @@ import { SignInWithGoogleButton } from '~/modules/session/buttons';
 import { verifyGoogleToken } from '~/modules/session/google-auth.server';
 import { createUserSession, getUserSession } from '~/modules/session/session.server';
 import { verifyPasskeyAuthenticationResponse } from '~/modules/session/webauthn.server';
-import { AuthButton } from '~/components/ui/button';
+import { AuthButton, LinkButton } from '~/components/ui/button';
 import { KeyIcon } from '~/components/ui/icons/button-icons';
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -175,10 +175,7 @@ export default function Component() {
             <SignInWithGoogleButton />
 
             <p className="text-base">
-              New here?{' '}
-              <Link to="/signup" className="underline underline-offset-4 hover:decoration-2">
-                Sign up
-              </Link>
+              New here? <LinkButton to="/signup">Sign up</LinkButton>
             </p>
           </Form>
 

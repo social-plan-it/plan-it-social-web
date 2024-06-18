@@ -1,4 +1,5 @@
-import type { ButtonHTMLAttributes } from 'react';
+import { Link } from '@remix-run/react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 export const variants = {
   primary: 'primary',
@@ -97,5 +98,18 @@ export function IconButton({ 'aria-label': ariaLabel, children, ...props }: Icon
     <button aria-label={ariaLabel} {...props}>
       {children}
     </button>
+  );
+}
+
+type LinkButtonProps = {
+  children: ReactNode;
+  to: string;
+};
+
+export function LinkButton({ to, children, ...props }: LinkButtonProps) {
+  return (
+    <Link {...props} to={to} className="font-medium text-primary underline underline-offset-4 hover:decoration-2">
+      {children}
+    </Link>
   );
 }

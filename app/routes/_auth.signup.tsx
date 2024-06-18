@@ -1,8 +1,8 @@
 import type { LoaderFunctionArgs, ActionFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
-import { Form, Link, useActionData, useNavigation } from '@remix-run/react';
+import { Form, useActionData, useNavigation } from '@remix-run/react';
 import { z } from 'zod';
-import { AuthButton } from '~/components/ui/button';
+import { AuthButton, LinkButton } from '~/components/ui/button';
 
 import { Card } from '~/components/ui/containers';
 import { Input } from '~/components/ui/forms';
@@ -164,10 +164,7 @@ export default function Component() {
             </AuthButton>
 
             <p>
-              Have an account already?{' '}
-              <Link to="/login" className="underline underline-offset-4 hover:decoration-2">
-                Login
-              </Link>
+              Have an account already? <LinkButton to="/login">Login</LinkButton>
             </p>
           </Form>
         </Card>
