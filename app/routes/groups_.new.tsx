@@ -12,6 +12,7 @@ import { Button } from '~/components/ui/button';
 import { H1, H2 } from '~/components/ui/headers';
 import { requireUserSession } from '~/modules/session/session.server';
 import { badRequest } from '~/modules/response/response.server';
+import { invokeBackgroundTask } from '~/modules/background-tasks/invoke';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   return requireUserSession(request);
@@ -77,9 +78,15 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   const new_group = await db.group.create({
-    data: { name, description, imgUrl: groupImageUrl, imgAlt: 'Group image' },
+    data: { name, description, imgUrl: groupImageUrl, imgAlt: 'The group image' },
   });
   await db.userGroup.create({ data: { userId: userSession.userId, groupId: new_group.id, role: 'ADMIN' } });
+
+  if (groupImageUrl) {
+    await invokeBackgroundTask(`${process.env.DOMAIN}/api/generate-image-caption`, {
+      groupId: new_group.id,
+    });
+  }
 
   return redirect(`/groups/${new_group.id}`);
 }
