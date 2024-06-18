@@ -24,7 +24,7 @@ export async function generateTextContent(prompt: string, imageUrl?: string) {
     });
   }
   const response = await openai.chat.completions.create({
-    model: 'gpt-4-o',
+    model: 'gpt-4o',
     messages: [
       {
         role: 'user',
