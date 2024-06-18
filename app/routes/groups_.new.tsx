@@ -11,6 +11,7 @@ import { Button } from '~/components/ui/button';
 
 import { H1, H2 } from '~/components/ui/headers';
 import { requireUserSession } from '~/modules/session/session.server';
+import { invokeBackgroundTask } from '~/modules/background-tasks/invoke';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   return requireUserSession(request);
@@ -45,11 +46,17 @@ export async function action({ request }: ActionFunctionArgs) {
     groupImageUrl = `https://fzzehiiwadkmbvpouotf.supabase.co/storage/v1/object/public/group-cover-images/${data.path}`;
   }
 
-  // TODO generate alt text or prompt user for alt text
   const new_group = await db.group.create({
-    data: { name, description, imgUrl: groupImageUrl, imgAlt: 'Group image' },
+    data: { name, description, imgUrl: groupImageUrl, imgAlt: 'The group image' },
   });
   await db.userGroup.create({ data: { userId: userSession.userId, groupId: new_group.id, role: 'ADMIN' } });
+
+  if (groupImageUrl) {
+    await invokeBackgroundTask(`${process.env.DOMAIN}/api/generate-image-caption`, {
+      groupId: new_group.id,
+    });
+  }
+
   return redirect(`/groups/`);
 }
 
