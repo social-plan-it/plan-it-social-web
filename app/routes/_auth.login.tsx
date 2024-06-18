@@ -179,9 +179,12 @@ export default function Component() {
             </p>
           </Form>
 
-          <div className="flex flex-col items-center gap-3 my-4">
-            <p>or</p>
-            <form onSubmit={handleSignInWithPasskey} method="post" className="flex flex-col w-full gap-3 items-center">
+          <div className="flex flex-col items-center gap-5 my-4">
+            <div className="inline-flex items-center justify-center w-full">
+              <hr className="w-full h-px my-4 bg-gray-300 border-0" />
+              <span className="absolute px-3 font-normal text-gray-700 -translate-x-1/2 bg-white left-1/2">or</span>
+            </div>
+            <form onSubmit={handleSignInWithPasskey} method="post" className="flex flex-col w-full gap-5 items-center">
               <Input
                 name="email"
                 type="email"
