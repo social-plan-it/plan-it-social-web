@@ -103,7 +103,7 @@ export function ErrorBoundary() {
   return <div className="error-container">There was an error loading event by the id {eventId}.</div>;
 }
 
-export const meta: MetaFunction = ({ data }) => {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   const eventFullName = data.event.name;
   const regex = /^[^:]+/;
   const eventName = eventFullName.match(regex);
