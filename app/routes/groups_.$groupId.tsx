@@ -19,7 +19,6 @@ export async function loader({ params }: LoaderFunctionArgs) {
       },
     },
   });
-  console.log('group', group);
   return json({ group });
 }
 

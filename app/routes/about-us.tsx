@@ -1,4 +1,6 @@
+import type { MetaFunction } from '@remix-run/node';
 import { Image, staticImage } from '~/components/ui/images';
+
 
 export default function AboutUs() {
   return (
@@ -91,3 +93,10 @@ export default function AboutUs() {
     </div>
   );
 }
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'About | Social Plan-It' },
+    { name: 'description', content: 'Checkout what Social Plan-It is all about' },
+  ];
+};

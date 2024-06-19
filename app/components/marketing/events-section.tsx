@@ -42,7 +42,7 @@ export function EventCard({ event, index }: { event: FullEvent; index: number })
   const isTransitioning = unstable_useViewTransitionState(to);
 
   return (
-    <Link to={to} unstable_viewTransition>
+    <Link to={to} unstable_viewTransition prefetch="intent">
       <div className="flex flex-col space-y-3 w-64 md:h-96 md:w-72 mx-6 sm:mx-0 max-w-md p-6 rounded-2xl bg-primary hover:transform hover:scale-105 transition-transform duration-300 hover:border">
         {event.imgUrl && event.imgAlt ? (
           <Image
