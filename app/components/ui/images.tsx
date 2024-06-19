@@ -17,7 +17,7 @@ export function Image({ ...props }: ImageProps) {
 interface ImageDetails {
   url: string;
   altText: string;
-  title: string;
+  title?: string;
 }
 
 const staticImage: { [key: string]: ImageDetails } = {

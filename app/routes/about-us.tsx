@@ -8,8 +8,8 @@ export default function AboutUs() {
           <Image
             className="w-full"
             src={staticImage.happySun.url}
-            alt={staticImage.happySun.url}
-            title={staticImage.happySun.url}
+            alt={staticImage.happySun.altText}
+            title={staticImage.happySun.title}
             width={512}
             height={512}
           />
