@@ -7,6 +7,12 @@ import { LinkButton } from '~/components/ui/forms';
 import { Image } from '~/components/ui/images';
 import { eventsDataPatcher } from '~/modules/events/event';
 
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  const group = data.group;
+
+  return [{ title: `${group.name} | Social Plan-It` }, { name: 'description', content: `${group.description}` }];
+};
+
 export async function loader({ params }: LoaderFunctionArgs): Promise<Response> {
   const group = await db.group.findFirstOrThrow({
     where: { id: params.groupId },
@@ -165,10 +171,3 @@ export function ErrorBoundary() {
   const { groupId } = useParams();
   return <div className="error-container">There was an error loading group by the id {groupId}.</div>;
 }
-
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  console.log(data);
-  const group = data.group;
-
-  return [{ title: `${group.name}` }, { name: 'description', content: `${group.description}` }];
-};
