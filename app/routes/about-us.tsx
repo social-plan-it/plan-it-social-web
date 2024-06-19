@@ -1,7 +1,6 @@
 import type { MetaFunction } from '@remix-run/node';
 import { Image, staticImage } from '~/components/ui/images';
 
-
 export default function AboutUs() {
   return (
     <div className="bg-primary text-white flex flex-col justify-center content-center">
