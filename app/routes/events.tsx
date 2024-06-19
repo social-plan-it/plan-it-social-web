@@ -1,3 +1,4 @@
+import type { MetaFunction } from '@remix-run/node';
 import { useEvents } from '~/hooks/useEvents';
 import { EventCard } from '~/components/marketing/events-section';
 
@@ -15,3 +16,10 @@ export default function EventsPage() {
     </div>
   );
 }
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'Events | Social Plan-It' },
+    { name: 'description', content: 'Your welcome to join us in any event. Looking forward to seeing you there!' },
+  ];
+};
