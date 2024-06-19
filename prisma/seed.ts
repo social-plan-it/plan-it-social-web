@@ -33,7 +33,7 @@ const events = [
     date: new Date('2023-07-19T08:00:00'),
     description:
       'Join us for an evening of insightful talks on progressive web apps, serverless architecture, and the future of JavaScript frameworks.',
-    imgUrl: 'imgs/upc-events1.png',
+    imgUrl: '/imgs/upc-events1.png',
     imgAlt: 'group of people in a meeting-1',
     location: '123 Main St, San Francisco',
   },
@@ -42,7 +42,7 @@ const events = [
     date: new Date('2023-08-15T18:30:00'),
     description:
       'Break a sweat and achieve your fitness goals with our high-intensity workout session suitable for all fitness levels.',
-    imgUrl: 'imgs/upc-events2.png',
+    imgUrl: '/imgs/upc-events2.png',
     imgAlt: 'group of people in a meeting-2',
     location: '456 Elm St, Munich',
   },
@@ -51,7 +51,7 @@ const events = [
     date: new Date('2023-09-22T12:15:00'),
     description:
       'Participate in our annual tennis tournament and showcase your skills in exciting matches with players from the community.',
-    imgUrl: 'imgs/upc-events3.png',
+    imgUrl: '/imgs/upc-events3.png',
     imgAlt: 'group of people in a meeting-3',
     location: '789 Oak St, Istanbul',
   },

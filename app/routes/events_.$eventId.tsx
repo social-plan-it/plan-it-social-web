@@ -1,7 +1,7 @@
 import type { MetaFunction, ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { useParams, useLoaderData, Link, Form } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
-import { json } from '@remix-run/node';
+import { json, redirect } from '@remix-run/node';
 import { eventDataPatcher } from '~/modules/events/event';
 import { requireUserSession } from '~/modules/session/session.server';
 
@@ -29,13 +29,27 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
 export async function action({ params, request }: ActionFunctionArgs) {
   const userSession = await requireUserSession(request);
+  const formData = await request.formData();
+  const intent = formData.get('intent');
 
-  const event = await db.event.update({
-    where: { id: params.eventId },
-    data: { users: { connect: { id: userSession.userId } } },
-  });
-
-  return json({ event });
+  switch (intent) {
+    case 'joinEvent': {
+      await db.event.update({
+        where: { id: params.eventId },
+        data: { users: { connect: { id: userSession.userId } } },
+      });
+      return redirect(`/events/${params.eventId}`);
+    }
+    case 'deleteEvent': {
+      await db.event.delete({
+        where: { id: params.eventId },
+      });
+      return redirect(`/events`);
+    }
+    default: {
+      throw new Response(`Invalid event intent: ${intent}`, { status: 400 });
+    }
+  }
 }
 
 export default function EventRoute() {
@@ -87,10 +101,20 @@ export default function EventRoute() {
         </ul>
         <Form method="post">
           <button
-            className="w-full md:px-[30px] md:py-[15px] md:w-max bg-warm rounded-full py-4 text-white"
+            className="w-full md:px-[30px] md:py-[15px] md:w-max bg-primary rounded-full py-4 text-white"
             type="submit"
+            name="intent"
+            value="joinEvent"
           >
             Join Event
+          </button>
+          <button
+            className="w-full md:px-[30px] md:py-[15px] md:w-max bg-warm rounded-full py-4 text-white"
+            type="submit"
+            name="intent"
+            value="deleteEvent"
+          >
+            Delete Event
           </button>
         </Form>
       </div>

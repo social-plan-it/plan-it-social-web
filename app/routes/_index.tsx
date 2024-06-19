@@ -7,7 +7,13 @@ import { BenefitsSection } from '~/components/marketing/benefits-section';
 import { eventsDataPatcher } from '~/modules/events/event';
 
 export const meta: MetaFunction = () => {
-  return [{ title: 'Home' }];
+  return [
+    { title: 'Home | Social Plan-It' },
+    {
+      name: 'description',
+      content: 'Social Plan-It is where you can join groups and events to collaborate to learn and meet new friends.',
+    },
+  ];
 };
 
 export async function loader() {
