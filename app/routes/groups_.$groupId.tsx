@@ -1,4 +1,4 @@
-import type { LoaderFunctionArgs } from '@remix-run/node';
+import type { MetaFunction, LoaderFunctionArgs } from '@remix-run/node';
 import { useParams, useLoaderData } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
 import { json } from '@remix-run/node';
@@ -7,7 +7,7 @@ import { LinkButton } from '~/components/ui/forms';
 import { Image } from '~/components/ui/images';
 import { eventsDataPatcher } from '~/modules/events/event';
 
-export async function loader({ params }: LoaderFunctionArgs) {
+export async function loader({ params }: LoaderFunctionArgs): Promise<Response> {
   const group = await db.group.findFirstOrThrow({
     where: { id: params.groupId },
     include: {
@@ -165,3 +165,10 @@ export function ErrorBoundary() {
   const { groupId } = useParams();
   return <div className="error-container">There was an error loading group by the id {groupId}.</div>;
 }
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  console.log(data);
+  const group = data.group;
+
+  return [{ title: `${group.name}` }, { name: 'description', content: `${group.description}` }];
+};
