@@ -5,7 +5,7 @@ import { json, redirect } from '@remix-run/node';
 import { eventDataPatcher } from '~/modules/events/event';
 import { requireUserSession } from '~/modules/session/session.server';
 
-export async function loader({ params }: LoaderFunctionArgs) {
+export async function loader({ params }: LoaderFunctionArgs): Promise<Response> {
   const event = await db.event.findFirst({
     where: { id: params.eventId },
     include: {
