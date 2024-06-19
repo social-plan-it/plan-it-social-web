@@ -67,7 +67,7 @@ export default function HeroSection() {
             height={379}
             width={553}
             priority
-          ></Image>
+          />
         </div>
       </div>
     </section>
