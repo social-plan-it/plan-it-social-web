@@ -21,12 +21,12 @@ export async function findGroups(this: any, { count = 24, skip, query, userId, r
   }
 
   const result = await db.$transaction([
-    (this as typeof db).group.findMany({
+    db.group.findMany({
       where: whereArg,
       skip: skip,
       take: count,
     }),
-    (this as typeof db).group.count({ where: whereArg }),
+    db.group.count({ where: whereArg }),
   ]);
 
   console.log(result);
