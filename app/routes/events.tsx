@@ -20,6 +20,6 @@ export default function EventsPage() {
 export const meta: MetaFunction = () => {
   return [
     { title: 'Events | Social Plan-It' },
-    { name: 'description', content: 'Your welcome to join us in any event. Looking forward to seeing you there!' },
+    { name: 'description', content: "You're welcome to join us in any event. Looking forward to seeing you there!" },
   ];
 };
