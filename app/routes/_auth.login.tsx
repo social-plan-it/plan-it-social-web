@@ -2,10 +2,9 @@ import type { LoaderFunctionArgs, ActionFunctionArgs } from '@remix-run/node';
 import type { FormEvent } from 'react';
 
 import { redirect } from '@remix-run/node';
-import { Form, Link, useActionData, useNavigation, useSubmit } from '@remix-run/react';
+import { Form, useActionData, useNavigation, useSubmit } from '@remix-run/react';
 import { startAuthentication } from '@simplewebauthn/browser';
 import { useState } from 'react';
-import { Button } from '~/components/ui/button';
 import { Card } from '~/components/ui/containers';
 import { Input } from '~/components/ui/forms';
 import { matchesHash } from '~/modules/database/crypto.server';
@@ -15,6 +14,8 @@ import { SignInWithGoogleButton } from '~/modules/session/buttons';
 import { verifyGoogleToken } from '~/modules/session/google-auth.server';
 import { createUserSession, getUserSession } from '~/modules/session/session.server';
 import { verifyPasskeyAuthenticationResponse } from '~/modules/session/webauthn.server';
+import { AuthButton, LinkButton } from '~/components/ui/button';
+import { KeyIcon } from '~/components/ui/icons/button-icons';
 
 export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
@@ -167,21 +168,23 @@ export default function Component() {
               showLabel={false}
               centerText
             />
-            <button type="submit" disabled={isPending}>
+            <AuthButton disabled={isPending} variant="primary" buttonStyle="fullyRounded">
               {isPending ? 'Logging in...' : 'Log In'}
-            </button>
+            </AuthButton>
             {actionData && 'message' in actionData && <p className="text-red-500">{actionData.message}</p>}
-
             <SignInWithGoogleButton />
 
-            <p>
-              New here? <Link to="/signup">Sign up</Link>
+            <p className="text-base">
+              New here? <LinkButton to="/signup">Sign up</LinkButton>
             </p>
           </Form>
 
-          <div className="flex flex-col items-center gap-3 my-4">
-            <p>or</p>
-            <form onSubmit={handleSignInWithPasskey} method="post" className="flex flex-col gap-3 items-center">
+          <div className="flex flex-col items-center gap-5 my-4">
+            <div className="inline-flex items-center justify-center w-full">
+              <hr className="w-full h-px my-4 bg-gray-300 border-0" />
+              <span className="absolute px-3 font-normal text-gray-700 -translate-x-1/2 bg-white left-1/2">or</span>
+            </div>
+            <form onSubmit={handleSignInWithPasskey} method="post" className="flex flex-col w-full gap-5 items-center">
               <Input
                 name="email"
                 type="email"
@@ -193,10 +196,10 @@ export default function Component() {
                 centerText
                 onChange={(e) => setEmail(e.target.value)}
               />
-
-              <Button variant="primary" buttonStyle="fullyRounded" disabled={processingPasskey || isPending}>
+              <AuthButton variant="outlined" buttonStyle="fullyRounded" icon>
+                <KeyIcon />
                 {processingPasskey || isPending ? 'Signing in...' : 'Sign in with Passkey'}
-              </Button>
+              </AuthButton>
 
               {passkeyError && <p className="text-red-500">{passkeyError}</p>}
               {actionData && 'passkeyError' in actionData && <p className="text-red-500">{actionData.passkeyError}</p>}

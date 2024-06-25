@@ -1,11 +1,11 @@
-import type { ButtonHTMLAttributes } from 'react';
+import { Link } from '@remix-run/react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 export const variants = {
   primary: 'primary',
   secondary: 'secondary',
   warm: 'warm',
   outlined: 'outlined',
-  tertiary: 'tertiary',
 } as const;
 
 export const buttonStyles = {
@@ -17,53 +17,99 @@ type BaseButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant: (typeof variants)[keyof typeof variants];
   buttonStyle: (typeof buttonStyles)[keyof typeof buttonStyles];
   children: React.ReactNode;
+  icon?: true;
   disabled?: boolean;
 };
 
-type ButtonProps = BaseButtonProps & {
-  icon?: false;
-};
+function getVariantClasses(variant: (typeof variants)[keyof typeof variants]) {
+  switch (variant) {
+    case 'primary':
+      return 'bg-primary text-white focus:ring-gray-300 hover:bg-gray-900';
 
-type ButtonAndIconProps = BaseButtonProps & {
-  icon?: true;
-  'aria-label': string;
-};
+    case 'secondary':
+      return 'bg-secondary focus:ring-teal-300 hover:bg-teal-200';
 
-type CombinedButtonProps = ButtonProps | ButtonAndIconProps;
+    case 'warm':
+      return 'bg-warm text-white focus:ring-red-300 hover:bg-red-700';
 
-export function Button({ variant, buttonStyle, icon, disabled, children, ...props }: CombinedButtonProps) {
+    // Outlined style
+    default:
+      return 'bg-white text-primary hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-gray-300 hover:bg-gray-100';
+  }
+}
+
+function getStyleClasses(buttonStyle: (typeof buttonStyles)[keyof typeof buttonStyles]) {
+  return buttonStyle === 'rounded' ? 'rounded-lg' : 'rounded-full';
+}
+
+export function Button({ variant, buttonStyle, icon, disabled, children, ...props }: BaseButtonProps) {
   let baseClasses =
-    'w-full sm:w-fit me-2 mb-2 text-center font-medium focus:outline-none focus:ring-4 px-3 py-2 text-sm sm:px-5 sm:py-2.5 md:py-3 md:text-base';
-  let variantClasses = '';
-  let styleClasses = '';
+    'w-full sm:w-fit me-2 mb-2 px-3 sm:px-5 py-2 sm:py-2.5 md:py-3 text-center text-sm md:text-base font-medium focus:outline-none focus:ring-4';
 
-  if (variant === 'primary') {
-    variantClasses = 'bg-primary text-white focus:ring-gray-300 hover:bg-gray-900';
-  } else if (variant === 'secondary') {
-    variantClasses = 'bg-secondary focus:ring-teal-300 hover:bg-teal-200';
-  } else if (variant === 'warm') {
-    variantClasses = 'bg-warm text-white focus:ring-red-300 hover:bg-red-700';
-  } else {
-    variantClasses = 'bg-white text-primary border border-gray-200 focus:ring-gray-300 hover:bg-gray-100';
-  }
-
-  if (buttonStyle === 'rounded') {
-    styleClasses = 'rounded-lg';
-  } else {
-    styleClasses = 'rounded-full';
-  }
+  let variantClasses = getVariantClasses(variant);
+  let styleClasses = getStyleClasses(buttonStyle);
 
   if (icon) {
     baseClasses += ' inline-flex items-center justify-center';
   }
 
   if (disabled) {
-    variantClasses += ' opacity-75 cursor-not-allowed';
+    variantClasses =
+      'w-full sm:w-fit me-2 mb-2 px-3 sm:px-5 py-2 sm:py-2.5 md:py-3 text-center text-sm md:text-base font-medium bg-gray-300 text-gray-600 opacity-75 cursor-not-allowed';
+    baseClasses = '';
   }
 
   return (
     <button className={`${baseClasses} ${variantClasses} ${styleClasses}`} {...props}>
       {children}
     </button>
+  );
+}
+
+export function AuthButton({ variant, buttonStyle, icon, disabled, children, ...props }: BaseButtonProps) {
+  let baseClasses = 'w-full py-3 text-center text-base font-normal focus:outline-none focus:ring-4 py-3';
+  let variantClasses = getVariantClasses(variant);
+  let styleClasses = getStyleClasses(buttonStyle);
+
+  if (icon) {
+    baseClasses += ' inline-flex items-center justify-center';
+  }
+
+  if (disabled) {
+    variantClasses =
+      'w-full py-3 text-center text-base font-normal bg-gray-300 text-gray-600 opacity-75 cursor-not-allowed';
+    baseClasses = '';
+  }
+
+  return (
+    <button type="submit" className={`${baseClasses} ${variantClasses} ${styleClasses}`} {...props}>
+      {children}
+    </button>
+  );
+}
+
+type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  'aria-label': string;
+  children: React.ReactNode;
+};
+
+export function IconButton({ 'aria-label': ariaLabel, children, ...props }: IconButtonProps) {
+  return (
+    <button aria-label={ariaLabel} {...props}>
+      {children}
+    </button>
+  );
+}
+
+type LinkButtonProps = {
+  children: ReactNode;
+  to: string;
+};
+
+export function LinkButton({ to, children, ...props }: LinkButtonProps) {
+  return (
+    <Link {...props} to={to} className="font-medium text-primary underline underline-offset-4 hover:decoration-2">
+      {children}
+    </Link>
   );
 }
