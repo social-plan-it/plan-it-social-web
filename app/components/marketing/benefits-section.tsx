@@ -1,26 +1,30 @@
 import { Link } from '@remix-run/react';
+import { staticImage, Image } from '../ui/images';
 
 const benefits = [
   {
     title: 'Join a group',
     message: 'Do what you love, meet others who love it, find your community. The rest is history!',
-    imgUrl: 'https://res.cloudinary.com/dxctpvd8v/image/upload/v1687225039/SocialPlan-it/Feature-Image-1_clboti.png',
-    imgAlt: 'Group of women collaborating on a computer',
+    imgUrl: staticImage.womenCollaborating.url,
+    imgAlt: staticImage.womenCollaborating.altText,
+    imgTitle: staticImage.womenCollaborating.title,
     link: '/groups',
   },
   {
     title: 'Find an event',
     message:
       'Events are happening on just about any topic you can think of, from online gaming and photography to yoga and hiking.',
-    imgUrl: 'https://res.cloudinary.com/dxctpvd8v/image/upload/v1687225039/SocialPlan-it/Feature-Image-2_c5mgcb.png',
-    imgAlt: 'Five members sitting on a ledge bench',
+    imgUrl: staticImage.friendsOnABench.url,
+    imgAlt: staticImage.friendsOnABench.altText,
+    imgTitle: staticImage.friendsOnABench.title,
     link: '/events',
   },
   {
     title: 'Start a group',
     message: 'You don’t have to be an expert to gather people together and explore shared interests.',
-    imgUrl: 'https://res.cloudinary.com/dxctpvd8v/image/upload/v1687225039/SocialPlan-it/Feature-Image-3_vpibsv.png',
-    imgAlt: 'Multiple people conversing on the steps',
+    imgUrl: staticImage.womenOnStaircase.url,
+    imgAlt: staticImage.womenOnStaircase.altText,
+    imgTitle: staticImage.womenOnStaircase.title,
     link: '/groups/new',
   },
 ];
@@ -33,7 +37,14 @@ export function BenefitsSection() {
           <Link key={index} to={benefit.link}>
             <div className="flex flex-col p-5 text-start max-w-xs">
               <div className="w-full pb-5">
-                <img className="w-full" src={benefit.imgUrl} alt={benefit.imgAlt} />
+                <Image
+                  className="w-full"
+                  src={benefit.imgUrl}
+                  alt={benefit.imgAlt}
+                  title={benefit.imgTitle}
+                  width={500}
+                  height={500}
+                />
               </div>
               <h1 className="text-4xl font-bold mb-2">{benefit.title}</h1>
               <p className="text-lg">{benefit.message}</p>
