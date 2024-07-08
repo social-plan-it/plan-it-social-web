@@ -17,7 +17,7 @@ type BaseButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant: (typeof variants)[keyof typeof variants];
   buttonStyle: (typeof buttonStyles)[keyof typeof buttonStyles];
   children: React.ReactNode;
-  icon?: true;
+  icon?: boolean;
   disabled?: boolean;
 };
 
