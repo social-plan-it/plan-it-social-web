@@ -15,7 +15,7 @@ import { verifyGoogleToken } from '~/modules/session/google-auth.server';
 import { createUserSession, getUserSession } from '~/modules/session/session.server';
 import { verifyPasskeyAuthenticationResponse } from '~/modules/session/webauthn.server';
 import { Button, LinkButton } from '~/components/ui/button';
-import { KeyIcon } from '~/components/ui/icons/button-icons';
+import { KeyIcon } from '~/components/ui/icons';
 
 export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
