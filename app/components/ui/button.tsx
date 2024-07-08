@@ -43,8 +43,7 @@ function getStyleClasses(buttonStyle: (typeof buttonStyles)[keyof typeof buttonS
 }
 
 export function Button({ variant, buttonStyle, icon, disabled, children, ...props }: BaseButtonProps) {
-  let baseClasses =
-    'w-full px-3 sm:px-5 py-2 sm:py-2.5 md:py-3 text-center text-sm md:text-base font-medium focus:outline-none focus:ring-4';
+  let baseClasses = 'w-full px-6 py-2.5 text-center text-sm font-medium focus:outline-none focus:ring-4';
 
   let variantClasses = getVariantClasses(variant);
   let styleClasses = getStyleClasses(buttonStyle);
@@ -55,7 +54,7 @@ export function Button({ variant, buttonStyle, icon, disabled, children, ...prop
 
   if (disabled) {
     variantClasses =
-      'w-full px-3 sm:px-5 py-2 sm:py-2.5 md:py-3 text-center text-sm md:text-base font-medium bg-gray-300 text-gray-600 opacity-75 cursor-not-allowed';
+      'w-full px-6 py-2.5 text-center text-sm font-medium bg-gray-300 text-gray-600 opacity-75 cursor-not-allowed';
     baseClasses = '';
   }
 
