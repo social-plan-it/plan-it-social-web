@@ -14,8 +14,9 @@ import { SignInWithGoogleButton } from '~/modules/session/buttons';
 import { verifyGoogleToken } from '~/modules/session/google-auth.server';
 import { createUserSession, getUserSession } from '~/modules/session/session.server';
 import { verifyPasskeyAuthenticationResponse } from '~/modules/session/webauthn.server';
-import { Button, LinkButton } from '~/components/ui/button';
+import { Button } from '~/components/ui/button';
 import { KeyIcon } from '~/components/ui/icons';
+import { DefaultLink } from '~/components/ui/links';
 
 export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
@@ -175,7 +176,7 @@ export default function Component() {
             <SignInWithGoogleButton />
 
             <p className="text-base">
-              New here? <LinkButton to="/signup">Sign up</LinkButton>
+              New here? <DefaultLink to="/signup">Sign up</DefaultLink>
             </p>
           </Form>
 

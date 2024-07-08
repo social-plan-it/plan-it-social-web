@@ -2,7 +2,8 @@ import type { LoaderFunctionArgs, ActionFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { Form, useActionData, useNavigation } from '@remix-run/react';
 import { z } from 'zod';
-import { Button, LinkButton } from '~/components/ui/button';
+import { Button } from '~/components/ui/button';
+import { DefaultLink } from '~/components/ui/links';
 
 import { Card } from '~/components/ui/containers';
 import { Input } from '~/components/ui/forms';
@@ -164,7 +165,7 @@ export default function Component() {
             </Button>
 
             <p>
-              Have an account already? <LinkButton to="/login">Login</LinkButton>
+              Have an account already? <DefaultLink to="/login">Login</DefaultLink>
             </p>
           </Form>
         </Card>
