@@ -2,7 +2,7 @@ import type { LoaderFunctionArgs, ActionFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { Form, useActionData, useNavigation } from '@remix-run/react';
 import { z } from 'zod';
-import { AuthButton, LinkButton } from '~/components/ui/button';
+import { Button, LinkButton } from '~/components/ui/button';
 
 import { Card } from '~/components/ui/containers';
 import { Input } from '~/components/ui/forms';
@@ -159,9 +159,9 @@ export default function Component() {
               </p>
             )}
 
-            <AuthButton variant="primary" buttonStyle="fullyRounded" disabled={isPending}>
+            <Button variant="primary" buttonStyle="fullyRounded" disabled={isPending}>
               {isPending ? 'Signing up...' : 'Sign Up'}
-            </AuthButton>
+            </Button>
 
             <p>
               Have an account already? <LinkButton to="/login">Login</LinkButton>

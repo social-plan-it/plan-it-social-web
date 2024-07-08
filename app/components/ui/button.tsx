@@ -66,28 +66,6 @@ export function Button({ variant, buttonStyle, icon, disabled, children, ...prop
   );
 }
 
-export function AuthButton({ variant, buttonStyle, icon, disabled, children, ...props }: BaseButtonProps) {
-  let baseClasses = 'w-full py-3 text-center text-base font-normal focus:outline-none focus:ring-4 py-3';
-  let variantClasses = getVariantClasses(variant);
-  let styleClasses = getStyleClasses(buttonStyle);
-
-  if (icon) {
-    baseClasses += ' inline-flex items-center justify-center';
-  }
-
-  if (disabled) {
-    variantClasses =
-      'w-full py-3 text-center text-base font-normal bg-gray-300 text-gray-600 opacity-75 cursor-not-allowed';
-    baseClasses = '';
-  }
-
-  return (
-    <button type="submit" className={`${baseClasses} ${variantClasses} ${styleClasses}`} {...props}>
-      {children}
-    </button>
-  );
-}
-
 type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   'aria-label': string;
   children: React.ReactNode;
