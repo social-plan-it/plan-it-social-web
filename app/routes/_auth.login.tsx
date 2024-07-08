@@ -172,11 +172,17 @@ export default function Component() {
             <Button disabled={isPending} variant="primary" buttonStyle="fullyRounded">
               {isPending ? 'Logging in...' : 'Log In'}
             </Button>
+
+            <div className="inline-flex items-center justify-center w-full">
+              <hr className="w-full h-px my-4 bg-gray-300 border-0" />
+              <span className="absolute px-3 font-normal text-gray-700 -translate-x-1/2 bg-white left-1/2">or</span>
+            </div>
+
             {actionData && 'message' in actionData && <p className="text-red-500">{actionData.message}</p>}
             <SignInWithGoogleButton />
 
             <p className="text-base">
-              New here? <DefaultLink to="/signup">Sign up</DefaultLink>
+              New to Social Plan-It? <DefaultLink to="/signup">Join now</DefaultLink>
             </p>
           </Form>
 
