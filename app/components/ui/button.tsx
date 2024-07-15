@@ -1,26 +1,18 @@
 import type { ButtonHTMLAttributes } from 'react';
 
-export const variants = {
-  primary: 'primary',
-  secondary: 'secondary',
-  warm: 'warm',
-  outlined: 'outlined',
-} as const;
+type VariantProps = 'primary' | 'secondary' | 'warm' | 'outlined';
 
-export const buttonStyles = {
-  rounded: 'rounded',
-  fullyRounded: 'fullyRounded',
-} as const;
+type ButtonStyleProps = 'rounded' | 'fullyRounded';
 
 type BaseButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant: (typeof variants)[keyof typeof variants];
-  buttonStyle: (typeof buttonStyles)[keyof typeof buttonStyles];
+  variant: VariantProps;
+  buttonStyle: ButtonStyleProps;
   children: React.ReactNode;
   icon?: boolean;
   disabled?: boolean;
 };
 
-function getVariantClasses(variant: (typeof variants)[keyof typeof variants]) {
+function getVariantClasses(variant: VariantProps) {
   switch (variant) {
     case 'primary':
       return 'bg-primary text-white focus:ring-gray-300 hover:bg-gray-900';
@@ -31,13 +23,12 @@ function getVariantClasses(variant: (typeof variants)[keyof typeof variants]) {
     case 'warm':
       return 'bg-warm text-white focus:ring-red-300 hover:bg-red-700';
 
-    // Outlined style
-    default:
+    default: // Outlined style
       return 'bg-white text-primary hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-gray-300 hover:bg-gray-100';
   }
 }
 
-function getStyleClasses(buttonStyle: (typeof buttonStyles)[keyof typeof buttonStyles]) {
+function getStyleClasses(buttonStyle: ButtonStyleProps) {
   return buttonStyle === 'rounded' ? 'rounded-lg' : 'rounded-full';
 }
 
