@@ -60,11 +60,11 @@ type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
 };
 
-export function IconButton({ 'aria-label': ariaLabel, children, ...props }: IconButtonProps) {
+export function IconButton({ children, ...props }: IconButtonProps) {
   let baseClasses =
     'text-white bg-primary hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center';
   return (
-    <button aria-label={ariaLabel} className={baseClasses} {...props}>
+    <button className={baseClasses} {...props}>
       {children}
     </button>
   );
