@@ -16,7 +16,7 @@ import { createUserSession, getUserSession } from '~/modules/session/session.ser
 import { verifyPasskeyAuthenticationResponse } from '~/modules/session/webauthn.server';
 import { Button } from '~/components/ui/button';
 import { KeyIcon } from '~/components/ui/icons';
-import { DefaultLink } from '~/components/ui/links';
+import { Link } from '~/components/ui/links';
 
 export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
@@ -182,7 +182,10 @@ export default function Component() {
             <SignInWithGoogleButton />
 
             <p className="text-base">
-              New to Social Plan-It? <DefaultLink to="/signup">Join now</DefaultLink>
+              New to Social Plan-It?{' '}
+              <Link to="/signup" className="inline">
+                Join now
+              </Link>
             </p>
           </Form>
 

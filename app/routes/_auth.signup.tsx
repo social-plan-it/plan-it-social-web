@@ -3,7 +3,7 @@ import { redirect } from '@remix-run/node';
 import { Form, useActionData, useNavigation } from '@remix-run/react';
 import { z } from 'zod';
 import { Button } from '~/components/ui/button';
-import { DefaultLink } from '~/components/ui/links';
+import { Link } from '~/components/ui/links';
 
 import { Card } from '~/components/ui/containers';
 import { Input } from '~/components/ui/forms';
@@ -165,7 +165,10 @@ export default function Component() {
             </Button>
 
             <p>
-              Have an account already? <DefaultLink to="/login">Login</DefaultLink>
+              Have an account already?{' '}
+              <Link to="/login" className="inline">
+                Login
+              </Link>
             </p>
           </Form>
         </Card>

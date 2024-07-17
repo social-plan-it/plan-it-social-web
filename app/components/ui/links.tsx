@@ -1,6 +1,6 @@
-import type { HTMLAttributes, ReactNode } from 'react';
-import type { NavLinkProps, LinkProps as RemixLinkProps } from '@remix-run/react';
-import { NavLink, Link as RemixLink } from '@remix-run/react';
+import type { HTMLAttributes } from 'react';
+import type { NavLinkProps } from '@remix-run/react';
+import { NavLink } from '@remix-run/react';
 
 type LinkProps = NavLinkProps & {
   className?: HTMLAttributes<HTMLDivElement>['className'];
@@ -15,22 +15,9 @@ type LinkProps = NavLinkProps & {
 export function Link(props: LinkProps) {
   return (
     <div className={props.className}>
-      <NavLink {...props} className="text-green-500">
+      <NavLink {...props} className="font-medium text-green-700 hover:underline hover:underline-offset-4">
         {props.children}
       </NavLink>
     </div>
-  );
-}
-
-type DefaultLinkProps = RemixLinkProps & {
-  children: ReactNode;
-  to: string;
-};
-
-export function DefaultLink({ to, children, ...props }: DefaultLinkProps) {
-  return (
-    <RemixLink {...props} to={to} className="font-medium text-primary hover:underline hover:underline-offset-4">
-      {children}
-    </RemixLink>
   );
 }
