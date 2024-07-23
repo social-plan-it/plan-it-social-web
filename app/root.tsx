@@ -65,7 +65,9 @@ function Shell({ children }: { children: React.ReactNode }) {
       </head>
       <body className="min-h-screen w-full flex flex-col">
         <TopNav />
-        <main id="main">{children}</main>
+        <main id="main" className="flex flex-col mb-auto">
+          {children}
+        </main>
         <ScrollRestoration />
         <Scripts />
         <Footer />
@@ -84,7 +86,7 @@ export function ErrorBoundary() {
           <h1>
             {error.status} {error.statusText}
           </h1>
-          {!!error.data && <p>{error.data}</p>}
+          {!!error.data && <p>{JSON.stringify(error.data)}</p>}
         </ErrorMessage>
       </Shell>
     );
