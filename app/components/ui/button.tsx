@@ -1,68 +1,70 @@
 import type { ButtonHTMLAttributes } from 'react';
 
-export const variants = {
-  primary: 'primary',
-  secondary: 'secondary',
-  warm: 'warm',
-  outlined: 'outlined',
-  tertiary: 'tertiary',
-} as const;
+type VariantProps = 'primary' | 'secondary' | 'warm' | 'outlined';
 
-export const buttonStyles = {
-  rounded: 'rounded',
-  fullyRounded: 'fullyRounded',
-} as const;
+type ButtonStyleProps = 'rounded' | 'fullyRounded';
 
 type BaseButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant: (typeof variants)[keyof typeof variants];
-  buttonStyle: (typeof buttonStyles)[keyof typeof buttonStyles];
+  variant: VariantProps;
+  buttonStyle: ButtonStyleProps;
   children: React.ReactNode;
+  icon?: boolean;
   disabled?: boolean;
 };
 
-type ButtonProps = BaseButtonProps & {
-  icon?: false;
-};
+function getVariantClasses(variant: VariantProps) {
+  switch (variant) {
+    case 'primary':
+      return 'bg-primary text-white focus:ring-gray-300 hover:bg-gray-900';
 
-type ButtonAndIconProps = BaseButtonProps & {
-  icon?: true;
-  'aria-label': string;
-};
+    case 'secondary':
+      return 'bg-secondary focus:ring-teal-300 hover:bg-teal-200';
 
-type CombinedButtonProps = ButtonProps | ButtonAndIconProps;
+    case 'warm':
+      return 'bg-warm text-white focus:ring-red-300 hover:bg-red-700';
 
-export function Button({ variant, buttonStyle, icon, disabled, children, ...props }: CombinedButtonProps) {
-  let baseClasses =
-    'w-full sm:w-fit me-2 mb-2 text-center font-medium focus:outline-none focus:ring-4 px-3 py-2 text-sm sm:px-5 sm:py-2.5 md:py-3 md:text-base';
-  let variantClasses = '';
-  let styleClasses = '';
-
-  if (variant === 'primary') {
-    variantClasses = 'bg-primary text-white focus:ring-gray-300 hover:bg-gray-900';
-  } else if (variant === 'secondary') {
-    variantClasses = 'bg-secondary focus:ring-teal-300 hover:bg-teal-200';
-  } else if (variant === 'warm') {
-    variantClasses = 'bg-warm text-white focus:ring-red-300 hover:bg-red-700';
-  } else {
-    variantClasses = 'bg-white text-primary border border-gray-200 focus:ring-gray-300 hover:bg-gray-100';
+    default: // Outlined style
+      return 'bg-white text-primary hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-gray-300 hover:bg-gray-100';
   }
+}
 
-  if (buttonStyle === 'rounded') {
-    styleClasses = 'rounded-lg';
-  } else {
-    styleClasses = 'rounded-full';
-  }
+function getStyleClasses(buttonStyle: ButtonStyleProps) {
+  return buttonStyle === 'rounded' ? 'rounded-lg' : 'rounded-full';
+}
+
+export function Button({ variant, buttonStyle, icon, disabled, children, ...props }: BaseButtonProps) {
+  let baseClasses = 'w-full px-6 py-2.5 text-center text-sm font-medium focus:outline-none focus:ring-4';
+
+  let variantClasses = getVariantClasses(variant);
+  let styleClasses = getStyleClasses(buttonStyle);
 
   if (icon) {
     baseClasses += ' inline-flex items-center justify-center';
   }
 
   if (disabled) {
-    variantClasses += ' opacity-75 cursor-not-allowed';
+    variantClasses =
+      'w-full px-6 py-2.5 text-center text-sm font-medium bg-gray-300 text-gray-600 opacity-75 cursor-not-allowed';
+    baseClasses = '';
   }
 
   return (
     <button className={`${baseClasses} ${variantClasses} ${styleClasses}`} {...props}>
+      {children}
+    </button>
+  );
+}
+
+type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  'aria-label': string;
+  children: React.ReactNode;
+};
+
+export function IconButton({ children, ...props }: IconButtonProps) {
+  let baseClasses =
+    'text-white bg-primary hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center';
+  return (
+    <button className={baseClasses} {...props}>
       {children}
     </button>
   );

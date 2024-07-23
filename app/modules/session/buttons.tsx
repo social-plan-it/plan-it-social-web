@@ -36,6 +36,7 @@ export function SignInWithGoogleButton() {
         data-text="continue_with"
         data-size="large"
         data-logo_alignment="left"
+        data-width="272"
       />
     </>
   );
