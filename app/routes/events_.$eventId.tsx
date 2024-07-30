@@ -1,11 +1,20 @@
-import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
+import type { MetaFunction, ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { useParams, useLoaderData, Link, Form } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
 import { json, redirect } from '@remix-run/node';
 import { eventDataPatcher } from '~/modules/events/event';
 import { requireUserSession } from '~/modules/session/session.server';
 
-export async function loader({ params }: LoaderFunctionArgs) {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  const eventFullName = data.event.name;
+  const regex = /^[^:]+/;
+  const eventName = eventFullName.match(regex);
+  const eventDescription = data.event.description;
+
+  return [{ title: `${eventName} | Social Plan-It` }, { name: 'description', content: `${eventDescription}` }];
+};
+
+export async function loader({ params }: LoaderFunctionArgs): Promise<Response> {
   const event = await db.event.findFirst({
     where: { id: params.eventId },
     include: {

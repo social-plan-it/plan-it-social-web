@@ -15,7 +15,7 @@ type LinkProps = NavLinkProps & {
 export function Link(props: LinkProps) {
   return (
     <div className={props.className}>
-      <NavLink {...props} className="text-green-500">
+      <NavLink {...props} className="font-medium text-green-700 hover:underline hover:underline-offset-4">
         {props.children}
       </NavLink>
     </div>
