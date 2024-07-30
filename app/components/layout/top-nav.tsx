@@ -3,6 +3,7 @@ import { Form, Link, useNavigation } from '@remix-run/react';
 import { useCurrentUser } from '~/hooks/useCurrentUser';
 import { StyledMenu } from '~/components/ui/menu';
 import { Menu } from '@headlessui/react';
+import { staticImage, Image } from '../ui/images';
 
 export function TopNav() {
   const currentUser = useCurrentUser();
@@ -20,10 +21,12 @@ export function TopNav() {
       <div className="flex justify-start items-center max-w-screen-2xl mx-auto">
         <div className="text-white text-xl font-semibold flex justify-between items-center py-4 w-full">
           <Link to="/">
-            <img
-              className="w-1/3"
-              src="https://res.cloudinary.com/dxctpvd8v/image/upload/v1683267003/SocialPlanIt/SocialPlan-it-logo-Horizontal_xwm3xt.png"
-              alt="Social Plan It horizontal logo"
+            <Image
+              src={staticImage.companyLogoHorizontal.url}
+              alt={staticImage.companyLogoHorizontal.altText}
+              title={staticImage.companyLogoHorizontal.title}
+              width={180}
+              height={28.66}
             />
           </Link>
           <div className="hidden md:flex justify-between w-3/4 py-4">
