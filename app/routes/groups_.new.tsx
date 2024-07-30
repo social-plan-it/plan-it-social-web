@@ -1,6 +1,6 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
-import { Form, useActionData } from '@remix-run/react';
+import { Form, useActionData, useLoaderData } from '@remix-run/react';
 import { createClient } from '@supabase/supabase-js';
 import { z } from 'zod';
 
@@ -13,14 +13,20 @@ import { H1, H2 } from '~/components/ui/headers';
 import { requireUserSession } from '~/modules/session/session.server';
 import { badRequest } from '~/modules/response/response.server';
 import { invokeBackgroundTask } from '~/modules/background-tasks/invoke';
+import { requireValidCsrfToken } from '~/modules/csrf/csrf.server';
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  return requireUserSession(request);
+  const userSession = await requireUserSession(request);
+  const csrfToken = userSession.csrfToken;
+  return { csrfToken };
 }
 
 export async function action({ request }: ActionFunctionArgs) {
   const userSession = await requireUserSession(request);
   const form = await request.formData();
+  const csrfToken = form.get('csrfToken');
+  await requireValidCsrfToken(userSession.csrfToken, csrfToken);
+
   const formObject = await z
     .object({
       groupName: z.string().min(1, 'Group name is required.'),
@@ -28,11 +34,13 @@ export async function action({ request }: ActionFunctionArgs) {
       groupImage: z
         .instanceof(File)
         .refine(
-          (file) => !file || file?.size <= MAX_FILE_SIZE_MB * 1024 * 1024,
+          // if no file is attached, it's an empty File object with no name
+          (file) => !file.name || file?.size <= MAX_FILE_SIZE_MB * 1024 * 1024,
           `File size can't exceed ${MAX_FILE_SIZE_MB}MB.`,
         )
         .refine(
-          (file) => ACCEPTED_IMAGE_TYPES.split(', ').includes(file.type),
+          // if no file is attached, it's an empty File object with no name
+          (file) => !file.name || ACCEPTED_IMAGE_TYPES.split(', ').includes(file.type),
           `Only ${ACCEPTED_IMAGE_TYPES} are supported.`,
         ),
     })
@@ -84,6 +92,7 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function GroupNew() {
+  const { csrfToken } = useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
   return (
     <div className="grow py-20 lg:py-40 bg-secondary w-full flex flex-col items-center justify-center">
@@ -93,6 +102,7 @@ export default function GroupNew() {
           <H2>Your Community Starts Here</H2>
           <Card>
             <Form method="post" encType="multipart/form-data">
+              <input type="hidden" name="csrfToken" value={csrfToken} />
               <div className="flex pt-4 w-full">
                 <div className="w-1/2">
                   <div className="w-1/2 pb-4">
