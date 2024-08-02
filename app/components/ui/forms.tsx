@@ -1,13 +1,5 @@
-import {
-  useState,
-  type ButtonHTMLAttributes,
-  type InputHTMLAttributes,
-  type ReactNode,
-  type TextareaHTMLAttributes,
-} from 'react';
-import { Link } from '@remix-run/react';
+import { useState, type InputHTMLAttributes, type ReactNode, type TextareaHTMLAttributes } from 'react';
 import clsx from 'clsx';
-import type { LinkProps } from '@remix-run/react';
 
 export const MAX_FILE_SIZE_MB = 8;
 export const ACCEPTED_IMAGE_TYPES = 'image/jpeg, image/jpg, image/png, image/webp';
@@ -82,43 +74,5 @@ export function TextArea({ label, ...props }: TextAreaProps) {
       {label}
       <textarea {...props} className="border border-gray-300 bg-grayBackground rounded-lg px-4 py-2 w-full" />
     </label>
-  );
-}
-
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
-
-export function Button({ children, ...props }: ButtonProps) {
-  return (
-    <button {...props} className="border-2 bg-red-700 text-white rounded-lg p-2" type="submit">
-      {children}
-    </button>
-  );
-}
-
-type LinkButtonProps = {
-  children: ReactNode;
-  to: string;
-  preventScrollReset?: boolean;
-  prefetch?: LinkProps['prefetch'];
-};
-
-export function LinkButton({
-  to,
-  children,
-  preventScrollReset = true,
-  prefetch = 'intent',
-  ...props
-}: LinkButtonProps) {
-  return (
-    <Link
-      {...props}
-      to={to}
-      prefetch="intent"
-      className="border-2 bg-red-700 text-white rounded-lg p-3 w-full text-center"
-      preventScrollReset={preventScrollReset}
-      type="submit"
-    >
-      {children}
-    </Link>
   );
 }

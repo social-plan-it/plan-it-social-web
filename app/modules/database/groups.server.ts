@@ -29,7 +29,5 @@ export async function findGroups(this: any, { count = 24, skip, query, userId, r
     db.group.count({ where: whereArg }),
   ]);
 
-  console.log(result);
-
   return result;
 }
