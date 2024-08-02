@@ -1,6 +1,7 @@
 import { createCookieSessionStorage, redirect } from '@remix-run/node';
 
 import { db } from '~/modules/database/db.server';
+import { createCsrfToken } from '../csrf/csrf.server';
 
 const sessionSecret = process.env.SESSION_SECRET;
 if (!sessionSecret) {
@@ -27,6 +28,7 @@ export async function createUserSession(userId: string): Promise<Headers> {
 
   const cookie = await getSession();
   cookie.set('userId', userId);
+  cookie.set('csrfToken', createCsrfToken());
 
   const cookieValue = await commitSession(cookie);
   headers.set('Set-Cookie', cookieValue);
@@ -36,12 +38,13 @@ export async function createUserSession(userId: string): Promise<Headers> {
 
 export type UserSession = {
   userId: string;
+  csrfToken: string;
 };
 
 export async function getUserSession(request: Request): Promise<UserSession | null> {
   const cookie = await getSession(request.headers.get('Cookie'));
   if (cookie && cookie.get('userId')) {
-    return { userId: cookie.get('userId') };
+    return { userId: cookie.get('userId'), csrfToken: cookie.get('csrfToken') };
   }
   return null;
 }
