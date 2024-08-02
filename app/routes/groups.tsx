@@ -1,27 +1,55 @@
-import { Form, Link, useLoaderData } from '@remix-run/react';
+import { Form, Link, redirect, useLoaderData, useSearchParams } from '@remix-run/react';
 import { Image, staticImage } from '~/components/ui/images';
 import { LinkButton } from '~/components/ui/forms';
-import { db } from '~/modules/database/db.server';
 import type { MetaFunction, LoaderFunctionArgs } from '@remix-run/node';
 import type { Group } from '@prisma/client';
+import { findGroups } from '~/modules/database/groups.server';
+
+const pageCount = 24;
+
+function getQueryString(pageNum: number | null, query: string | null) {
+  const searchParams = new URLSearchParams();
+  if (pageNum) {
+    searchParams.append('p', '' + pageNum);
+  }
+  if (query) {
+    searchParams.append('q', query);
+  }
+  return searchParams.toString();
+}
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const query = url.searchParams.get('q');
+  const page = url.searchParams.get('p');
+  const pageNum = page ? Number.parseInt(page, 10) : 1;
+  //add Zod validation
 
-  if (!query) {
-    const groups = await db.group.findMany({ take: 24 });
-    return { groups };
+  const [groups, count] = await findGroups({
+    query: query || undefined,
+    count: pageCount,
+    skip: pageCount * (pageNum - 1),
+  });
+
+  const maxPage = Math.ceil(count / pageCount);
+
+  if (pageNum > maxPage) {
+    return redirect(`/groups/?${getQueryString(maxPage, query)}`);
+  }
+  if (pageNum < 1) {
+    return redirect(`/groups/?${getQueryString(maxPage, query)}`);
   }
 
-  const groups = await db.group.findMany({
-    where: { name: { contains: query } },
-  });
-  return { groups };
+  return { groups, count };
 }
 
 export default function Group() {
-  const { groups } = useLoaderData<typeof loader>();
+  const { groups, count } = useLoaderData<typeof loader>();
+  const [searchParams] = useSearchParams();
+  const page = searchParams.get('p');
+  const query = searchParams.get('q');
+  const pageNum = page ? Number.parseInt(page, 10) : 1;
+
   return (
     <div className="bg-primary">
       <div className="m-auto max-w-screen-xl">
@@ -86,6 +114,14 @@ export default function Group() {
           })}
         </ul>
       </div>
+
+      <div className="w-full flex justify-center gap-4">
+        <LinkButton to={`/groups/?${getQueryString(Math.max(pageNum - 1, 1), query)}`}>Previous</LinkButton>
+        <LinkButton to={`/groups/?${getQueryString(Math.min(pageNum + 1, Math.ceil(count / pageCount)), query)}`}>
+          Next
+        </LinkButton>
+      </div>
+
       <div className="md:w-52 m-auto flex justify-center items-center py-4">
         <LinkButton to="/groups/new">Create New Group</LinkButton>
       </div>
