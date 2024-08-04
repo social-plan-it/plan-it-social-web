@@ -6,7 +6,7 @@ import { db } from '~/modules/database/db.server';
 import { Card } from '~/components/ui/containers';
 import { Input, TextArea } from '~/components/ui/forms';
 import { Button } from '~/components/ui/button';
-import { H1 } from '~/components/ui/headers';
+import { H1 } from '~/components/ui/article';
 import { requireUserSession } from '~/modules/session/session.server';
 
 export async function loader({ request }: LoaderFunctionArgs) {

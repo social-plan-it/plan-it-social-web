@@ -9,7 +9,7 @@ import { db } from '~/modules/database/db.server';
 import { Card } from '~/components/ui/containers';
 import { ACCEPTED_IMAGE_TYPES, ImageUpload, Input, MAX_FILE_SIZE_MB, TextArea } from '~/components/ui/forms';
 import { Button } from '~/components/ui/button';
-import { H1, H2 } from '~/components/ui/headers';
+import { H1, H2 } from '~/components/ui/article';
 import { requireUserSession } from '~/modules/session/session.server';
 import { badRequest } from '~/modules/response/response.server';
 import { invokeBackgroundTask } from '~/modules/background-tasks/invoke';
