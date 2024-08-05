@@ -1,6 +1,5 @@
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
-import errorMap from 'zod/locales/en.js';
 
 export default {
   content: ['./app/**/*.{js,jsx,ts,tsx}'],
@@ -23,14 +22,19 @@ export default {
         onSurface: '#1F2937', // Text and icons against any surface color
         onSurfaceVariant: '#6B7280', // Lower-emphasis color for text and icons against any surface color
 
-        surfaceContainerLowest: '#F3F4F6',
-        surfaceContainerLow: '#F3F4F6',
-        surfaceContainer: '#F9FAFB', // Container Color, use-case see: https://m3.material.io/styles/color/roles#2396f283-2cd1-4138-8452-76cfb500cecd
-        surfaceContainerHigh: '#FFFFFF',
-        surfaceContainerHighest: '#F9FAFB',
+        surfaceContainer: {
+          // Container Color, use-case see: https://m3.material.io/styles/color/roles#2396f283-2cd1-4138-8452-76cfb500cecd
+          lowest: '#F3F4F6',
+          low: '#F3F4F6',
+          DEFAULT: '#F9FAFB',
+          high: '#F3F4F6',
+          highest: '#FFFFFF',
+        },
 
-        outline: '#D1D5DB', // Important boundaries, such as a text field outline. Need 3:1 contrast with surface color.
-        outlineVariant: '#9CA3AF', // Lower-emphasis boundaries, such as a form field outline
+        outline: {
+          DEFAULT: '#D1D5DB', // Important boundaries, suchimportant as a text field outline. Need 3:1 contrast with surface color.
+          variant: '#9CA3AF', // Lower-emphasis boundaries, such as a form field outline
+        },
 
         // Below are the colors deprecated
         warm: '#E11D48',
