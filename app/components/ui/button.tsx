@@ -54,18 +54,3 @@ export function Button({ variant, buttonStyle, icon, disabled, children, ...prop
     </button>
   );
 }
-
-type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  'aria-label': string;
-  children: React.ReactNode;
-};
-
-export function IconButton({ children, ...props }: IconButtonProps) {
-  let baseClasses =
-    'text-white bg-primary hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center';
-  return (
-    <button className={baseClasses} {...props}>
-      {children}
-    </button>
-  );
-}
