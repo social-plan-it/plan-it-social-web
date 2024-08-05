@@ -14,7 +14,6 @@ type Story = StoryObj<typeof Button>;
 export const PrimaryRounded: Story = {
   args: {
     variant: 'primary',
-    buttonStyle: 'rounded',
     children: 'Button',
   },
 };
@@ -22,7 +21,6 @@ export const PrimaryRounded: Story = {
 export const PrimaryFullyRounded: Story = {
   args: {
     variant: 'primary',
-    buttonStyle: 'fullyRounded',
     children: 'Button',
   },
 };
@@ -30,7 +28,6 @@ export const PrimaryFullyRounded: Story = {
 export const SecondaryRounded: Story = {
   args: {
     variant: 'secondary',
-    buttonStyle: 'rounded',
     children: 'Button',
   },
 };
@@ -38,7 +35,6 @@ export const SecondaryRounded: Story = {
 export const SecondaryFullyRounded: Story = {
   args: {
     variant: 'secondary',
-    buttonStyle: 'fullyRounded',
     children: 'Button',
   },
 };

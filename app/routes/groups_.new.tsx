@@ -136,9 +136,7 @@ export default function GroupNew() {
                 <ImageUpload label="Attach Image" name="groupImage" />
               </div>
               <div className="flex-row justify-end">
-                <Button variant="warm" buttonStyle="fullyRounded">
-                  Create a group
-                </Button>
+                <Button variant="warm">Create a group</Button>
                 {actionData && <div>{actionData.error.message}</div>}
               </div>
             </Form>

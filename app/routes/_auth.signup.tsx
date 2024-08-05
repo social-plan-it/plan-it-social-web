@@ -160,7 +160,7 @@ export default function Component() {
               </p>
             )}
 
-            <Button variant="primary" buttonStyle="fullyRounded" disabled={isPending}>
+            <Button variant="primary" disabled={isPending}>
               {isPending ? 'Signing up...' : 'Sign Up'}
             </Button>
 
