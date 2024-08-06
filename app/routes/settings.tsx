@@ -70,9 +70,7 @@ export default function Settings() {
   return (
     <div className="flex justify-center my-10">
       <form onSubmit={addPasskey} method="post" className="flex flex-col items-center gap-2">
-        <Button variant="primary" buttonStyle="fullyRounded">
-          {processingPasskey ? 'Creating Passkey...' : 'Add a Passkey'}
-        </Button>
+        <Button variant="primary">{processingPasskey ? 'Creating Passkey...' : 'Add a Passkey'}</Button>
 
         {passkeyError && (
           <p className="text-sm text-red-600 text-center" role="alert">

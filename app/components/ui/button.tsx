@@ -2,11 +2,8 @@ import type { ButtonHTMLAttributes } from 'react';
 
 type VariantProps = 'primary' | 'secondary' | 'warm' | 'outlined';
 
-type ButtonStyleProps = 'rounded' | 'fullyRounded';
-
 type BaseButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant: VariantProps;
-  buttonStyle: ButtonStyleProps;
   children: React.ReactNode;
   icon?: boolean;
   disabled?: boolean;
@@ -28,15 +25,10 @@ function getVariantClasses(variant: VariantProps) {
   }
 }
 
-function getStyleClasses(buttonStyle: ButtonStyleProps) {
-  return buttonStyle === 'rounded' ? 'rounded-lg' : 'rounded-full';
-}
-
-export function Button({ variant, buttonStyle, icon, disabled, children, ...props }: BaseButtonProps) {
-  let baseClasses = 'w-full px-6 py-2.5 text-center text-sm font-medium focus:outline-none focus:ring-4';
+export function Button({ variant, icon, disabled, children, ...props }: BaseButtonProps) {
+  let baseClasses = 'w-full px-6 py-2.5 text-center text-sm font-medium focus:outline-none focus:ring-4 rounded-full';
 
   let variantClasses = getVariantClasses(variant);
-  let styleClasses = getStyleClasses(buttonStyle);
 
   if (icon) {
     baseClasses += ' inline-flex items-center justify-center';
@@ -49,22 +41,7 @@ export function Button({ variant, buttonStyle, icon, disabled, children, ...prop
   }
 
   return (
-    <button className={`${baseClasses} ${variantClasses} ${styleClasses}`} {...props}>
-      {children}
-    </button>
-  );
-}
-
-type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  'aria-label': string;
-  children: React.ReactNode;
-};
-
-export function IconButton({ children, ...props }: IconButtonProps) {
-  let baseClasses =
-    'text-white bg-primary hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center';
-  return (
-    <button className={baseClasses} {...props}>
+    <button className={`${baseClasses} ${variantClasses}`} {...props}>
       {children}
     </button>
   );

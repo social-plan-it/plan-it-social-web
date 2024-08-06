@@ -50,7 +50,7 @@ export default function Page() {
 
               <div>Attach Image</div>
               <div className="flex pt-4 w-full">
-                <Button type="submit" variant="warm" buttonStyle="fullyRounded">
+                <Button type="submit" variant="warm">
                   Create New Event
                 </Button>
               </div>

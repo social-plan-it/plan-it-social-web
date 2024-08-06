@@ -169,7 +169,7 @@ export default function Component() {
               showLabel={false}
               centerText
             />
-            <Button disabled={isPending} variant="primary" buttonStyle="fullyRounded">
+            <Button disabled={isPending} variant="primary">
               {isPending ? 'Logging in...' : 'Log In'}
             </Button>
 
@@ -206,7 +206,7 @@ export default function Component() {
                 centerText
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <Button variant="outlined" buttonStyle="fullyRounded" icon>
+              <Button variant="outlined" icon>
                 <KeyIcon />
                 {processingPasskey || isPending ? 'Signing in...' : 'Sign in with Passkey'}
               </Button>
