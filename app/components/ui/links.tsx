@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 import type { NavLinkProps } from '@remix-run/react';
 import { NavLink } from '@remix-run/react';
 
@@ -19,5 +19,32 @@ export function Link(props: LinkProps) {
         {props.children}
       </NavLink>
     </div>
+  );
+}
+
+type LinkButtonProps = {
+  children: ReactNode;
+  to: string;
+  preventScrollReset?: boolean;
+  prefetch?: LinkProps['prefetch'];
+};
+
+export function LinkButton({
+  to,
+  children,
+  preventScrollReset = true,
+  prefetch = 'intent',
+  ...props
+}: LinkButtonProps) {
+  return (
+    <Link
+      {...props}
+      to={to}
+      prefetch="intent"
+      className="border-2 bg-red-700 text-white rounded-lg p-3 w-full text-center"
+      preventScrollReset={preventScrollReset}
+    >
+      {children}
+    </Link>
   );
 }
