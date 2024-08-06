@@ -43,7 +43,6 @@ export function LinkButton({
       prefetch="intent"
       className="border-2 bg-red-700 text-white rounded-lg p-3 w-full text-center"
       preventScrollReset={preventScrollReset}
-      type="submit"
     >
       {children}
     </Link>
