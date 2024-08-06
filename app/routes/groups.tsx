@@ -1,6 +1,6 @@
 import { Form, Link, redirect, useLoaderData, useSearchParams } from '@remix-run/react';
 import { Image, staticImage } from '~/components/ui/images';
-import { LinkButton } from '~/components/ui/forms';
+import { LinkButton } from '~/components/ui/links';
 import type { MetaFunction, LoaderFunctionArgs } from '@remix-run/node';
 import type { Group } from '@prisma/client';
 import { findGroups } from '~/modules/database/groups.server';

@@ -2,7 +2,7 @@ import type { MetaFunction, LoaderFunctionArgs } from '@remix-run/node';
 import { useParams, useLoaderData } from '@remix-run/react';
 import { db } from '~/modules/database/db.server';
 import { json } from '@remix-run/node';
-import { LinkButton } from '~/components/ui/forms';
+import { LinkButton } from '~/components/ui/links';
 
 import { Image, staticImage } from '~/components/ui/images';
 import { eventsDataPatcher } from '~/modules/events/event';
